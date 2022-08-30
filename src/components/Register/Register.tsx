@@ -11,23 +11,28 @@ const Register = (): JSX.Element => {
 
   const { register } = useUserApi();
   const [formData, setFormData] = useState(initialState);
+  const [fieldStatus, setFieldStatus] = useState(false);
 
   const onSubmitData = async (event: SyntheticEvent) => {
     event.preventDefault();
-
-    register({ username: formData.username, password: formData.password });
+    if (formData.password !== formData.repeatPassword) {
+      setFieldStatus(true);
+    } else {
+      register({ username: formData.username, password: formData.password });
+    }
 
     setFormData(initialState);
   };
 
   const onChangeData = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFieldStatus(false);
     setFormData({ ...formData, [event.target.id]: event.target.value });
   };
 
   const hasEmptyFields =
     formData.username.length < 5 ||
     formData.password.length < 5 ||
-    formData.password.length < 5;
+    formData.repeatPassword.length < 5;
 
   return (
     <form onSubmit={onSubmitData} className="form">
@@ -54,6 +59,7 @@ const Register = (): JSX.Element => {
           autoComplete="off"
           required
           onChange={onChangeData}
+          error={fieldStatus}
           value={formData.password}
         />
         <TextField
@@ -65,6 +71,7 @@ const Register = (): JSX.Element => {
           autoComplete="off"
           required
           onChange={onChangeData}
+          error={fieldStatus}
           value={formData.repeatPassword}
         />
 

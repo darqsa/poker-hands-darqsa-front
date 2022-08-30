@@ -17,11 +17,17 @@ const Register = (): JSX.Element => {
     event.preventDefault();
     if (formData.password !== formData.repeatPassword) {
       setFieldStatus("form__input--wrong");
+
+      setFormData({
+        username: formData.username,
+        password: initialState.password,
+        repeatPassword: initialState.repeatPassword,
+      });
     } else {
       register({ username: formData.username, password: formData.password });
-    }
 
-    setFormData(initialState);
+      setFormData(initialState);
+    }
   };
 
   const onChangeData = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -36,7 +42,7 @@ const Register = (): JSX.Element => {
 
   return (
     <FormStyled onSubmit={onSubmitData} className="form">
-      <span className="form__heading">Create your account</span>
+      <h2 className="form__heading">Create your account</h2>
       <div className="form__group">
         <label className="form__label" htmlFor="username">
           Username
@@ -75,7 +81,7 @@ const Register = (): JSX.Element => {
           className={`form__input ${fieldStatus}`}
           type="password"
           autoComplete="off"
-          placeholder="Repeat you password"
+          placeholder="Repeat your password"
           required
           onChange={onChangeData}
           value={formData.repeatPassword}

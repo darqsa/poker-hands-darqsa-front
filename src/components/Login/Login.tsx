@@ -28,7 +28,7 @@ const Register = (): JSX.Element => {
 
   return (
     <FormStyled onSubmit={onSubmitData} className="form">
-      <h2 className="form__heading">Create your account</h2>
+      <h2 className="form__heading">Login to see your PokerHands</h2>
       <div className="form__group">
         <label className="form__label" htmlFor="username">
           Username

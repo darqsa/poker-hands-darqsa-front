@@ -9,7 +9,7 @@ Array [
     <h2
       className="form__heading"
     >
-      Create your account
+      Login to see your PokerHands
     </h2>
     <div
       className="form__group"

@@ -1,6 +1,6 @@
+import { useAppDispatch } from "../../../app/hooks";
 import { UserData, UserToken } from "../models/User";
 import axios, { AxiosResponse } from "axios";
-import { useAppDispatch } from "../../../app/hooks";
 import fetchToken from "../../../utils/auth";
 import {
   loginUserActionCreator,
@@ -10,11 +10,11 @@ import {
 export const apiURL = process.env.REACT_APP_USERS_API_URL;
 
 const useUserApi = () => {
+  const dispatch = useAppDispatch();
+
   const register = async (userData: UserData) => {
     await axios.post(`${apiURL}users/register`, userData);
   };
-
-  const dispatch = useAppDispatch();
 
   const login = async (userData: UserData) => {
     const {

@@ -4,6 +4,13 @@ import useUserApi, { apiURL } from "./useUserApi";
 
 jest.mock("axios");
 
+const mockUseDispatch = jest.fn();
+
+jest.mock("../../../app/hooks", () => ({
+  ...jest.requireActual("../../../app/hooks"),
+  useAppDispatch: () => mockUseDispatch,
+}));
+
 describe("Given a useUserApi hook", () => {
   describe("When invoke register function with a mockUser", () => {
     test("Then it should post a new user", async () => {

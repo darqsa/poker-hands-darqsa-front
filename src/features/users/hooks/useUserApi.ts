@@ -1,16 +1,47 @@
-import { UserData } from "../models/User";
-import axios from "axios";
+import { useAppDispatch } from "../../../app/hooks";
+import { UserData, UserToken } from "../models/User";
+import axios, { AxiosResponse } from "axios";
+import fetchToken from "../../../utils/auth";
+import {
+  loginUserActionCreator,
+  logoutUserActionCreator,
+} from "../slices/userSlice";
 
 export const apiURL = process.env.REACT_APP_USERS_API_URL;
 
 const useUserApi = () => {
-  const register = async (UserData: UserData) => {
-    await axios.post(`${apiURL}users/register`, {
-      username: UserData.username,
-      password: UserData.password,
-    });
+  const dispatch = useAppDispatch();
+
+  const register = async (userData: UserData) => {
+    await axios.post(`${apiURL}users/register`, userData);
   };
 
-  return { register };
+  const login = async (userData: UserData) => {
+    const {
+      data: {
+        user: { token },
+      },
+    }: AxiosResponse<UserToken> = await axios.post(
+      `${apiURL}users/login`,
+      userData,
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const user = fetchToken(token);
+
+    localStorage.setItem("token", token);
+    dispatch(loginUserActionCreator(user));
+  };
+
+  const logout = () => {
+    dispatch(logoutUserActionCreator());
+    localStorage.removeItem("token");
+  };
+
+  return { register, login, logout };
 };
 export default useUserApi;

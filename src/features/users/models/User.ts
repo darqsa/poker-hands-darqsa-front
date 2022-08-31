@@ -8,3 +8,9 @@ export interface LoginUserData {
   token: string;
   id: string;
 }
+
+export interface UserToken {
+  user: {
+    token: string;
+  };
+}

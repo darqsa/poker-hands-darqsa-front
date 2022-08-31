@@ -78,7 +78,7 @@ const Register = (): JSX.Element => {
         )}
       </div>
       <div className="form__group">
-        <label className="form__label" htmlFor="password">
+        <label className="form__label" htmlFor="repeatPassword">
           Repeat password
         </label>
         <input

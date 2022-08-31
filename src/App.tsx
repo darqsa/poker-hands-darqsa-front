@@ -1,7 +1,15 @@
-import Register from "./components/Register/Register";
+import { Navigate, Route, Routes } from "react-router-dom";
+import RegisterPage from "./pages/RegisterPage";
 
 function App() {
-  return <Register />;
+  return (
+    <>
+      <Routes>
+        <Route path="/" element={<Navigate to="/register" />} />
+        <Route path="/register" element={<RegisterPage />} />
+      </Routes>
+    </>
+  );
 }
 
 export default App;

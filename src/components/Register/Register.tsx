@@ -71,6 +71,11 @@ const Register = (): JSX.Element => {
           onChange={onChangeData}
           value={formData.password}
         />
+        {fieldStatus === "form__input--wrong" && (
+          <span className="form__wrong-password">
+            Your passwords doesn't match{" "}
+          </span>
+        )}
       </div>
       <div className="form__group">
         <label className="form__label" htmlFor="password">

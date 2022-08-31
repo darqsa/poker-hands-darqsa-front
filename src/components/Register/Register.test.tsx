@@ -1,13 +1,12 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-// import userEvent from "@testing-library/user-event";
+import userEvent from "@testing-library/user-event";
 import Register from "./Register";
 
-// const registerMock = jest.mock(
-//   "../../features/users/hooks/useUserApi",
-//   () => () => ({
-//     register: jest.fn(),
-//   })
-// );
+const mockRegisterFunction = { register: jest.fn() };
+jest.mock(
+  "../../features/users/hooks/useUserApi",
+  () => () => mockRegisterFunction
+);
 
 describe("Given a register component", () => {
   describe("When instantiated", () => {
@@ -70,32 +69,56 @@ describe("Given a register component", () => {
         expect(button).toBeDisabled();
       });
     });
-    // test("Then it should call the mockRegister function with the new text", async () => {
-    //   const newText = "kkkkk";
-    //   render(<Register />);
-    //   const form = {
-    //     username: screen.getByLabelText("Username") as HTMLInputElement,
-    //     password: screen.getByLabelText("Password") as HTMLInputElement,
-    //     repeatPassword: screen.getByLabelText(
-    //       "Repeat password"
-    //     ) as HTMLInputElement,
-    //   };
 
-    //   fireEvent.change(form.username, { target: { value: newText } });
-    //   fireEvent.change(form.password, { target: { value: newText } });
-    //   fireEvent.change(form.repeatPassword, {
-    //     target: { value: newText },
-    //   });
+    test("Then it should call the mockRegister function with the new text", async () => {
+      const newText = "kkkkk";
+      render(<Register />);
+      const form = {
+        username: screen.getByLabelText("Username") as HTMLInputElement,
+        password: screen.getByLabelText("Password") as HTMLInputElement,
+        repeatPassword: screen.getByPlaceholderText(
+          "Repeat your password"
+        ) as HTMLInputElement,
+      };
 
-    //   const submit = screen.getByRole("button", { name: "Register" });
-    //   await userEvent.click(submit);
-    //   const registerData = {
-    //     name: form.username.value,
-    //     password: form.password.value,
-    //   };
+      fireEvent.change(form.username, { target: { value: newText } });
+      fireEvent.change(form.password, { target: { value: newText } });
+      fireEvent.change(form.repeatPassword, {
+        target: { value: newText },
+      });
+      const submit = screen.getByRole("button", { name: "Register" });
+      await userEvent.click(submit);
+      const registerData = {
+        username: newText,
+        password: newText,
+      };
 
-    //   expect(registerMock).toHaveBeenCalledWith(registerData);
-    // });
-    // falta tambien comprobar que cuando clico y las pass son diferentes no se envia nada
+      expect(mockRegisterFunction.register).toHaveBeenCalledWith(registerData);
+    });
+
+    describe("And the user type different passwords", () => {
+      test("Then it shouldn't call the mockRegister function", async () => {
+        const newText = "kkkkk";
+        const repeatPasswordNewText = "kkkkkk";
+        render(<Register />);
+        const form = {
+          username: screen.getByLabelText("Username") as HTMLInputElement,
+          password: screen.getByLabelText("Password") as HTMLInputElement,
+          repeatPassword: screen.getByPlaceholderText(
+            "Repeat your password"
+          ) as HTMLInputElement,
+        };
+
+        fireEvent.change(form.username, { target: { value: newText } });
+        fireEvent.change(form.password, { target: { value: newText } });
+        fireEvent.change(form.repeatPassword, {
+          target: { value: repeatPasswordNewText },
+        });
+        const submit = screen.getByRole("button", { name: "Register" });
+        await userEvent.click(submit);
+
+        expect(mockRegisterFunction.register).not.toHaveBeenCalled();
+      });
+    });
   });
 });

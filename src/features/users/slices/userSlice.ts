@@ -5,7 +5,6 @@ const initialState: LoginUserData = {
   id: "",
   token: "",
   username: "",
-  isLogged: false,
 };
 
 const userSlice = createSlice({

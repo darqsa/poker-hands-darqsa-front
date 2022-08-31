@@ -1,5 +1,5 @@
 import axios from "axios";
-import { RegisterUserData } from "../models/User";
+import { UserData } from "../models/User";
 import useUserApi, { apiURL } from "./useUserApi";
 
 jest.mock("axios");
@@ -7,7 +7,7 @@ jest.mock("axios");
 describe("Given a useUserApi hook", () => {
   describe("When invoke register function with a mockUser", () => {
     test("Then it should post a new user", async () => {
-      const mockUser: RegisterUserData = {
+      const mockUser: UserData = {
         username: "bob",
         password: "thesponge",
       };

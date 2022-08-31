@@ -1,13 +1,13 @@
-import { RegisterUserData } from "../models/User";
+import { UserData } from "../models/User";
 import axios from "axios";
 
 export const apiURL = process.env.REACT_APP_USERS_API_URL;
 
 const useUserApi = () => {
-  const register = async (registerUserData: RegisterUserData) => {
+  const register = async (UserData: UserData) => {
     await axios.post(`${apiURL}users/register`, {
-      username: registerUserData.username,
-      password: registerUserData.password,
+      username: UserData.username,
+      password: UserData.password,
     });
   };
 

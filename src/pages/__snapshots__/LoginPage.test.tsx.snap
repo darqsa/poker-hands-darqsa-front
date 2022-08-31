@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Given a login page component When invoked Then it should match the snapshot 1`] = `
+Array [
+  <form
+    className="sc-bczRLJ bgmofV form"
+    onSubmit={[Function]}
+  >
+    <h2
+      className="form__heading"
+    >
+      Login to see your PokerHands
+    </h2>
+    <div
+      className="form__group"
+    >
+      <label
+        className="form__label"
+        htmlFor="username"
+      >
+        Username
+      </label>
+      <input
+        autoComplete="off"
+        className="form__input "
+        id="username"
+        onChange={[Function]}
+        placeholder="Enter your username"
+        required={true}
+        value=""
+      />
+    </div>
+    <div
+      className="form__group"
+    >
+      <label
+        className="form__label"
+        htmlFor="password"
+      >
+        Password
+      </label>
+      <input
+        autoComplete="off"
+        className="form__input "
+        id="password"
+        onChange={[Function]}
+        placeholder="Enter your password"
+        required={true}
+        type="password"
+        value=""
+      />
+    </div>
+    <button
+      className="form__button"
+      disabled={true}
+      type="submit"
+    >
+      Login
+    </button>
+  </form>,
+  <span>
+    You have no account yet? Register 
+  </span>,
+  <a
+    href="/register"
+    onClick={[Function]}
+  >
+    <span>
+      here
+    </span>
+  </a>,
+]
+`;

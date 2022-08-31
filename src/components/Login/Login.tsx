@@ -6,50 +6,36 @@ const Register = (): JSX.Element => {
   const initialState = {
     username: "",
     password: "",
-    repeatPassword: "",
   };
 
-  const { register } = useUserApi();
+  const { login } = useUserApi();
   const [formData, setFormData] = useState(initialState);
-  const [fieldStatus, setFieldStatus] = useState("");
+  const [fieldStatus] = useState("");
 
   const onSubmitData = async (event: SyntheticEvent) => {
     event.preventDefault();
-    if (formData.password !== formData.repeatPassword) {
-      setFieldStatus("form__input--wrong");
 
-      setFormData({
-        username: formData.username,
-        password: initialState.password,
-        repeatPassword: initialState.repeatPassword,
-      });
-    } else {
-      register({ username: formData.username, password: formData.password });
+    login({ username: formData.username, password: formData.password });
 
-      setFormData(initialState);
-    }
+    setFormData(initialState);
   };
-
   const onChangeData = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFieldStatus("");
     setFormData({ ...formData, [event.target.id]: event.target.value });
   };
 
   const hasEmptyFields =
-    formData.username.length < 5 ||
-    formData.password.length < 5 ||
-    formData.repeatPassword.length < 5;
+    formData.username.length < 5 || formData.password.length < 5;
 
   return (
     <FormStyled onSubmit={onSubmitData} className="form">
-      <h2 className="form__heading">Create your account</h2>
+      <h2 className="form__heading">Login to see your PokerHands</h2>
       <div className="form__group">
         <label className="form__label" htmlFor="username">
           Username
         </label>
         <input
           id="username"
-          className="form__input"
+          className={`form__input ${fieldStatus}`}
           autoComplete="off"
           placeholder="Enter your username"
           required
@@ -57,6 +43,11 @@ const Register = (): JSX.Element => {
           value={formData.username}
         />
       </div>
+      {fieldStatus === "form__input--wrong" && (
+        <span className="form__wrong-password">
+          Incorrect username or password
+        </span>
+      )}
       <div className="form__group">
         <label className="form__label" htmlFor="password">
           Password
@@ -71,29 +62,9 @@ const Register = (): JSX.Element => {
           onChange={onChangeData}
           value={formData.password}
         />
-        {fieldStatus === "form__input--wrong" && (
-          <span className="form__wrong-password">
-            Your passwords doesn't match{" "}
-          </span>
-        )}
-      </div>
-      <div className="form__group">
-        <label className="form__label" htmlFor="repeatPassword">
-          Repeat password
-        </label>
-        <input
-          id="repeatPassword"
-          className={`form__input ${fieldStatus}`}
-          type="password"
-          autoComplete="off"
-          placeholder="Repeat your password"
-          required
-          onChange={onChangeData}
-          value={formData.repeatPassword}
-        />
       </div>
       <button className="form__button" type="submit" disabled={hasEmptyFields}>
-        Register
+        Login
       </button>
     </FormStyled>
   );

@@ -16,6 +16,7 @@ const FormStyled = styled.form`
     &__group {
       display: flex;
       flex-direction: column;
+      position: relative;
     }
     &__label {
       width: max-content;
@@ -71,6 +72,13 @@ const FormStyled = styled.form`
           color: ${styles.colors.main};
         }
       }
+    }
+    &__wrong-password {
+      color: ${styles.colors.red};
+      position: absolute;
+      top: 80px;
+      left: 5px;
+      font-size: ${styles.fontSizes.smaller};
     }
   }
 `;

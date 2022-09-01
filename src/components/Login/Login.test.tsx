@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Login from "./Login";
 
-const mockLoginFunction = { login: jest.fn() };
+let mockLoginFunction = { login: jest.fn() };
 jest.mock(
   "../../features/users/hooks/useUserApi",
   () => () => mockLoginFunction
@@ -76,6 +76,28 @@ describe("Given a Login component", () => {
       };
 
       expect(mockLoginFunction.login).toHaveBeenCalledWith(loginData);
+    });
+  });
+
+  describe("When the submit function calls the hook and it gets an error (invalid username or password)", () => {
+    test("Then it should render the text 'Incorrect username or password'", async () => {
+      mockLoginFunction = { login: jest.fn().mockRejectedValue(new Error()) };
+      const text = "Incorrect username or password";
+      const newText = "kkkkk";
+      render(<Login />);
+      const form = {
+        username: screen.getByLabelText("Username") as HTMLInputElement,
+        password: screen.getByLabelText("Password") as HTMLInputElement,
+      };
+
+      fireEvent.change(form.username, { target: { value: newText } });
+      fireEvent.change(form.password, { target: { value: newText } });
+      const submit = screen.getByRole("button", { name: "Login" });
+      await userEvent.click(submit);
+
+      const wrongText = screen.getByText(text);
+
+      expect(wrongText).toBeInTheDocument();
     });
   });
 });

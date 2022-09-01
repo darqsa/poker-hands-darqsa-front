@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useAppDispatch } from "./app/hooks";
+import Header from "./components/Header/Header";
 import { loginUserActionCreator } from "./features/users/slices/userSlice";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
@@ -16,6 +17,7 @@ function App() {
 
   return (
     <>
+      <Header currentPage="register" />
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/register" element={<RegisterPage />} />

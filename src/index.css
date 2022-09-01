@@ -1,8 +1,10 @@
 html {
-  margin: 0;
   font-family: Inter, sans-serif;
   background-color: #f6f6f6;
   min-height: 100vh;
+}
+body {
+  margin: 0;
 }
 
 * {

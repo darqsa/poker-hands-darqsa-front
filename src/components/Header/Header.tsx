@@ -3,33 +3,32 @@ import AddIcon from "@mui/icons-material/Add";
 import PersonIcon from "@mui/icons-material/Person";
 import EditIcon from "@mui/icons-material/Edit";
 import HeaderStyled from "./HeaderStyled";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-interface HeaderProps {
-  currentPage: "register" | "login" | "hands" | "details" | "create";
-}
-const Header = ({ currentPage }: HeaderProps): JSX.Element => {
-  const parsedHeading = currentPage[0].toUpperCase() + currentPage.slice(1);
+const Header = (): JSX.Element => {
+  let { pathname } = useLocation();
+
+  const parsedHeading = pathname[1].toUpperCase() + pathname.slice(2);
   return (
     <HeaderStyled className="header-container">
       <>
         <div className="header-container__item">
-          {currentPage === "register" && (
+          {pathname === "/register" && (
             <Link to={`/login`}>
               <KeyboardArrowLeftIcon className="header-container__icon header-container__icon--left" />
             </Link>
           )}
-          {currentPage === "details" && (
+          {pathname === "/details" && (
             <Link to={`/hands`}>
               <KeyboardArrowLeftIcon className="header-container__icon header-container__icon--left" />
             </Link>
           )}
-          {currentPage === "create" && (
+          {pathname === "/create" && (
             <Link to={`/hands`}>
               <KeyboardArrowLeftIcon className="header-container__icon header-container__icon--left" />
             </Link>
           )}
-          {currentPage === "hands" && (
+          {pathname === "/hands" && (
             <Link to={`/create`}>
               <AddIcon className="header-container__icon header-container__icon--left" />
             </Link>
@@ -39,10 +38,10 @@ const Header = ({ currentPage }: HeaderProps): JSX.Element => {
           <h1 className="header-container__heading">{parsedHeading}</h1>
         </div>
         <div className="header-container__item">
-          {currentPage === "hands" && (
+          {pathname === "/hands" && (
             <PersonIcon className="header-container__icon header-container__icon--right" />
           )}
-          {currentPage === "details" && (
+          {pathname === "/details" && (
             <EditIcon className="header-container__icon header-container__icon--right" />
           )}
         </div>

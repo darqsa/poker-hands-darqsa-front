@@ -17,7 +17,7 @@ function App() {
 
   return (
     <>
-      <Header currentPage="register" />
+      <Header />
       <Routes>
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/register" element={<RegisterPage />} />

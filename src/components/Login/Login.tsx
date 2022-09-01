@@ -10,14 +10,16 @@ const Register = (): JSX.Element => {
 
   const { login } = useUserApi();
   const [formData, setFormData] = useState(initialState);
-  const [fieldStatus] = useState("");
+  const [fieldStatus, setFieldStatus] = useState("");
 
   const onSubmitData = async (event: SyntheticEvent) => {
     event.preventDefault();
 
-    login({ username: formData.username, password: formData.password });
-
-    setFormData(initialState);
+    try {
+      await login({ username: formData.username, password: formData.password });
+    } catch (error) {
+      setFieldStatus("form__input--wrong");
+    }
   };
   const onChangeData = (event: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [event.target.id]: event.target.value });

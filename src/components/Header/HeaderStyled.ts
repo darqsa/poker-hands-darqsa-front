@@ -6,6 +6,11 @@ const HeaderStyled = styled.header`
   color: ${styles.colors.white};
   display: flex;
   height: 64px;
+  a {
+    &:active {
+      background-color: none;
+    }
+  }
   .header-container {
     &__item {
       flex: 1;

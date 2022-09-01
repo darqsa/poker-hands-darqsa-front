@@ -50,6 +50,10 @@
     ]
   },
   "devDependencies": {
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@mui/icons-material": "^5.10.3",
+    "@mui/material": "^5.10.3",
     "@testing-library/user-event": "^14.4.3",
     "@types/react-test-renderer": "^18.0.0",
     "@types/styled-components": "^5.1.26",

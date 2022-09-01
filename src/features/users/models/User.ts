@@ -10,7 +10,5 @@ export interface LoginUserData {
 }
 
 export interface UserToken {
-  user: {
-    token: string;
-  };
+  token: string;
 }

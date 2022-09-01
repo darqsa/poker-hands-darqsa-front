@@ -18,19 +18,11 @@ const useUserApi = () => {
 
   const login = async (userData: UserData) => {
     const {
-      data: {
-        user: { token },
-      },
+      data: { token },
     }: AxiosResponse<UserToken> = await axios.post(
       `${apiURL}users/login`,
-      userData,
-      {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
+      userData
     );
-
     const user = fetchToken(token);
 
     localStorage.setItem("token", token);

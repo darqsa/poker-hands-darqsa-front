@@ -4,6 +4,7 @@ import Header from "./components/Header/Header";
 import { loginUserActionCreator } from "./features/users/slices/userSlice";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
+import GlobalStyles from "./styles/GlobalStyles";
 import fetchToken from "./utils/auth";
 
 function App() {
@@ -17,13 +18,16 @@ function App() {
 
   return (
     <>
+      <GlobalStyles />
       <Header />
-      <Routes>
-        <Route path="/" element={<Navigate to="/login" />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/home" element={<RegisterPage />} />
-      </Routes>
+      <main>
+        <Routes>
+          <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/home" element={<RegisterPage />} />
+        </Routes>
+      </main>
     </>
   );
 }

@@ -12,6 +12,8 @@ const FormStyled = styled.form`
     &__heading {
       font-weight: ${styles.fontWeights.bold};
       font-size: ${styles.fontSizes.bigger};
+      text-align: center;
+      margin: 0;
     }
     &__group {
       display: flex;
@@ -53,23 +55,6 @@ const FormStyled = styled.form`
         }
         &:focus {
           border: 2px solid ${styles.colors.red};
-        }
-      }
-    }
-    &__button {
-      margin-top: 20px;
-      border: none;
-      background-color: transparent;
-      font-size: ${styles.fontSizes.small};
-      font-family: inherit;
-      :enabled {
-        color: ${styles.colors.red};
-        :hover {
-          text-decoration: underline;
-          cursor: pointer;
-        }
-        :active {
-          color: ${styles.colors.main};
         }
       }
     }

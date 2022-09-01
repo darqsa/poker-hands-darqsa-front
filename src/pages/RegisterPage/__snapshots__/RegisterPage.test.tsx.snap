@@ -2,7 +2,7 @@
 
 exports[`Given a register page component When invoked Then it should match the snapshot 1`] = `
 <form
-  className="sc-bczRLJ bgmofV form"
+  className="sc-gsnTZi ehTXBa form"
   onSubmit={[Function]}
 >
   <h2
@@ -70,7 +70,7 @@ exports[`Given a register page component When invoked Then it should match the s
     />
   </div>
   <button
-    className="form__button"
+    className="sc-bczRLJ eEXWBV form__button"
     disabled={true}
     type="submit"
   >

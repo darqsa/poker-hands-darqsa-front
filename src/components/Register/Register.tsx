@@ -1,5 +1,6 @@
 import { SyntheticEvent, useState } from "react";
 import useUserApi from "../../features/users/hooks/useUserApi";
+import ButtonStyled from "../../styles/ButtonStyled";
 import FormStyled from "../../styles/FormStyled";
 
 const Register = (): JSX.Element => {
@@ -92,9 +93,13 @@ const Register = (): JSX.Element => {
           value={formData.repeatPassword}
         />
       </div>
-      <button className="form__button" type="submit" disabled={hasEmptyFields}>
+      <ButtonStyled
+        className="form__button"
+        type="submit"
+        disabled={hasEmptyFields}
+      >
         Register
-      </button>
+      </ButtonStyled>
     </FormStyled>
   );
 };

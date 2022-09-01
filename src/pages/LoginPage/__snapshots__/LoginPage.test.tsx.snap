@@ -3,7 +3,7 @@
 exports[`Given a login page component When invoked Then it should match the snapshot 1`] = `
 Array [
   <form
-    className="sc-bczRLJ bgmofV form"
+    className="sc-gsnTZi ehTXBa form"
     onSubmit={[Function]}
   >
     <h2
@@ -51,23 +51,32 @@ Array [
       />
     </div>
     <button
-      className="form__button"
+      className="sc-bczRLJ eEXWBV form__button"
       disabled={true}
       type="submit"
     >
       Login
     </button>
   </form>,
-  <span>
-    You have no account yet? Register 
-  </span>,
-  <a
-    href="/register"
-    onClick={[Function]}
+  <div
+    className="sc-dkzDqf fzKJqc login-text-container"
   >
-    <span>
-      here
+    <span
+      className="login-text-container__text"
+    >
+      You have no account yet? Register
+       
+      <a
+        href="/register"
+        onClick={[Function]}
+      >
+        <button
+          className="sc-bczRLJ eEXWBV login-text-container__register-link"
+        >
+          here
+        </button>
+      </a>
     </span>
-  </a>,
+  </div>,
 ]
 `;

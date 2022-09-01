@@ -1,5 +1,6 @@
 import { SyntheticEvent, useState } from "react";
 import useUserApi from "../../features/users/hooks/useUserApi";
+import ButtonStyled from "../../styles/ButtonStyled";
 import FormStyled from "../../styles/FormStyled";
 
 const Register = (): JSX.Element => {
@@ -44,12 +45,12 @@ const Register = (): JSX.Element => {
           onChange={onChangeData}
           value={formData.username}
         />
+        {fieldStatus === "form__input--wrong" && (
+          <span className="form__wrong-password">
+            Incorrect username or password
+          </span>
+        )}
       </div>
-      {fieldStatus === "form__input--wrong" && (
-        <span className="form__wrong-password">
-          Incorrect username or password
-        </span>
-      )}
       <div className="form__group">
         <label className="form__label" htmlFor="password">
           Password
@@ -65,9 +66,13 @@ const Register = (): JSX.Element => {
           value={formData.password}
         />
       </div>
-      <button className="form__button" type="submit" disabled={hasEmptyFields}>
+      <ButtonStyled
+        className="form__button"
+        type="submit"
+        disabled={hasEmptyFields}
+      >
         Login
-      </button>
+      </ButtonStyled>
     </FormStyled>
   );
 };

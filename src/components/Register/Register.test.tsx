@@ -8,6 +8,13 @@ jest.mock(
   () => () => mockRegisterFunction
 );
 
+const mockUseDispatch = jest.fn();
+
+jest.mock("../../app/hooks", () => ({
+  ...jest.requireActual("../../app/hooks"),
+  useAppDispatch: () => mockUseDispatch,
+}));
+
 describe("Given a register component", () => {
   describe("When instantiated", () => {
     test("Then it should render a heading, username, password and repeatPassword inputs and a submit button", () => {

@@ -3,7 +3,7 @@ import useUserApi from "../../features/users/hooks/useUserApi";
 import ButtonStyled from "../../styles/ButtonStyled";
 import FormStyled from "../../styles/FormStyled";
 
-const Register = (): JSX.Element => {
+const Login = (): JSX.Element => {
   const initialState = {
     username: "",
     password: "",
@@ -18,6 +18,7 @@ const Register = (): JSX.Element => {
 
     try {
       await login({ username: formData.username, password: formData.password });
+      setFormData(initialState);
     } catch (error) {
       setFieldStatus("form__input--wrong");
     }
@@ -76,4 +77,4 @@ const Register = (): JSX.Element => {
     </FormStyled>
   );
 };
-export default Register;
+export default Login;

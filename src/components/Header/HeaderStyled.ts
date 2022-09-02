@@ -37,7 +37,7 @@ const HeaderStyled = styled.header`
     &__heading {
       margin: 0;
       font-size: ${styles.fontSizes.bigger};
-      font-weight: ${styles.fontWeights.medium};
+      font-weight: ${styles.fontWeights.bold};
       align-self: center;
     }
   }

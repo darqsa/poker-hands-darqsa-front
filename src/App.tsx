@@ -9,6 +9,7 @@ import GlobalStyles, { MainContainerStyled } from "./styles/GlobalStyles";
 import fetchToken from "./utils/auth";
 import CloseIcon from "@mui/icons-material/Close";
 import { toggleAlertActionCreator } from "./features/users/slices/alertSlice";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -30,6 +31,7 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/home" element={<RegisterPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
         {alert && (
           <Alert

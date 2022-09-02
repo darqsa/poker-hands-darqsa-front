@@ -15,22 +15,34 @@ const Header = (): JSX.Element => {
         <div className="header-container__item">
           {pathname === "/register" && (
             <Link to={`/login`}>
-              <KeyboardArrowLeftIcon className="header-container__icon header-container__icon--left" />
+              <KeyboardArrowLeftIcon
+                data-testid="arrow-left"
+                className="header-container__icon header-container__icon--left"
+              />
             </Link>
           )}
           {pathname === "/details" && (
             <Link to={`/hands`}>
-              <KeyboardArrowLeftIcon className="header-container__icon header-container__icon--left" />
+              <KeyboardArrowLeftIcon
+                data-testid="arrow-left"
+                className="header-container__icon header-container__icon--left"
+              />
             </Link>
           )}
           {pathname === "/create" && (
             <Link to={`/hands`}>
-              <KeyboardArrowLeftIcon className="header-container__icon header-container__icon--left" />
+              <KeyboardArrowLeftIcon
+                data-testid="arrow-left"
+                className="header-container__icon header-container__icon--left"
+              />
             </Link>
           )}
           {pathname === "/hands" && (
             <Link to={`/create`}>
-              <AddIcon className="header-container__icon header-container__icon--left" />
+              <AddIcon
+                data-testid="add"
+                className="header-container__icon header-container__icon--left"
+              />
             </Link>
           )}
         </div>
@@ -39,10 +51,16 @@ const Header = (): JSX.Element => {
         </div>
         <div className="header-container__item">
           {pathname === "/hands" && (
-            <PersonIcon className="header-container__icon header-container__icon--right" />
+            <PersonIcon
+              data-testid="user"
+              className="header-container__icon header-container__icon--right"
+            />
           )}
           {pathname === "/details" && (
-            <EditIcon className="header-container__icon header-container__icon--right" />
+            <EditIcon
+              data-testid="edit"
+              className="header-container__icon header-container__icon--right"
+            />
           )}
         </div>
       </>

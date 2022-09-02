@@ -1,8 +1,8 @@
-import axios from "axios";
+import { renderHook } from "@testing-library/react";
+import Wrapper from "../../../test-utils/Wrapper";
 import { UserData } from "../models/User";
-import useUserApi, { apiURL } from "./useUserApi";
-
-jest.mock("axios");
+import { loginUserActionCreator } from "../slices/userSlice";
+import useUserApi from "./useUserApi";
 
 const mockUseDispatch = jest.fn();
 
@@ -11,21 +11,51 @@ jest.mock("../../../app/hooks", () => ({
   useAppDispatch: () => mockUseDispatch,
 }));
 
+const mockFetchToken = jest.fn();
+
+jest.mock("../../../utils/auth", () => () => {
+  mockFetchToken();
+});
+
+const mockUser: UserData = {
+  username: "bobby",
+  password: "thesponge",
+};
+
 describe("Given a useUserApi hook", () => {
-  describe("When invoke register function with a mockUser", () => {
-    test("Then it should post a new user", async () => {
-      const mockUser: UserData = {
-        username: "bob",
-        password: "thesponge",
+  describe("When signUp function is called with a User data", () => {
+    test("The it should return the response of the request", async () => {
+      const newUser = {
+        username: "bobby",
+        id: "6311947608ed28e35ccabbeb",
       };
 
-      const { register } = useUserApi();
+      const {
+        result: {
+          current: { register },
+        },
+      } = renderHook(useUserApi, { wrapper: Wrapper });
+
       await register(mockUser);
 
-      expect(axios.post).toHaveBeenCalledWith(
-        `${apiURL}users/register`,
-        mockUser
-      );
+      const result = await register(mockUser);
+
+      expect(result).toStrictEqual(newUser);
     });
+  });
+});
+describe("When login function is called with a User name and a password", () => {
+  test("Then it should return the response of the request", async () => {
+    const token =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWQiOiI2MzBkMDBjMTE1MDllNTE2N2JiN2Y1YmIiLCJpYXQiOjE2NjIxMTA0MDJ9.EBtoJh2jDwsMhtv89FuU_O1aYBdKX_CUccvQEue5D4E";
+
+    const {
+      result: {
+        current: { login },
+      },
+    } = renderHook(useUserApi, { wrapper: Wrapper });
+    await login(mockUser);
+    const user = mockFetchToken(token);
+    expect(mockUseDispatch).toHaveBeenCalledWith(loginUserActionCreator(user));
   });
 });

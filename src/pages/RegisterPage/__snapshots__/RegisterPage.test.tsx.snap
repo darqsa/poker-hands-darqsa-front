@@ -21,7 +21,7 @@ exports[`Given a register page component When invoked Then it should match the s
     </label>
     <input
       autoComplete="off"
-      className="form__input"
+      className="form__input "
       id="username"
       onChange={[Function]}
       placeholder="Enter your username"
@@ -40,7 +40,7 @@ exports[`Given a register page component When invoked Then it should match the s
     </label>
     <input
       autoComplete="off"
-      className="form__input "
+      className="form__input  "
       id="password"
       onChange={[Function]}
       placeholder="Enter your password"

@@ -1,5 +1,5 @@
 import { useAppDispatch } from "../../../app/hooks";
-import { UserData, UserToken } from "../models/User";
+import { RegisterUserData, UserData, UserToken } from "../models/User";
 import axios, { AxiosResponse } from "axios";
 import fetchToken from "../../../utils/auth";
 import {
@@ -13,7 +13,12 @@ const useUserApi = () => {
   const dispatch = useAppDispatch();
 
   const register = async (userData: UserData) => {
-    await axios.post(`${apiURL}users/register`, userData);
+    const response: AxiosResponse<RegisterUserData> = await axios.post(
+      `${apiURL}users/register`,
+      userData
+    );
+
+    return response.data;
   };
 
   const login = async (userData: UserData) => {

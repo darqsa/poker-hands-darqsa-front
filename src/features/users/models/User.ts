@@ -8,7 +8,10 @@ export interface LoginUserData {
   token: string;
   id: string;
 }
-
+export interface RegisterUserData {
+  username: string;
+  id: string;
+}
 export interface UserToken {
   token: string;
 }

@@ -3,7 +3,7 @@ import Login from "../../components/Login/Login";
 import ButtonStyled from "../../styles/ButtonStyled";
 import LinkContainerStyled from "./LoginPageStyled";
 
-const RegisterPage = (): JSX.Element => {
+const LoginPage = (): JSX.Element => {
   return (
     <>
       <Login />
@@ -20,4 +20,4 @@ const RegisterPage = (): JSX.Element => {
     </>
   );
 };
-export default RegisterPage;
+export default LoginPage;

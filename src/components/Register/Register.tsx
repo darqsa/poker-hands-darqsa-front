@@ -2,8 +2,12 @@ import { SyntheticEvent, useState } from "react";
 import useUserApi from "../../features/users/hooks/useUserApi";
 import ButtonStyled from "../../styles/ButtonStyled";
 import FormStyled from "../../styles/FormStyled";
+import { useAppDispatch } from "../../app/hooks";
+import { toggleAlertActionCreator } from "../../features/users/slices/alertSlice";
 
 const Register = (): JSX.Element => {
+  const dispatch = useAppDispatch();
+
   const initialState = {
     username: "",
     password: "",
@@ -32,6 +36,7 @@ const Register = (): JSX.Element => {
           password: formData.password,
         });
         setFormData(initialState);
+        dispatch(toggleAlertActionCreator());
       } catch (error) {
         setUsernameFieldStatus("form__input--wrong");
       }

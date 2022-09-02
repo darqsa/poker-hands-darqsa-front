@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import Register from "./Register";
 
-const mockRegisterFunction = { register: jest.fn() };
+let mockRegisterFunction = { register: jest.fn() };
 jest.mock(
   "../../features/users/hooks/useUserApi",
   () => () => mockRegisterFunction
@@ -118,6 +118,37 @@ describe("Given a register component", () => {
         await userEvent.click(submit);
 
         expect(mockRegisterFunction.register).not.toHaveBeenCalled();
+      });
+    });
+
+    describe("And the user types an already used username", () => {
+      test("Then it render the text 'Username already taken", async () => {
+        mockRegisterFunction = {
+          register: jest.fn().mockRejectedValue(new Error()),
+        };
+        const errorText = "Username already taken";
+        const newText = "kkkkk";
+        render(<Register />);
+        const form = {
+          username: screen.getByLabelText("Username") as HTMLInputElement,
+          password: screen.getByLabelText("Password") as HTMLInputElement,
+          repeatPassword: screen.getByPlaceholderText(
+            "Repeat your password"
+          ) as HTMLInputElement,
+        };
+
+        fireEvent.change(form.username, { target: { value: newText } });
+        fireEvent.change(form.password, { target: { value: newText } });
+        fireEvent.change(form.repeatPassword, {
+          target: { value: newText },
+        });
+
+        const submit = screen.getByRole("button", { name: "Register" });
+        await userEvent.click(submit);
+
+        const expectedText = screen.getByText(errorText);
+
+        expect(expectedText).toBeInTheDocument();
       });
     });
   });

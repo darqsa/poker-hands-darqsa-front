@@ -1,5 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { Provider } from "react-redux";
+import { store } from "../../app/store";
 import Login from "./Login";
 
 let mockLoginFunction = { login: jest.fn() };
@@ -11,7 +13,11 @@ jest.mock(
 describe("Given a Login component", () => {
   describe("When instantiated", () => {
     test("Then it should render a heading, username, password and repeatPassword inputs and a submit button", () => {
-      render(<Login />);
+      render(
+        <Provider store={store}>
+          <Login />
+        </Provider>
+      );
       const form = [
         screen.getByRole("heading", { name: "Login to see your PokerHands" }),
         screen.getByLabelText("Username"),
@@ -26,7 +32,11 @@ describe("Given a Login component", () => {
   describe("When instantiated and the user types in", () => {
     test("Then it should render a username, password and repeatPassword inputs with the text 'kkkkk'", () => {
       const newText = "kkkkk";
-      render(<Login />);
+      render(
+        <Provider store={store}>
+          <Login />
+        </Provider>
+      );
       const form = {
         username: screen.getByLabelText("Username") as HTMLInputElement,
         password: screen.getByLabelText("Password") as HTMLInputElement,
@@ -42,7 +52,11 @@ describe("Given a Login component", () => {
     describe("And the user type is not valid", () => {
       test("Then the button should be disabled", () => {
         const newInvalidText = "kkk";
-        render(<Login />);
+        render(
+          <Provider store={store}>
+            <Login />
+          </Provider>
+        );
         const form = {
           username: screen.getByLabelText("Username") as HTMLInputElement,
           password: screen.getByLabelText("Password") as HTMLInputElement,
@@ -59,7 +73,11 @@ describe("Given a Login component", () => {
 
     test("Then it should call the mockLogin function with the new text", async () => {
       const newText = "kkkkk";
-      render(<Login />);
+      render(
+        <Provider store={store}>
+          <Login />
+        </Provider>
+      );
       const form = {
         username: screen.getByLabelText("Username") as HTMLInputElement,
         password: screen.getByLabelText("Password") as HTMLInputElement,
@@ -84,7 +102,11 @@ describe("Given a Login component", () => {
       mockLoginFunction = { login: jest.fn().mockRejectedValue(new Error()) };
       const text = "Incorrect username or password";
       const newText = "kkkkk";
-      render(<Login />);
+      render(
+        <Provider store={store}>
+          <Login />
+        </Provider>
+      );
       const form = {
         username: screen.getByLabelText("Username") as HTMLInputElement,
         password: screen.getByLabelText("Password") as HTMLInputElement,

@@ -3,7 +3,7 @@ import useUserApi from "../../features/users/hooks/useUserApi";
 import ButtonStyled from "../../styles/ButtonStyled";
 import FormStyled from "../../styles/FormStyled";
 import { useAppDispatch } from "../../app/hooks";
-import { toggleAlertActionCreator } from "../../features/users/slices/alertSlice";
+import { openAlertActionCreator } from "../../features/users/slices/alertSlice";
 
 const Register = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -14,7 +14,7 @@ const Register = (): JSX.Element => {
     repeatPassword: "",
   };
 
-  const { register } = useUserApi();
+  const { register, login } = useUserApi();
   const [formData, setFormData] = useState(initialState);
   const [fieldStatus, setFieldStatus] = useState("");
   const [usernameFieldStatus, setUsernameFieldStatus] = useState("");
@@ -35,8 +35,17 @@ const Register = (): JSX.Element => {
           username: formData.username,
           password: formData.password,
         });
+
         setFormData(initialState);
-        dispatch(toggleAlertActionCreator());
+        login({
+          username: formData.username,
+          password: formData.password,
+        });
+        dispatch(
+          openAlertActionCreator(
+            `Your account has been created successfully! 👍`
+          )
+        );
       } catch (error) {
         setUsernameFieldStatus("form__input--wrong");
       }

@@ -1,14 +1,22 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState = false;
+const initialState = { isAlertShown: false, alertMessage: "" };
 
 const alertSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    toggleAlert: (previousState) => !previousState,
+    openAlert: (previousState, action: PayloadAction<string>) => ({
+      ...previousState,
+      isAlertShown: true,
+      alertMessage: action.payload,
+    }),
+    closeAlert: (previousState) => initialState,
   },
 });
 
-export const { toggleAlert: toggleAlertActionCreator } = alertSlice.actions;
+export const {
+  openAlert: openAlertActionCreator,
+  closeAlert: closeAlertActionCreator,
+} = alertSlice.actions;
 export default alertSlice.reducer;

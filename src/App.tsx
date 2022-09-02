@@ -8,8 +8,8 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import GlobalStyles, { MainContainerStyled } from "./styles/GlobalStyles";
 import fetchToken from "./utils/auth";
 import CloseIcon from "@mui/icons-material/Close";
-import { toggleAlertActionCreator } from "./features/users/slices/alertSlice";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
+import { closeAlertActionCreator } from "./features/users/slices/alertSlice";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -33,23 +33,19 @@ function App() {
           <Route path="/home" element={<LoginPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
-        {alert && (
+        {alert.isAlertShown && (
           <Alert
+            onClick={() => {
+              dispatch(closeAlertActionCreator());
+            }}
             className="alert"
             action={
-              <IconButton
-                aria-label="close"
-                color="inherit"
-                size="small"
-                onClick={() => {
-                  dispatch(toggleAlertActionCreator());
-                }}
-              >
+              <IconButton aria-label="close" color="inherit" size="small">
                 <CloseIcon fontSize="inherit" />
               </IconButton>
             }
           >
-            Your account has been created successfully! 👍
+            {alert.alertMessage}
           </Alert>
         )}
       </MainContainerStyled>

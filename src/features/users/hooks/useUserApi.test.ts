@@ -1,8 +1,7 @@
-import axios from "axios";
+import { renderHook } from "@testing-library/react";
+import Wrapper from "../../../test-utils/Wrapper";
 import { UserData } from "../models/User";
-import useUserApi, { apiURL } from "./useUserApi";
-
-jest.mock("axios");
+import useUserApi from "./useUserApi";
 
 const mockUseDispatch = jest.fn();
 
@@ -12,20 +11,28 @@ jest.mock("../../../app/hooks", () => ({
 }));
 
 describe("Given a useUserApi hook", () => {
-  describe("When invoke register function with a mockUser", () => {
-    test("Then it should post a new user", async () => {
+  describe("When signUp function is called with a User data", () => {
+    test("The it should return the response of the request", async () => {
       const mockUser: UserData = {
-        username: "bob",
+        username: "bobby",
         password: "thesponge",
       };
+      const newUser = {
+        username: "bobby",
+        id: "6311947608ed28e35ccabbeb",
+      };
 
-      const { register } = useUserApi();
+      const {
+        result: {
+          current: { register },
+        },
+      } = renderHook(useUserApi, { wrapper: Wrapper });
+
       await register(mockUser);
 
-      expect(axios.post).toHaveBeenCalledWith(
-        `${apiURL}users/register`,
-        mockUser
-      );
+      const result = await register(mockUser);
+
+      expect(result).toStrictEqual(newUser);
     });
   });
 });

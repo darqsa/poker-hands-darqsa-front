@@ -30,7 +30,7 @@ function App() {
           <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/home" element={<RegisterPage />} />
+          <Route path="/home" element={<LoginPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
         {alert && (

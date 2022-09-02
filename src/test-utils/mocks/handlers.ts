@@ -4,7 +4,6 @@ const apiUrl = process.env.REACT_APP_USERS_API_URL as string;
 
 const handlers = [
   rest.post(`${apiUrl}users/register`, (req, res, ctx) => {
-    debugger;
     return res(
       ctx.status(200),
       ctx.json({

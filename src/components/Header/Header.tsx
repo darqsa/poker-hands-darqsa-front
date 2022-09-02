@@ -6,9 +6,7 @@ import HeaderStyled from "./HeaderStyled";
 import { Link, useLocation } from "react-router-dom";
 
 const Header = (): JSX.Element => {
-  let { pathname } = useLocation();
-
-  const parsedHeading = pathname[1].toUpperCase() + pathname.slice(2);
+  const { pathname } = useLocation();
   return (
     <HeaderStyled className="header-container">
       <>
@@ -47,7 +45,13 @@ const Header = (): JSX.Element => {
           )}
         </div>
         <div className="header-container__item-heading">
-          <h1 className="header-container__heading">{parsedHeading}</h1>
+          <h1 className="header-container__heading">
+            {pathname === "/hands" && "Hands"}
+            {pathname === "/details" && "Details"}
+            {pathname === "/create" && "Create"}
+            {pathname === "/login" && "Login"}
+            {pathname === "/register" && "Register"}
+          </h1>
         </div>
         <div className="header-container__item">
           {pathname === "/hands" && (

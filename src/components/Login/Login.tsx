@@ -1,5 +1,7 @@
 import { SyntheticEvent, useState } from "react";
+import { useAppDispatch } from "../../app/hooks";
 import useUserApi from "../../features/users/hooks/useUserApi";
+import { openAlertActionCreator } from "../../features/users/slices/alertSlice";
 import ButtonStyled from "../../styles/ButtonStyled";
 import FormStyled from "../../styles/FormStyled";
 
@@ -8,6 +10,8 @@ const Login = (): JSX.Element => {
     username: "",
     password: "",
   };
+
+  const dispatch = useAppDispatch();
 
   const { login } = useUserApi();
   const [formData, setFormData] = useState(initialState);
@@ -18,6 +22,7 @@ const Login = (): JSX.Element => {
 
     try {
       await login({ username: formData.username, password: formData.password });
+      dispatch(openAlertActionCreator(`Welcome, back ${formData.username} 👍`));
       setFormData(initialState);
     } catch (error) {
       setFieldStatus("form__input--wrong");

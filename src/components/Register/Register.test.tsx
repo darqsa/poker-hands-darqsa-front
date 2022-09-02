@@ -1,8 +1,9 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { openAlertActionCreator } from "../../features/users/slices/alertSlice";
 import Register from "./Register";
 
-let mockRegisterFunction = { register: jest.fn() };
+let mockRegisterFunction = { register: jest.fn(), login: jest.fn() };
 jest.mock(
   "../../features/users/hooks/useUserApi",
   () => () => mockRegisterFunction
@@ -101,6 +102,32 @@ describe("Given a register component", () => {
       };
 
       expect(mockRegisterFunction.register).toHaveBeenCalledWith(registerData);
+      expect(mockRegisterFunction.login).toHaveBeenCalledWith(registerData);
+    });
+
+    test("Then it should call the mockDispatcher with the openAlertActionCreator", async () => {
+      const newText = "kkkkk";
+      const alertText = "Your account has been created successfully! 👍";
+      render(<Register />);
+      const form = {
+        username: screen.getByLabelText("Username") as HTMLInputElement,
+        password: screen.getByLabelText("Password") as HTMLInputElement,
+        repeatPassword: screen.getByPlaceholderText(
+          "Repeat your password"
+        ) as HTMLInputElement,
+      };
+
+      fireEvent.change(form.username, { target: { value: newText } });
+      fireEvent.change(form.password, { target: { value: newText } });
+      fireEvent.change(form.repeatPassword, {
+        target: { value: newText },
+      });
+      const submit = screen.getByRole("button", { name: "Register" });
+      await userEvent.click(submit);
+
+      expect(mockUseDispatch).toHaveBeenCalledWith(
+        openAlertActionCreator(alertText)
+      );
     });
 
     describe("And the user type different passwords", () => {
@@ -132,6 +159,7 @@ describe("Given a register component", () => {
       test("Then it render the text 'Username already taken", async () => {
         mockRegisterFunction = {
           register: jest.fn().mockRejectedValue(new Error()),
+          login: jest.fn(),
         };
         const errorText = "Username already taken";
         const newText = "kkkkk";

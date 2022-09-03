@@ -1,5 +1,8 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { Provider } from "react-redux";
 import { MemoryRouter } from "react-router-dom";
+import { store } from "../../app/store";
 import Header from "./Header";
 
 describe("Given a Header component", () => {
@@ -51,7 +54,7 @@ describe("Given a Header component", () => {
     });
   });
 
-  describe("When invoked and the page is hands", () => {
+  describe("When invoked and the page is home", () => {
     test("Then it should return a hands heading, AddIcon and a PersionIcon", () => {
       render(
         <MemoryRouter initialEntries={["/home"]}>
@@ -67,21 +70,39 @@ describe("Given a Header component", () => {
       expect(icon1).toBeInTheDocument();
       expect(icon2).toBeInTheDocument();
     });
-  });
 
-  describe("When invoked and the page is create", () => {
-    test("Then it should return a create heading, KeyboardArrowLeftIcon", () => {
-      render(
-        <MemoryRouter initialEntries={["/create"]}>
-          <Header />
-        </MemoryRouter>
-      );
+    describe("And the user clicks in the icon2", () => {
+      test("Then it should render the Profile component", async () => {
+        render(
+          <Provider store={store}>
+            <MemoryRouter initialEntries={["/home"]}>
+              <Header />
+            </MemoryRouter>
+          </Provider>
+        );
+        const icon = screen.getByTestId("user");
+        await userEvent.click(icon);
 
-      const heading = screen.getByRole("heading", { name: "Create" });
-      const icon = screen.getByTestId("arrow-left");
+        const profileButton = screen.getByRole("button", { name: "Logout" });
 
-      expect(heading).toBeInTheDocument();
-      expect(icon).toBeInTheDocument();
+        expect(profileButton).toBeInTheDocument();
+      });
+    });
+
+    describe("When invoked and the page is create", () => {
+      test("Then it should return a create heading, KeyboardArrowLeftIcon", () => {
+        render(
+          <MemoryRouter initialEntries={["/create"]}>
+            <Header />
+          </MemoryRouter>
+        );
+
+        const heading = screen.getByRole("heading", { name: "Create" });
+        const icon = screen.getByTestId("arrow-left");
+
+        expect(heading).toBeInTheDocument();
+        expect(icon).toBeInTheDocument();
+      });
     });
   });
 });

@@ -16,20 +16,18 @@ const Profile = (): JSX.Element => {
 
   return (
     <>
-      {user.username && (
-        <SideBarStyled className="sidebar">
-          <div className="sidebar__profile-container">
-            <span className="sidebar__current-user">
-              Logged as <strong>{user.username}</strong>
-            </span>
-            <Link to={"/login"}>
-              <button className="sidebar__logout-button" onClick={logoutUser}>
-                Logout
-              </button>
-            </Link>
-          </div>
-        </SideBarStyled>
-      )}
+      <SideBarStyled className="sidebar">
+        <div className="sidebar__profile-container">
+          <span className="sidebar__current-user">
+            Logged as <strong>{user.username}</strong>
+          </span>
+          <Link to={"/login"}>
+            <button className="sidebar__logout-button" onClick={logoutUser}>
+              Logout
+            </button>
+          </Link>
+        </div>
+      </SideBarStyled>
     </>
   );
 };

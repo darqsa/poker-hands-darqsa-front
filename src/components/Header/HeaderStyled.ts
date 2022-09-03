@@ -28,6 +28,7 @@ const HeaderStyled = styled.header`
       height: 32px;
       width: 32px;
       color: ${styles.colors.white};
+      cursor: pointer;
       &--left {
         padding-top: 4px;
         height: 45px;

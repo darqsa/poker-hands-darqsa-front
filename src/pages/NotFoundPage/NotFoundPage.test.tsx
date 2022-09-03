@@ -19,6 +19,7 @@ describe("Given a NotFound Page", () => {
     });
 
     test("Then it should render a button that redirets to the /home page", async () => {
+      const expectedPathname = "/home";
       render(
         <BrowserRouter>
           <NotFoundPage />
@@ -36,7 +37,7 @@ describe("Given a NotFound Page", () => {
         },
       } = renderHook(useLocation, { wrapper: Wrapper });
 
-      expect(pathname).toBe("/home");
+      expect(pathname).toBe(expectedPathname);
     });
   });
 });

@@ -54,7 +54,7 @@ describe("Given a Header component", () => {
   describe("When invoked and the page is hands", () => {
     test("Then it should return a hands heading, AddIcon and a PersionIcon", () => {
       render(
-        <MemoryRouter initialEntries={["/hands"]}>
+        <MemoryRouter initialEntries={["/home"]}>
           <Header />
         </MemoryRouter>
       );

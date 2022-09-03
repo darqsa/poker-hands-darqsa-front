@@ -20,7 +20,7 @@ const Header = (): JSX.Element => {
             </Link>
           )}
           {pathname === "/details" && (
-            <Link to={`/hands`}>
+            <Link to={`/home`}>
               <KeyboardArrowLeftIcon
                 data-testid="arrow-left"
                 className="header-container__icon header-container__icon--left"
@@ -35,7 +35,7 @@ const Header = (): JSX.Element => {
               />
             </Link>
           )}
-          {pathname === "/hands" && (
+          {pathname === "/home" && (
             <Link to={`/create`}>
               <AddIcon
                 data-testid="add"
@@ -46,7 +46,7 @@ const Header = (): JSX.Element => {
         </div>
         <div className="header-container__item-heading">
           <h1 className="header-container__heading">
-            {pathname === "/hands" && "Hands"}
+            {pathname === "/home" && "Hands"}
             {pathname === "/details" && "Details"}
             {pathname === "/create" && "Create"}
             {pathname === "/login" && "Login"}
@@ -54,7 +54,7 @@ const Header = (): JSX.Element => {
           </h1>
         </div>
         <div className="header-container__item">
-          {pathname === "/hands" && (
+          {pathname === "/home" && (
             <PersonIcon
               data-testid="user"
               className="header-container__icon header-container__icon--right"

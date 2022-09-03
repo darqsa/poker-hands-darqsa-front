@@ -29,6 +29,7 @@ const Login = (): JSX.Element => {
     }
   };
   const onChangeData = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFieldStatus("");
     setFormData({ ...formData, [event.target.id]: event.target.value });
   };
 

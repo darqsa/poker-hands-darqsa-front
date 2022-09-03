@@ -37,7 +37,7 @@ const Register = (): JSX.Element => {
         });
 
         setFormData(initialState);
-        login({
+        await login({
           username: formData.username,
           password: formData.password,
         });

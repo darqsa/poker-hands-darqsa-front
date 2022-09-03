@@ -10,6 +10,7 @@ import fetchToken from "./utils/auth";
 import CloseIcon from "@mui/icons-material/Close";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import { closeAlertActionCreator } from "./features/users/slices/alertSlice";
+import HomePage from "./pages/HomePage/HomePage";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -28,9 +29,18 @@ function App() {
       <MainContainerStyled>
         <Routes>
           <Route path="/" element={<Navigate to="/login" />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/home" element={<Navigate to="/login" />} />
+          <Route
+            path="/register"
+            element={token ? <Navigate to="/home" /> : <RegisterPage />}
+          />
+          <Route
+            path="/login"
+            element={token ? <Navigate to="/home" /> : <LoginPage />}
+          />
+          <Route
+            path="/home"
+            element={token ? <HomePage /> : <Navigate to="/login" />}
+          />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
         {alert.isAlertShown && (

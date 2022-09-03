@@ -4,13 +4,19 @@ import styles from "../../styles/styles";
 const SideBarStyled = styled.aside`
   position: fixed;
   display: flex;
-  flex-direction: row-reverse;
   width: 100%;
   height: 150px;
   background-color: ${styles.colors.red};
   color: ${styles.colors.white};
   align-items: center;
   border-radius: 0 0 30px 30px;
+
+  @media (min-width: 700px) {
+    width: 300px;
+    right: 0;
+    border-radius: 0 0 0 10px;
+  }
+
   .sidebar {
     &__profile-container {
       width: 100%;

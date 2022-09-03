@@ -8,8 +8,8 @@ const Profile = (): JSX.Element => {
   const { logout } = useUserApi();
   const navigate = useNavigate();
 
-  const logoutUser = async () => {
-    await logout();
+  const logoutUser = () => {
+    logout();
     navigate("/login");
     window.location.reload();
   };

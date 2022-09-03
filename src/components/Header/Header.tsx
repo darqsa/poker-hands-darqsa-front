@@ -28,7 +28,7 @@ const Header = (): JSX.Element => {
             </Link>
           )}
           {pathname === "/create" && (
-            <Link to={`/hands`}>
+            <Link to={`/home`}>
               <KeyboardArrowLeftIcon
                 data-testid="arrow-left"
                 className="header-container__icon header-container__icon--left"

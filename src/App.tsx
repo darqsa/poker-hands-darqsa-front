@@ -11,7 +11,6 @@ import CloseIcon from "@mui/icons-material/Close";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import { closeAlertActionCreator } from "./features/users/slices/alertSlice";
 import HomePage from "./pages/HomePage/HomePage";
-import Profile from "./components/Profile/Profile";
 
 function App() {
   const token = localStorage.getItem("token");
@@ -27,7 +26,6 @@ function App() {
     <>
       <GlobalStyles />
       <Header />
-      <Profile />
       <MainContainerStyled>
         <Routes>
           <Route path="/" element={<Navigate to="/login" />} />

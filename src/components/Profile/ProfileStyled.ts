@@ -10,6 +10,7 @@ const SideBarStyled = styled.aside`
   background-color: ${styles.colors.red};
   color: ${styles.colors.white};
   align-items: center;
+  border-radius: 0 0 30px 30px;
   .sidebar {
     &__profile-container {
       width: 100%;

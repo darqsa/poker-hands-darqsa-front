@@ -6,7 +6,11 @@ const initialState: HandData[] = [];
 const handsSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    loadHands: (previousUsers, action: PayloadAction<HandData[]>) => [
+      ...action.payload,
+    ],
+  },
 });
 
 export const { loadHands: loadHandsActionCreator } = handsSlice.actions;

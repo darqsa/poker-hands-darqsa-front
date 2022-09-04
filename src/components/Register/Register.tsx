@@ -3,7 +3,7 @@ import useUserApi from "../../features/users/hooks/useUserApi";
 import ButtonStyled from "../../styles/ButtonStyled";
 import FormStyled from "../../styles/FormStyled";
 import { useAppDispatch } from "../../app/hooks";
-import { openAlertActionCreator } from "../../features/users/slices/alertSlice";
+import { openAlertActionCreator } from "../../features/ui/slices/alertSlice";
 
 const Register = (): JSX.Element => {
   const dispatch = useAppDispatch();

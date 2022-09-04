@@ -2,25 +2,18 @@ import { Alert, IconButton } from "@mui/material";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "./app/hooks";
 import Header from "./components/Header/Header";
-import { loginUserActionCreator } from "./features/users/slices/userSlice";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import GlobalStyles, { MainContainerStyled } from "./styles/GlobalStyles";
-import fetchToken from "./utils/auth";
 import CloseIcon from "@mui/icons-material/Close";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
-import { closeAlertActionCreator } from "./features/users/slices/alertSlice";
+import { closeAlertActionCreator } from "./features/ui/slices/alertSlice";
 import HomePage from "./pages/HomePage/HomePage";
 
 function App() {
-  const token = localStorage.getItem("token");
   const dispatch = useAppDispatch();
   const alert = useAppSelector((state) => state.alert);
-
-  if (token) {
-    const user = fetchToken(token);
-    dispatch(loginUserActionCreator(user));
-  }
+  const token = localStorage.getItem("token");
 
   return (
     <>

@@ -1,10 +1,12 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
-import alertSlice from "../features/users/slices/alertSlice";
+import handsSlice from "../features/hands/slices/handsSlice";
+import alertSlice from "../features/ui/slices/alertSlice";
 import userSlice from "../features/users/slices/userSlice";
 
 export const store = configureStore({
   reducer: {
     user: userSlice,
+    hands: handsSlice,
     alert: alertSlice,
   },
 });

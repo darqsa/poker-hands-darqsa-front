@@ -42,3 +42,7 @@ export interface HandData {
     handImage?: string;
   };
 }
+
+export interface GetHandData extends HandData {
+  id: string;
+}

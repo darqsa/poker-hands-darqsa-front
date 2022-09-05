@@ -7,7 +7,7 @@ import {
   logoutUserActionCreator,
 } from "../slices/userSlice";
 
-export const apiURL = process.env.REACT_APP_USERS_API_URL;
+export const apiURL = process.env.REACT_APP_API_URL;
 
 const useUserApi = () => {
   const dispatch = useAppDispatch();

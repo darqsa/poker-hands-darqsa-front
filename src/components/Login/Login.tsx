@@ -22,7 +22,7 @@ const Login = (): JSX.Element => {
 
     try {
       await login({ username: formData.username, password: formData.password });
-      dispatch(openAlertActionCreator(`Welcome, back ${formData.username} 👍`));
+      dispatch(openAlertActionCreator(`Welcome back, ${formData.username} 👍`));
       setFormData(initialState);
     } catch (error) {
       setFieldStatus("form__input--wrong");

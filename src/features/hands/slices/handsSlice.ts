@@ -4,7 +4,7 @@ import { HandData } from "../models/Hand";
 const initialState: HandData[] = [];
 
 const handsSlice = createSlice({
-  name: "user",
+  name: "hands",
   initialState,
   reducers: {
     loadHands: (previousUsers, action: PayloadAction<HandData[]>) => [

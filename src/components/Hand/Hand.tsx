@@ -1,5 +1,6 @@
 import { HandData } from "../../features/hands/models/Hand";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import HandStyled from "./HandStyled";
 
 interface HandProps {
   hand: HandData;
@@ -7,14 +8,16 @@ interface HandProps {
 const Hand = ({ hand }: HandProps): JSX.Element => {
   const handRoute = "./img/pokerCards/";
   return (
-    <article className="hand">
+    <HandStyled className="hand">
       <div className="hand__hero-img-group">
         <img
+          height={75}
           src={`${handRoute}${hand.preGame.hero.hand[0]}.png`}
           alt={`The ${hand.preGame.hero.hand[0]} poker hand.`}
           className="hand__hero-card"
         />
         <img
+          height={75}
           src={`${handRoute}${hand.preGame.hero.hand[1]}.png`}
           alt={`The ${hand.preGame.hero.hand[1]} poker hand.`}
           className="hand__hero-card"
@@ -26,16 +29,19 @@ const Hand = ({ hand }: HandProps): JSX.Element => {
           {hand.game.flop?.board[0] && (
             <>
               <img
+                height={60}
                 className="hand__board-card"
                 src={`${handRoute}${hand.game.flop?.board[0]}.png`}
                 alt={`The ${hand.game.flop?.board[0]} poker hand.`}
               />
               <img
+                height={60}
                 className="hand__board-card"
                 src={`${handRoute}${hand.game.flop?.board[1]}.png`}
                 alt={`The ${hand.game.flop?.board[1]} poker hand.`}
               />
               <img
+                height={60}
                 className="hand__board-card"
                 src={`${handRoute}${hand.game.flop?.board[2]}.png`}
                 alt={`The ${hand.game.flop?.board[2]} poker hand.`}
@@ -44,6 +50,7 @@ const Hand = ({ hand }: HandProps): JSX.Element => {
           )}
           {hand.game.turn?.board && (
             <img
+              height={60}
               className="hand__board-card"
               src={`${handRoute}${hand.game.turn?.board}.png`}
               alt={`The ${hand.game.turn?.board} poker hand.`}
@@ -51,15 +58,16 @@ const Hand = ({ hand }: HandProps): JSX.Element => {
           )}
           {hand.game.river?.board && (
             <img
+              height={60}
               className="hand__board-card"
               src={`${handRoute}${hand.game.river?.board}.png`}
               alt={`The ${hand.game.river?.board} poker hand.`}
             />
           )}
         </div>
-        <KeyboardArrowRightIcon className="hand__info-icon" />
       </div>
-    </article>
+      <MoreVertIcon className="hand__more-icon" />
+    </HandStyled>
   );
 };
 export default Hand;

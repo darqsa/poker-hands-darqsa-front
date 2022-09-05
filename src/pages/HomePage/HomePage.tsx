@@ -4,7 +4,7 @@ import HomeContainerStyled from "./HomePageStyled";
 
 const HomePage = (): JSX.Element => {
   const testHand: HandData = {
-    handName: "Best hand name ever",
+    handName: "Best hand name ever fpodsmfpomf",
     preGame: {
       hero: { hand: ["Ac", "Ad"], initialStack: 100, position: 0 },
       villains: [{ hand: ["Ah", "As"], initialStack: 100, position: 1 }],

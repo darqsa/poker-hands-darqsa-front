@@ -82,6 +82,7 @@ const HeaderStyled = styled.header`
       border-radius: 0 0 20px 20px;
       padding: 10px 10px 20px 10px;
       gap: 10px;
+      z-index: 1;
     }
     &__current-user-text {
       display: flex;

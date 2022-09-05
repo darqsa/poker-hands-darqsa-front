@@ -74,13 +74,17 @@ const Header = (): JSX.Element => {
           {pathname === "/home" && matches && (
             <>
               <div
+                data-testid="hover-container"
                 onMouseOver={() => setIsProfileShown(false)}
                 onMouseOut={() => setIsProfileShown(true)}
                 className="header-container__current-user"
               >
                 {isProfileShown ? (
                   <>
-                    <PersonIcon className="header-container__icon header-container__icon--right" />
+                    <PersonIcon
+                      data-testid="user"
+                      className="header-container__icon header-container__icon--right"
+                    />
                     <span className="header-container__current-user-text">
                       {user.username}
                     </span>
@@ -102,6 +106,7 @@ const Header = (): JSX.Element => {
           )}
           {pathname === "/home" && !matches && (
             <PersonIcon
+              data-testid="user"
               className="header-container__icon"
               onClick={() => setIsProfileShown(!isProfileShown)}
             />
@@ -122,7 +127,10 @@ const Header = (): JSX.Element => {
             className="header-container__logout"
           >
             <span className="header-container__current-user-text">
-              <LogoutIcon className="header-container__icon header-container__icon--right" />
+              <LogoutIcon
+                data-testid="logout"
+                className="header-container__icon header-container__icon--right"
+              />
               logout
             </span>
           </Link>

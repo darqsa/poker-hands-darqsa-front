@@ -13,6 +13,7 @@ describe("Given a usersSlice function", () => {
         },
         game: { preFlop: { actions: ["Everyone is allin"], pot: 200 } },
         postGame: { finalPot: 200, gameWinner: "Hero" },
+        id: "1234",
       };
 
       const users = handsSlice(

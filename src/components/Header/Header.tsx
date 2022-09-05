@@ -72,7 +72,6 @@ const Header = (): JSX.Element => {
           {pathname === "/home" && matches && (
             <>
               <div
-                data-testid="hover-container"
                 onMouseOver={() => setIsProfileShown(false)}
                 onMouseOut={() => setIsProfileShown(true)}
                 className="header-container__current-user"

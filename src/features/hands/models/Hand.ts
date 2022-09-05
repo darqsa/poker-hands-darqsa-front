@@ -41,8 +41,5 @@ export interface HandData {
     handDescription?: string;
     handImage?: string;
   };
-}
-
-export interface GetHandData extends HandData {
   id: string;
 }

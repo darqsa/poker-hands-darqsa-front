@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { HandData } from "../../features/hands/models/Hand";
 import Hand from "./Hand";
 
@@ -87,12 +88,15 @@ describe("Given a hand component", () => {
       handItems.forEach((item) => expect(item).toBeInTheDocument());
     });
 
-    test("Then it should render a 'more' button", () => {
+    test("Then it should render a 'more' button that renders a delete icon on click", async () => {
       render(<Hand hand={completeFakeHand} />);
 
       const moreVert = screen.getByTestId("more-vert");
+      await userEvent.click(moreVert);
 
-      expect(moreVert).toBeInTheDocument();
+      const expectedDeleteButton = screen.getByTestId("delete");
+
+      expect(expectedDeleteButton).toBeInTheDocument();
     });
   });
 });

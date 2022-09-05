@@ -55,9 +55,40 @@ const HandStyled = styled.article`
       position: relative;
       top: 3px;
       right: -10px;
+      z-index: 1;
       &:hover {
         color: ${styles.colors.red};
         cursor: pointer;
+      }
+      &--active {
+        color: ${styles.colors.white};
+        &:hover {
+          color: ${styles.colors.main};
+        }
+      }
+    }
+    &__menu {
+      display: flex;
+      background-color: ${styles.colors.red};
+      border-radius: 15px;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      gap: 40px;
+      top: 0;
+      right: 0;
+    }
+    &__delete-button {
+      position: relative;
+      width: 48px;
+      height: 48px;
+      font-size: ${styles.fontSizes.big};
+      color: ${styles.colors.white};
+      cursor: pointer;
+      &:hover {
+        color: ${styles.colors.main};
       }
     }
   }

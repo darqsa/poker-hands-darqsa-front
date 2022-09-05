@@ -1,11 +1,15 @@
 import { HandData } from "../../features/hands/models/Hand";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import DeleteIcon from "@mui/icons-material/Delete";
 import HandStyled from "./HandStyled";
+import { useState } from "react";
 
 interface HandProps {
   hand: HandData;
 }
 const Hand = ({ hand }: HandProps): JSX.Element => {
+  const [menuStatus, setMenuStatus] = useState(false);
+
   const handRoute = "./img/pokerCards/";
   return (
     <HandStyled className="hand">
@@ -66,7 +70,22 @@ const Hand = ({ hand }: HandProps): JSX.Element => {
           )}
         </div>
       </div>
-      <MoreVertIcon data-testid="more-vert" className="hand__more-icon" />
+      <MoreVertIcon
+        onClick={() => {
+          setMenuStatus(!menuStatus);
+        }}
+        data-testid="more-vert"
+        className={
+          menuStatus
+            ? "hand__more-icon hand__more-icon--active"
+            : "hand__more-icon"
+        }
+      />
+      {menuStatus && (
+        <div className="hand__menu">
+          <DeleteIcon data-testid="delete" className="hand__delete-button" />
+        </div>
+      )}
     </HandStyled>
   );
 };

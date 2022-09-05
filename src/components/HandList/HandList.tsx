@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import useHandsApi from "../../features/hands/hooks/useHandsApi";
 import Hand from "../Hand/Hand";
+import HandListContainerStyled from "./HandListStyled";
 
 const HandList = (): JSX.Element => {
   const { hands, loadHands } = useHandsApi();
@@ -9,21 +10,21 @@ const HandList = (): JSX.Element => {
     loadHands();
   }, [loadHands]);
   return (
-    <div className="hand-list-container">
-      {hands.length !== 0 && (
+    <HandListContainerStyled className="hand-list-container">
+      {hands.length === 0 && (
         <p className="hands-list-container__no-hands-text">
           You currently have no hands in your list... Try clicking at the
           top-left icon to create a new hand.
         </p>
       )}
-      <ul className="hand-list-container__list">
+      <ul className="hands-list-container__list">
         {hands.map((hand) => (
-          <li className="hand-list-container__list-item" key={hand.id}>
+          <li className="hands-list-container__list-item" key={hand.id}>
             <Hand hand={hand} />
           </li>
         ))}
       </ul>
-    </div>
+    </HandListContainerStyled>
   );
 };
 export default HandList;

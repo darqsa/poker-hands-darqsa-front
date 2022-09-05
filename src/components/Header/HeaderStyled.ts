@@ -53,7 +53,6 @@ const HeaderStyled = styled.header`
         justify-content: center;
         flex-direction: row;
         cursor: pointer;
-        padding-right: 50px;
       }
     }
     &__logout {

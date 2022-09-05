@@ -43,3 +43,7 @@ export interface HandData {
   };
   id: string;
 }
+
+export interface GetHands extends HandData {
+  hands: HandData[];
+}

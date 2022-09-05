@@ -66,7 +66,7 @@ const Hand = ({ hand }: HandProps): JSX.Element => {
           )}
         </div>
       </div>
-      <MoreVertIcon className="hand__more-icon" />
+      <MoreVertIcon data-testid="more-vert" className="hand__more-icon" />
     </HandStyled>
   );
 };

@@ -25,12 +25,12 @@ export interface HandData {
       actions: string[];
     };
     turn?: {
-      board: string[];
+      board: string;
       pot: number;
       actions: string[];
     };
     river?: {
-      board: string[];
+      board: string;
       pot: number;
       actions: string[];
     };

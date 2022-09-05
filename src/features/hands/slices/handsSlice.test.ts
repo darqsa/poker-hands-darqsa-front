@@ -5,7 +5,7 @@ describe("Given a usersSlice function", () => {
   describe("When invoked with an initial state as previous users and a loadUsers with a fakeUser inside", () => {
     test("Then it should return an array with the fakeUser", () => {
       const initialState: HandData[] = [];
-      const fakeUser: HandData = {
+      const fakeHand: HandData = {
         handName: "Best hand name ever",
         preGame: {
           hero: { hand: ["Ac", "Ad"], initialStack: 100, position: 0 },
@@ -18,10 +18,10 @@ describe("Given a usersSlice function", () => {
 
       const users = handsSlice(
         initialState,
-        loadHandsActionCreator([fakeUser])
+        loadHandsActionCreator([fakeHand])
       );
 
-      expect(users).toStrictEqual([fakeUser]);
+      expect(users).toStrictEqual([fakeHand]);
     });
   });
 });

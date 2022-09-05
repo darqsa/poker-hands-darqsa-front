@@ -69,7 +69,7 @@ exports[`Given a home page component When invoked Then it should match the snaps
     <svg
       aria-hidden={true}
       className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium hand__more-icon css-i4bv87-MuiSvgIcon-root"
-      data-testid="MoreVertIcon"
+      data-testid="more-vert"
       focusable="false"
       viewBox="0 0 24 24"
     >

@@ -10,7 +10,7 @@ const HomeContainerStyled = styled.div`
       font-weight: ${styles.fontWeights.bold};
       font-size: ${styles.fontSizes.bigger};
       text-align: center;
-      margin-top: 30px;
+      margin-top: 100px;
       width: 80%;
       @media (min-width: 700px) {
         width: 35%;

@@ -4,7 +4,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import EditIcon from "@mui/icons-material/Edit";
 import HeaderStyled from "./HeaderStyled";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { useAppSelector } from "../../app/hooks";
 import useUserApi from "../../features/users/hooks/useUserApi";
@@ -15,13 +15,11 @@ const Header = (): JSX.Element => {
   const { pathname } = useLocation();
   const [isProfileShown, setIsProfileShown] = useState(true);
   const { logout } = useUserApi();
-  const navigate = useNavigate();
   const matches = useMediaQuery("(min-width:700px)");
 
   const logoutUser = () => {
+    setIsProfileShown(!isProfileShown);
     logout();
-    navigate("/login");
-    window.location.reload();
   };
 
   return (

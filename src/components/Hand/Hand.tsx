@@ -83,7 +83,7 @@ const Hand = ({ hand }: HandProps): JSX.Element => {
       />
       {menuStatus && (
         <div className="hand__menu">
-          <DeleteIcon className="hand__delete-button" />
+          <DeleteIcon data-testid="delete" className="hand__delete-button" />
         </div>
       )}
     </HandStyled>

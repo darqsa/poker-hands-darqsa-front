@@ -1,5 +1,5 @@
 import { Alert, IconButton } from "@mui/material";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "./app/hooks";
 import Header from "./components/Header/Header";
 import LoginPage from "./pages/LoginPage/LoginPage";
@@ -9,11 +9,19 @@ import CloseIcon from "@mui/icons-material/Close";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import { closeAlertActionCreator } from "./features/ui/slices/alertSlice";
 import HomePage from "./pages/HomePage/HomePage";
+import { loginUserActionCreator } from "./features/users/slices/userSlice";
+import fetchToken from "./utils/auth";
 
 function App() {
   const dispatch = useAppDispatch();
   const alert = useAppSelector((state) => state.alert);
   const token = localStorage.getItem("token");
+  useNavigate();
+
+  if (token) {
+    const user = fetchToken(token);
+    dispatch(loginUserActionCreator(user));
+  }
 
   return (
     <>
@@ -21,7 +29,7 @@ function App() {
       <Header />
       <MainContainerStyled>
         <Routes>
-          <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="/" element={<Navigate to="/login" />} />ç
           <Route
             path="/register"
             element={token ? <Navigate to="/home" /> : <RegisterPage />}

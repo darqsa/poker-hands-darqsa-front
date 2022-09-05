@@ -35,8 +35,8 @@ const useUserApi = () => {
   };
 
   const logout = () => {
-    dispatch(logoutUserActionCreator());
     localStorage.removeItem("token");
+    dispatch(logoutUserActionCreator());
   };
 
   return { register, login, logout };

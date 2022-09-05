@@ -2,12 +2,81 @@
 
 exports[`Given a home page component When invoked Then it should match the snapshot 1`] = `
 <div
-  className="sc-bczRLJ lePsR home-container"
+  className="sc-gsnTZi QSfMP home-container"
 >
-  <p
-    className="home-container__no-hands-text"
+  <article
+    className="sc-bczRLJ kNGxSf hand"
   >
-    You currently have no hands in your list... Try clicking at the top-left icon to create a new hand.
-  </p>
+    <div
+      className="hand__hero-img-group"
+    >
+      <img
+        alt="The Ac poker hand."
+        className="hand__hero-card"
+        height={75}
+        src="./img/pokerCards/Ac.png"
+      />
+      <img
+        alt="The Ad poker hand."
+        className="hand__hero-card"
+        height={75}
+        src="./img/pokerCards/Ad.png"
+      />
+    </div>
+    <div
+      className="hand__hand-container"
+    >
+      <span
+        className="hand__name"
+      >
+        Best hand name ever fpodsmfpomf
+      </span>
+      <div
+        className="hand__board-img-group"
+      >
+        <img
+          alt="The Ts poker hand."
+          className="hand__board-card"
+          height={60}
+          src="./img/pokerCards/Ts.png"
+        />
+        <img
+          alt="The 9c poker hand."
+          className="hand__board-card"
+          height={60}
+          src="./img/pokerCards/9c.png"
+        />
+        <img
+          alt="The 8h poker hand."
+          className="hand__board-card"
+          height={60}
+          src="./img/pokerCards/8h.png"
+        />
+        <img
+          alt="The 7d poker hand."
+          className="hand__board-card"
+          height={60}
+          src="./img/pokerCards/7d.png"
+        />
+        <img
+          alt="The 6d poker hand."
+          className="hand__board-card"
+          height={60}
+          src="./img/pokerCards/6d.png"
+        />
+      </div>
+    </div>
+    <svg
+      aria-hidden={true}
+      className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium hand__more-icon css-i4bv87-MuiSvgIcon-root"
+      data-testid="MoreVertIcon"
+      focusable="false"
+      viewBox="0 0 24 24"
+    >
+      <path
+        d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+      />
+    </svg>
+  </article>
 </div>
 `;

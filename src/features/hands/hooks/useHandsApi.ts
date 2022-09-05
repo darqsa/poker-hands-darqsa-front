@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { GetHandData } from "../models/Hand";
 import { loadHandsActionCreator } from "../slices/handsSlice";
 
-export const apiURL = process.env.REACT_APP_USERS_API_URL;
+export const apiURL = process.env.REACT_APP_API_URL;
 
 const useHandsApi = () => {
   const dispatch = useAppDispatch();

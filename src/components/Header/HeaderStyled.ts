@@ -5,9 +5,19 @@ const HeaderStyled = styled.header`
   display: flex;
   flex-direction: column;
   a {
-    &:active {
+    &::selection {
       background-color: none;
     }
+  }
+  a.nostyle:link {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: auto;
+  }
+  a.nostyle:visited {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: auto;
   }
   .header-container {
     &__container {
@@ -81,7 +91,7 @@ const HeaderStyled = styled.header`
       border-radius: 0 0 20px 20px;
       padding: 10px 10px 20px 10px;
       gap: 10px;
-      z-index: 1;
+      z-index: 2;
     }
     &__current-user-text {
       display: flex;

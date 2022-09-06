@@ -1,4 +1,5 @@
 import { useState } from "react";
+import ButtonStyled from "../../styles/ButtonStyled";
 
 const CreateForm = (): JSX.Element => {
   const [gameInfo, setGameInfo] = useState({});
@@ -6,6 +7,7 @@ const CreateForm = (): JSX.Element => {
   const [flop, setFlop] = useState({});
   const [turn, setTurn] = useState({});
   const [river, setRiver] = useState({});
+  const [endInfo, setendInfo] = useState({});
 
   const onChangeGameInfo = (event: React.ChangeEvent<HTMLInputElement>) => {
     setGameInfo({
@@ -38,6 +40,13 @@ const CreateForm = (): JSX.Element => {
   const onChangeRiverInfo = (event: React.ChangeEvent<HTMLInputElement>) => {
     setRiver({
       ...river,
+      [event.target.id]: event.target.value,
+    });
+  };
+
+  const onChangeEndInfo = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setendInfo({
+      ...endInfo,
       [event.target.id]: event.target.value,
     });
   };
@@ -200,7 +209,6 @@ const CreateForm = (): JSX.Element => {
               type="text"
               id="flopCard1"
               autoComplete="off"
-              required
               onChange={onChangeFlopInfo}
             />
             <input
@@ -208,7 +216,6 @@ const CreateForm = (): JSX.Element => {
               type="text"
               id="flopCard2"
               autoComplete="off"
-              required
               onChange={onChangeFlopInfo}
             />
             <input
@@ -216,7 +223,6 @@ const CreateForm = (): JSX.Element => {
               type="text"
               id="flopCard2"
               autoComplete="off"
-              required
               onChange={onChangeFlopInfo}
             />
           </div>
@@ -229,7 +235,6 @@ const CreateForm = (): JSX.Element => {
               type="text"
               id="flopActions"
               autoComplete="off"
-              required
               onChange={onChangeFlopInfo}
             />
           </div>
@@ -245,7 +250,6 @@ const CreateForm = (): JSX.Element => {
               type="text"
               id="turnCard"
               autoComplete="off"
-              required
               onChange={onChangeTurnInfo}
             />
           </div>
@@ -258,7 +262,6 @@ const CreateForm = (): JSX.Element => {
               type="text"
               id="turnActions"
               autoComplete="off"
-              required
               onChange={onChangeTurnInfo}
             />
           </div>
@@ -274,7 +277,6 @@ const CreateForm = (): JSX.Element => {
               type="text"
               id="riverCard"
               autoComplete="off"
-              required
               onChange={onChangeRiverInfo}
             />
           </div>
@@ -287,11 +289,58 @@ const CreateForm = (): JSX.Element => {
               type="text"
               id="riverActions"
               autoComplete="off"
-              required
               onChange={onChangeRiverInfo}
             />
           </div>
         </section>
+        <section className="form__section">
+          <h2 className="form__title">Post game</h2>
+          <div className="form__field">
+            <label className="form__label" htmlFor="gameWinner">
+              Winner
+            </label>
+            <input
+              list="winner"
+              className="form__input"
+              type="text"
+              id="gameWinner"
+              autoComplete="off"
+              required
+              onChange={onChangeEndInfo}
+            />
+            <datalist className="form__selection-list" id="winner">
+              <option value="hero" className="form__list-option" />
+              <option value="villain" className="form__list-option" />
+            </datalist>
+          </div>
+          <div className="form__field">
+            <label className="form__label" htmlFor="handDescription">
+              Description
+            </label>
+            <input
+              className="form__input"
+              type="text"
+              id="handDescription"
+              autoComplete="off"
+              onChange={onChangeEndInfo}
+            />
+          </div>
+          <div className="form__field">
+            <label className="form__label" htmlFor="handImage">
+              Image
+            </label>
+            <input
+              className="form__input"
+              type="file"
+              id="handImage"
+              autoComplete="off"
+              onChange={onChangeEndInfo}
+            />
+          </div>
+        </section>
+        <ButtonStyled className="form__button" type="submit">
+          Create Hand
+        </ButtonStyled>
       </form>
     </section>
   );

@@ -51,7 +51,6 @@ const CreateForm = (): JSX.Element => {
     });
   };
 
-  // const gameInfoRequirements = formData.
   return (
     <section className="form">
       <h2 className="form__title">Game info</h2>

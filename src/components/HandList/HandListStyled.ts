@@ -5,6 +5,14 @@ const HandListContainerStyled = styled.div`
   display: flex;
   color: ${styles.colors.main};
   justify-content: center;
+
+  @media (min-width: 1200px) {
+    width: 85%;
+  }
+  @media (min-width: 900px) {
+    width: 80%;
+  }
+  margin: auto;
   .hands-list-container {
     &__no-hands-text {
       font-weight: ${styles.fontWeights.bold};
@@ -21,15 +29,14 @@ const HandListContainerStyled = styled.div`
       list-style: none;
       display: flex;
       flex-wrap: wrap;
-      justify-content: center;
       gap: 20px;
       padding: 0;
-      @media (min-width: 1200px) {
-        width: 85%;
-      }
-      @media (min-width: 900px) {
-        width: 80%;
-      }
+      min-width: 320px;
+      justify-content: center;
+    }
+    &__list-item {
+      width: 380px;
+      min-width: 320px;
     }
   }
 `;

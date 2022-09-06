@@ -60,7 +60,7 @@ const CreateForm = (): JSX.Element => {
             <h3 className="form__field-heading">Hero</h3>
             <div className="form__field">
               <label className="form__label" htmlFor="heroPosition">
-                Position:
+                *Position
               </label>
               <input
                 className="form__input"
@@ -74,17 +74,17 @@ const CreateForm = (): JSX.Element => {
                 className="form__selection-list"
                 id="select-hero-position"
               >
-                <option value={0} className="form__list-option" />
                 <option value={1} className="form__list-option" />
                 <option value={2} className="form__list-option" />
                 <option value={3} className="form__list-option" />
                 <option value={4} className="form__list-option" />
                 <option value={5} className="form__list-option" />
+                <option value={6} className="form__list-option" />
               </datalist>
             </div>
             <div className="form__field">
               <label className="form__label" htmlFor="heroStack">
-                Stack:
+                *Stack
               </label>
               <input
                 className="form__input"
@@ -98,7 +98,7 @@ const CreateForm = (): JSX.Element => {
             </div>
             <div className="form__field">
               <label className="form__label" htmlFor="heroCard1">
-                Hand:
+                *Hand
               </label>
               <input
                 className="form__input"
@@ -122,7 +122,7 @@ const CreateForm = (): JSX.Element => {
             <h3 className="form__field-heading">Villain</h3>
             <div className="form__field">
               <label className="form__label" htmlFor="villainPosition">
-                Position:
+                *Position
               </label>
               <input
                 className="form__input"
@@ -136,17 +136,17 @@ const CreateForm = (): JSX.Element => {
                 className="form__selection-list"
                 id="select-villain-position"
               >
-                <option value={0} className="form__list-option" />
                 <option value={1} className="form__list-option" />
                 <option value={2} className="form__list-option" />
                 <option value={3} className="form__list-option" />
                 <option value={4} className="form__list-option" />
                 <option value={5} className="form__list-option" />
+                <option value={6} className="form__list-option" />
               </datalist>
             </div>
             <div className="form__field">
               <label className="form__label" htmlFor="villainStack">
-                Stack:
+                *Stack
               </label>
               <input
                 className="form__input"
@@ -160,7 +160,7 @@ const CreateForm = (): JSX.Element => {
             </div>
             <div className="form__field">
               <label className="form__label" htmlFor="villainCard1">
-                Hand:
+                *Hand
               </label>
               <input
                 className="form__input"
@@ -185,12 +185,25 @@ const CreateForm = (): JSX.Element => {
           <h2 className="form__title">Preflop</h2>
           <div className="form__field">
             <label className="form__label" htmlFor="preflopActions">
-              Actions
+              *Actions
             </label>
             <input
               className="form__input"
               type="text"
               id="preflopActions"
+              autoComplete="off"
+              required
+              onChange={onChangePreFlopInfo}
+            />
+          </div>
+          <div className="form__field">
+            <label className="form__label" htmlFor="preFlopPot">
+              *Pot
+            </label>
+            <input
+              className="form__input"
+              type="number"
+              id="preFlopPot"
               autoComplete="off"
               required
               onChange={onChangePreFlopInfo}
@@ -237,6 +250,19 @@ const CreateForm = (): JSX.Element => {
               onChange={onChangeFlopInfo}
             />
           </div>
+          <div className="form__field">
+            <label className="form__label" htmlFor="flopPot">
+              Pot
+            </label>
+            <input
+              className="form__input"
+              type="number"
+              id="flopPot"
+              autoComplete="off"
+              required
+              onChange={onChangePreFlopInfo}
+            />
+          </div>
         </section>
         <section className="form__section">
           <h2 className="form__title">Turn</h2>
@@ -264,6 +290,19 @@ const CreateForm = (): JSX.Element => {
               onChange={onChangeTurnInfo}
             />
           </div>
+          <div className="form__field">
+            <label className="form__label" htmlFor="turnPot">
+              Pot
+            </label>
+            <input
+              className="form__input"
+              type="number"
+              id="turnPot"
+              autoComplete="off"
+              required
+              onChange={onChangePreFlopInfo}
+            />
+          </div>
         </section>
         <section className="form__section">
           <h2 className="form__title">River</h2>
@@ -289,6 +328,19 @@ const CreateForm = (): JSX.Element => {
               id="riverActions"
               autoComplete="off"
               onChange={onChangeRiverInfo}
+            />
+          </div>
+          <div className="form__field">
+            <label className="form__label" htmlFor="riverPot">
+              Pot
+            </label>
+            <input
+              className="form__input"
+              type="number"
+              id="riverPot"
+              autoComplete="off"
+              required
+              onChange={onChangePreFlopInfo}
             />
           </div>
         </section>

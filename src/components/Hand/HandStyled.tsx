@@ -5,8 +5,8 @@ const HandStyled = styled.article`
   display: flex;
   background-color: ${styles.colors.grey};
   padding: 11px 25px 11px 15px;
-  width: 320px;
-  max-width: 380px;
+  min-width: 320px;
+  width: 100%;
   height: 130px;
   border-radius: 15px;
   position: relative;

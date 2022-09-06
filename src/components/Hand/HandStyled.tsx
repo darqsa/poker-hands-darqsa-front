@@ -5,7 +5,7 @@ const HandStyled = styled.article`
   display: flex;
   background-color: ${styles.colors.grey};
   padding: 11px 25px 11px 15px;
-  min-width: 320px;
+  width: 320px;
   max-width: 380px;
   height: 130px;
   border-radius: 15px;
@@ -14,7 +14,8 @@ const HandStyled = styled.article`
 
   .hand {
     &__hero-img-group {
-      width: 90px;
+      max-width: 90px;
+      width: 100%;
       min-width: 75px;
     }
     &__hero-card {
@@ -26,7 +27,8 @@ const HandStyled = styled.article`
       }
     }
     &__hand-container {
-      width: 230px;
+      max-width: 230px;
+      width: 100%;
       min-width: 190px;
       padding-left: 5px;
       height: 100%;

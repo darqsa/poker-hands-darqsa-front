@@ -24,8 +24,11 @@ const HandListContainerStyled = styled.div`
       justify-content: center;
       gap: 20px;
       padding: 0;
-      @media (min-width: 700px) {
+      @media (min-width: 1200px) {
         width: 85%;
+      }
+      @media (min-width: 900px) {
+        width: 80%;
       }
     }
   }

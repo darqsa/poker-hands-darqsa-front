@@ -1,162 +1,294 @@
 import { useState } from "react";
 
 const CreateForm = (): JSX.Element => {
-  const initialState = {
-    heroInfo: {
-      heroPosition: "",
-      heroStack: 0,
-      heroHand1: "",
-      heroHand2: "",
-    },
-    villainInfo: {
-      villainPosition: "",
-      villainStack: 0,
-      villainHand1: "",
-      villainHand2: "",
-    },
-  };
-  const [formData, setFormData] = useState(initialState);
+  const [gameInfo, setGameInfo] = useState({});
+  const [preflop, setPreflop] = useState({});
+  const [flop, setFlop] = useState({});
+  const [turn, setTurn] = useState({});
+  const [river, setRiver] = useState({});
 
-  const onHeroChangeData = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      heroInfo: { ...formData.heroInfo, [event.target.id]: event.target.value },
-      villainInfo: { ...formData.villainInfo },
+  const onChangeGameInfo = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setGameInfo({
+      ...gameInfo,
+      [event.target.id]: event.target.value,
     });
   };
 
-  const onVillainChangeData = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      villainInfo: {
-        ...formData.villainInfo,
-        [event.target.id]: event.target.value,
-      },
-      heroInfo: { ...formData.heroInfo },
+  const onChangePreFlopInfo = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setPreflop({
+      ...preflop,
+      [event.target.id]: event.target.value,
     });
   };
 
+  const onChangeFlopInfo = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFlop({
+      ...flop,
+      [event.target.id]: event.target.value,
+    });
+  };
+
+  const onChangeTurnInfo = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTurn({
+      ...turn,
+      [event.target.id]: event.target.value,
+    });
+  };
+
+  const onChangeRiverInfo = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRiver({
+      ...river,
+      [event.target.id]: event.target.value,
+    });
+  };
+
+  // const gameInfoRequirements = formData.
   return (
     <section className="form">
       <h2 className="form__title">Game info</h2>
       <form className="form__form-container">
         <section className="form__section">
-          <h3 className="form__field-heading">Hero</h3>
-          <div className="form__field">
-            <label className="form__label" htmlFor="heroPosition">
-              Position:
-            </label>
-            <input
-              className="form__input"
-              list="select-hero-position"
-              id="heroPosition"
-              autoComplete="off"
-              required
-              onChange={onHeroChangeData}
-            />
-            <datalist
-              className="form__selection-list"
-              id="select-hero-position"
-            >
-              <option value="SB" className="form__list-option" />
-              <option value="BB" className="form__list-option" />
-              <option value="UTG" className="form__list-option" />
-              <option value="MP" className="form__list-option" />
-              <option value="CO" className="form__list-option" />
-              <option value="BTN" className="form__list-option" />
-            </datalist>
+          <div className="form__player-container">
+            <h3 className="form__field-heading">Hero</h3>
+            <div className="form__field">
+              <label className="form__label" htmlFor="heroPosition">
+                Position:
+              </label>
+              <input
+                className="form__input"
+                list="select-hero-position"
+                id="heroPosition"
+                autoComplete="off"
+                required
+                onChange={onChangeGameInfo}
+              />
+              <datalist
+                className="form__selection-list"
+                id="select-hero-position"
+              >
+                <option value={0} className="form__list-option" />
+                <option value={1} className="form__list-option" />
+                <option value={2} className="form__list-option" />
+                <option value={3} className="form__list-option" />
+                <option value={4} className="form__list-option" />
+                <option value={5} className="form__list-option" />
+              </datalist>
+            </div>
+            <div className="form__field">
+              <label className="form__label" htmlFor="heroStack">
+                Stack:
+              </label>
+              <input
+                className="form__input"
+                type="number"
+                id="heroStack"
+                autoComplete="off"
+                required
+                onChange={onChangeGameInfo}
+                max={999}
+              />
+            </div>
+            <div className="form__field">
+              <label className="form__label" htmlFor="heroCard1">
+                Hand:
+              </label>
+              <input
+                className="form__input"
+                type="text"
+                id="heroCard1"
+                autoComplete="off"
+                required
+                onChange={onChangeGameInfo}
+              />
+              <input
+                className="form__input"
+                type="text"
+                id="heroCard2"
+                autoComplete="off"
+                required
+                onChange={onChangeGameInfo}
+              />
+            </div>
           </div>
-          <div className="form__field">
-            <label className="form__label" htmlFor="heroStack">
-              Stack:
-            </label>
-            <input
-              className="form__input"
-              type="number"
-              id="heroStack"
-              autoComplete="off"
-              required
-              onChange={onHeroChangeData}
-            />
+          <div className="form__player-container">
+            <h3 className="form__field-heading">Villain</h3>
+            <div className="form__field">
+              <label className="form__label" htmlFor="villainPosition">
+                Position:
+              </label>
+              <input
+                className="form__input"
+                list="select-villain-position"
+                id="villainPosition"
+                autoComplete="off"
+                required
+                onChange={onChangeGameInfo}
+              />
+              <datalist
+                className="form__selection-list"
+                id="select-villain-position"
+              >
+                <option value={0} className="form__list-option" />
+                <option value={1} className="form__list-option" />
+                <option value={2} className="form__list-option" />
+                <option value={3} className="form__list-option" />
+                <option value={4} className="form__list-option" />
+                <option value={5} className="form__list-option" />
+              </datalist>
+            </div>
+            <div className="form__field">
+              <label className="form__label" htmlFor="villainStack">
+                Stack:
+              </label>
+              <input
+                className="form__input"
+                type="number"
+                id="villainStack"
+                autoComplete="off"
+                required
+                onChange={onChangeGameInfo}
+                max={999}
+              />
+            </div>
+            <div className="form__field">
+              <label className="form__label" htmlFor="villainCard1">
+                Hand:
+              </label>
+              <input
+                className="form__input"
+                type="text"
+                id="villainCard1"
+                autoComplete="off"
+                required
+                onChange={onChangeGameInfo}
+              />
+              <input
+                className="form__input"
+                type="text"
+                id="villainCard2"
+                autoComplete="off"
+                required
+                onChange={onChangeGameInfo}
+              />
+            </div>
           </div>
+        </section>
+        <section className="form__section">
+          <h2 className="form__title">Preflop</h2>
           <div className="form__field">
-            <label className="form__label" htmlFor="heroHand1">
-              Hand:
+            <label className="form__label" htmlFor="preflopActions">
+              Actions
             </label>
             <input
               className="form__input"
               type="text"
-              id="heroHand1"
+              id="preflopActions"
               autoComplete="off"
               required
-              onChange={onHeroChangeData}
-            />
-            <input
-              className="form__input"
-              type="text"
-              id="heroHand2"
-              autoComplete="off"
-              required
-              onChange={onHeroChangeData}
+              onChange={onChangePreFlopInfo}
             />
           </div>
         </section>
         <section className="form__section">
-          <h3 className="form__field-heading">Villain</h3>
+          <h2 className="form__title">Flop</h2>
           <div className="form__field">
-            <label className="form__label" htmlFor="villainPosition">
-              Position:
-            </label>
-            <input
-              className="form__input"
-              list="select-villain-position"
-              id="villainPosition"
-              autoComplete="off"
-              required
-              onChange={onVillainChangeData}
-            />
-            <datalist
-              className="form__selection-list"
-              id="select-villain-position"
-            >
-              <option value="SB" className="form__list-option" />
-              <option value="BB" className="form__list-option" />
-              <option value="UTG" className="form__list-option" />
-              <option value="MP" className="form__list-option" />
-              <option value="CO" className="form__list-option" />
-              <option value="BTN" className="form__list-option" />
-            </datalist>
-          </div>
-          <div className="form__field">
-            <label className="form__label" htmlFor="villainStack">
-              Stack:
-            </label>
-            <input
-              className="form__input"
-              type="number"
-              id="villainStack"
-              autoComplete="off"
-              required
-              onChange={onVillainChangeData}
-            />
-          </div>
-          <div className="form__field">
-            <label className="form__label" htmlFor="villainHand1">
-              Hand:
+            <label className="form__label" htmlFor="flopCard1">
+              Board
             </label>
             <input
               className="form__input"
               type="text"
-              id="villainHand1"
+              id="flopCard1"
               autoComplete="off"
               required
-              onChange={onVillainChangeData}
+              onChange={onChangeFlopInfo}
             />
             <input
               className="form__input"
               type="text"
-              id="villainHand2"
+              id="flopCard2"
               autoComplete="off"
               required
-              onChange={onVillainChangeData}
+              onChange={onChangeFlopInfo}
+            />
+            <input
+              className="form__input"
+              type="text"
+              id="flopCard2"
+              autoComplete="off"
+              required
+              onChange={onChangeFlopInfo}
+            />
+          </div>
+          <div className="form__field">
+            <label className="form__label" htmlFor="flopActions">
+              Actions
+            </label>
+            <input
+              className="form__input"
+              type="text"
+              id="flopActions"
+              autoComplete="off"
+              required
+              onChange={onChangeFlopInfo}
+            />
+          </div>
+        </section>
+        <section className="form__section">
+          <h2 className="form__title">Turn</h2>
+          <div className="form__field">
+            <label className="form__label" htmlFor="turnCard">
+              Board
+            </label>
+            <input
+              className="form__input"
+              type="text"
+              id="turnCard"
+              autoComplete="off"
+              required
+              onChange={onChangeTurnInfo}
+            />
+          </div>
+          <div className="form__field">
+            <label className="form__label" htmlFor="turnActions">
+              Actions
+            </label>
+            <input
+              className="form__input"
+              type="text"
+              id="turnActions"
+              autoComplete="off"
+              required
+              onChange={onChangeTurnInfo}
+            />
+          </div>
+        </section>
+        <section className="form__section">
+          <h2 className="form__title">River</h2>
+          <div className="form__field">
+            <label className="form__label" htmlFor="riverCard">
+              Board
+            </label>
+            <input
+              className="form__input"
+              type="text"
+              id="riverCard"
+              autoComplete="off"
+              required
+              onChange={onChangeRiverInfo}
+            />
+          </div>
+          <div className="form__field">
+            <label className="form__label" htmlFor="riverActions">
+              Actions
+            </label>
+            <input
+              className="form__input"
+              type="text"
+              id="riverActions"
+              autoComplete="off"
+              required
+              onChange={onChangeRiverInfo}
             />
           </div>
         </section>

@@ -11,6 +11,7 @@ import { closeAlertActionCreator } from "./features/ui/slices/alertSlice";
 import HomePage from "./pages/HomePage/HomePage";
 import { loginUserActionCreator } from "./features/users/slices/userSlice";
 import fetchToken from "./utils/auth";
+import CreatePage from "./pages/CreatePage/CreatePage";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -41,6 +42,10 @@ function App() {
           <Route
             path="/home"
             element={token ? <HomePage /> : <Navigate to="/login" />}
+          />
+          <Route
+            path="/create"
+            element={token ? <CreatePage /> : <Navigate to="/login" />}
           />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

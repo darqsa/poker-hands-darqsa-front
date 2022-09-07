@@ -9,6 +9,7 @@ import { useState } from "react";
 import { useAppSelector } from "../../app/hooks";
 import useUserApi from "../../features/users/hooks/useUserApi";
 import { useMediaQuery } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 const Header = (): JSX.Element => {
   const user = useAppSelector((state) => state.user);
@@ -42,14 +43,6 @@ const Header = (): JSX.Element => {
               />
             </Link>
           )}
-          {pathname === "/create" && (
-            <Link to={`/home`}>
-              <KeyboardArrowLeftIcon
-                data-testid="arrow-left"
-                className="header-container__icon header-container__icon--left"
-              />
-            </Link>
-          )}
           {pathname === "/home" && (
             <Link to={`/create`}>
               <AddIcon
@@ -69,6 +62,14 @@ const Header = (): JSX.Element => {
           </h1>
         </div>
         <div className="header-container__item">
+          {pathname === "/create" && (
+            <Link to={`/home`}>
+              <CloseIcon
+                data-testid="arrow-left"
+                className="header-container__icon header-container__icon--left"
+              />
+            </Link>
+          )}
           {pathname === "/home" && matches && (
             <>
               <div

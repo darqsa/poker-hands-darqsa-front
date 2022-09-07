@@ -8,19 +8,25 @@ const CreateFormStyled = styled(FormStyled)`
   margin: 20px auto;
   border-radius: 20px;
   align-items: center;
-  min-width: 320px;
-  padding: 20px 25px;
+  min-width: 280px;
+  width: fit-content;
   gap: 10px;
+  padding: 25px;
+  @media (min-width: 700px) {
+  }
   .form {
+    &__players-container {
+      display: flex;
+      gap: 40px;
+    }
     &__player-container {
       display: flex;
       flex-direction: column;
+      justify-content: center;
       align-items: center;
       gap: 10px;
     }
-    &__title {
-      margin-bottom: 10px;
-    }
+
     &__group {
       display: flex;
       align-items: center;
@@ -30,15 +36,33 @@ const CreateFormStyled = styled(FormStyled)`
     }
     &__section {
       display: flex;
-      gap: 40px;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      &--streets {
+        @media (min-width: 700px) {
+          flex-direction: row;
+          align-self: flex-start;
+          width: 100%;
+          justify-content: flex-end;
+        }
+      }
+    }
+    &__title {
+      margin-bottom: 10px;
+      &--streets {
+        @media (min-width: 700px) {
+          margin-inline-end: auto;
+        }
+      }
     }
     &__label {
       align-self: auto;
-      width: 87px;
       background-color: transparent;
       color: ${styles.colors.main};
       position: initial;
       padding: 5px 0;
+      text-align: center;
       font-weight: ${styles.fontWeights.bold};
     }
     &__hand-container {
@@ -53,17 +77,41 @@ const CreateFormStyled = styled(FormStyled)`
         padding: 10px 8px;
         width: 40px;
       }
-      &--hand-name {
+      &--text {
         width: 215px;
       }
+      &--text-area {
+        width: 315px;
+        height: 110px;
+      }
+      &--image {
+        width: 315px;
+      }
+      &--winner-selector {
+        width: 90px;
+      }
     }
-    &__arrow-icon {
+    &__icon {
       align-self: flex-end;
       margin: 10px 0 0 0;
       width: 36px;
       height: 36px;
       :hover {
         cursor: pointer;
+        color: ${styles.colors.red};
+      }
+    }
+    &__footer {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+    }
+    &__button {
+      color: ${styles.colors.main};
+      margin: 0;
+      position: relative;
+      top: 5px;
+      :hover {
         color: ${styles.colors.red};
       }
     }

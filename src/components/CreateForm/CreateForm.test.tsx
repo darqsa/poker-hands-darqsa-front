@@ -41,13 +41,13 @@ describe("Given a CreateForm component", () => {
           hand: screen.getAllByLabelText("Hand")[0] as HTMLInputElement,
         };
 
-        fireEvent.change(form.position, { target: { value: newText } });
+        fireEvent.change(form.position, { target: { value: newNumber } });
         fireEvent.change(form.stack, { target: { value: newNumber } });
         fireEvent.change(form.hand, {
           target: { value: newText },
         });
 
-        expect(form.position.value).toBe(newText);
+        expect(+form.position.value).toBe(newNumber);
         expect(+form.stack.value).toBe(newNumber);
         expect(form.hand.value).toBe(newText);
       });
@@ -75,6 +75,7 @@ describe("Given a CreateForm component", () => {
     describe("And the user types in the winner and description inputs", () => {
       test("Then it should render the value typed in the inputs", async () => {
         const newText = "kkkkk";
+        const newWinnerText = "hero";
         render(<CreateForm />);
         const nextIcon1 = screen.getByTestId("next-first-page");
         await userEvent.click(nextIcon1);
@@ -86,10 +87,10 @@ describe("Given a CreateForm component", () => {
           description: screen.getByLabelText("Description") as HTMLInputElement,
         };
 
-        fireEvent.change(form.winner, { target: { value: newText } });
+        fireEvent.change(form.winner, { target: { value: newWinnerText } });
         fireEvent.change(form.description, { target: { value: newText } });
 
-        expect(form.winner.value).toBe(newText);
+        expect(form.winner.value).toBe(newWinnerText);
         expect(form.description.value).toBe(newText);
       });
     });

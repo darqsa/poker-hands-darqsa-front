@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Login from "../../components/Login/Login";
-import ButtonStyled from "../../styles/ButtonStyled";
+import ButtonStyled from "../../styles/components/ButtonStyled";
 import LinkContainerStyled from "./LoginPageStyled";
 
 const LoginPage = (): JSX.Element => {

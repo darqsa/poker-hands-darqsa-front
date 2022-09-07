@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import styles from "./styles";
+import styles from "../styles";
 
 const ButtonStyled = styled.button`
   margin: 15px 0;

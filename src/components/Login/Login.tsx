@@ -2,8 +2,8 @@ import { SyntheticEvent, useState } from "react";
 import { useAppDispatch } from "../../app/hooks";
 import useUserApi from "../../features/users/hooks/useUserApi";
 import { openAlertActionCreator } from "../../features/ui/slices/alertSlice";
-import ButtonStyled from "../../styles/ButtonStyled";
-import FormStyled from "../../styles/FormStyled";
+import ButtonStyled from "../../styles/components/ButtonStyled";
+import FormStyled from "../../styles/components/FormStyled";
 
 const Login = (): JSX.Element => {
   const initialState = {

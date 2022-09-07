@@ -145,6 +145,7 @@ const CreateForm = (): JSX.Element => {
                 </div>
               </div>
               <ArrowForwardIcon
+                data-testid="next-first-page"
                 className="form__arrow-icon"
                 onClick={() => setCurrentPage(2)}
               />
@@ -182,10 +183,12 @@ const CreateForm = (): JSX.Element => {
                 />
               </div>
               <ArrowBackIcon
+                data-testid="previous-second-page"
                 className="form__arrow-icon"
                 onClick={() => setCurrentPage(1)}
               />
               <ArrowForwardIcon
+                data-testid="next-second-page"
                 className="form__arrow-icon"
                 onClick={() => setCurrentPage(3)}
               />
@@ -249,10 +252,12 @@ const CreateForm = (): JSX.Element => {
               </div>
             </section>
             <ArrowBackIcon
+              data-testid="previous-third-page"
               className="form__arrow-icon"
               onClick={() => setCurrentPage(2)}
             />
             <ArrowForwardIcon
+              data-testid="next-third-page"
               className="form__arrow-icon"
               onClick={() => setCurrentPage(4)}
             />
@@ -301,10 +306,12 @@ const CreateForm = (): JSX.Element => {
               </div>
             </section>
             <ArrowBackIcon
+              data-testid="previous-fourth-page"
               className="form__arrow-icon"
               onClick={() => setCurrentPage(3)}
             />
             <ArrowForwardIcon
+              data-testid="next-fourth-page"
               className="form__arrow-icon"
               onClick={() => setCurrentPage(5)}
             />
@@ -353,10 +360,12 @@ const CreateForm = (): JSX.Element => {
               </div>
             </section>
             <ArrowBackIcon
+              data-testid="previous-fifth-page"
               className="form__arrow-icon"
               onClick={() => setCurrentPage(4)}
             />
             <ArrowForwardIcon
+              data-testid="next-fifth-page"
               className="form__arrow-icon"
               onClick={() => setCurrentPage(6)}
             />
@@ -410,6 +419,7 @@ const CreateForm = (): JSX.Element => {
               </div>
             </section>
             <ArrowBackIcon
+              data-testid="previous-sixth-page"
               className="form__arrow-icon"
               onClick={() => setCurrentPage(5)}
             />

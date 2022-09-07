@@ -24,7 +24,7 @@ const CreateForm = (): JSX.Element => {
               <h3 className="form__group-heading">Hero</h3>
               <div className="form__group">
                 <label className="form__label" htmlFor="heroPosition">
-                  *Position
+                  Position
                 </label>
                 <input
                   className="form__input form__input--selector"
@@ -48,7 +48,7 @@ const CreateForm = (): JSX.Element => {
               </div>
               <div className="form__group">
                 <label className="form__label" htmlFor="heroStack">
-                  *Stack
+                  Stack
                 </label>
                 <input
                   className="form__input form__input--number"
@@ -62,7 +62,7 @@ const CreateForm = (): JSX.Element => {
               </div>
               <div className="form__group">
                 <label className="form__label" htmlFor="heroCard1">
-                  *Hand
+                  Hand
                 </label>
                 <div className="form__hand-container">
                   <input
@@ -90,7 +90,7 @@ const CreateForm = (): JSX.Element => {
               <h3 className="form__group-heading">Villain</h3>
               <div className="form__group">
                 <label className="form__label" htmlFor="villainPosition">
-                  *Position
+                  Position
                 </label>
                 <input
                   className="form__input form__input--selector"
@@ -114,7 +114,7 @@ const CreateForm = (): JSX.Element => {
               </div>
               <div className="form__group">
                 <label className="form__label" htmlFor="villainStack">
-                  *Stack
+                  Stack
                 </label>
                 <input
                   className="form__input form__input--number"
@@ -128,7 +128,7 @@ const CreateForm = (): JSX.Element => {
               </div>
               <div className="form__group">
                 <label className="form__label" htmlFor="villainCard1">
-                  *Hand
+                  Hand
                 </label>
                 <div className="form__hand-container">
                   <input
@@ -155,7 +155,7 @@ const CreateForm = (): JSX.Element => {
           </section>
           <div className="form__group">
             <label htmlFor="handName" className="form__label">
-              *Hand name
+              Hand name
             </label>
             <input
               className="form__input form__input--hand-name"
@@ -180,7 +180,7 @@ const CreateForm = (): JSX.Element => {
           <section className="form__section">
             <div className="form__group">
               <label className="form__label" htmlFor="preflopActions">
-                *Actions
+                Actions
               </label>
               <input
                 className="form__input"
@@ -193,7 +193,7 @@ const CreateForm = (): JSX.Element => {
             </div>
             <div className="form__group">
               <label className="form__label" htmlFor="preFlopPot">
-                *Pot
+                Pot
               </label>
               <input
                 className="form__input"

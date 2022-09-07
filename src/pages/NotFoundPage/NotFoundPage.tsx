@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import ButtonStyled from "../../styles/ButtonStyled";
+import ButtonStyled from "../../styles/components/ButtonStyled";
 import NotFoundStyled from "./NotFoundPageStyled";
 
 const NotFoundPage = (): JSX.Element => {

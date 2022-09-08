@@ -41,9 +41,36 @@ export interface HandData {
     handDescription?: string;
     handImage?: string;
   };
-  id: string;
+  id?: string;
 }
 
 export interface GetHands extends HandData {
   hands: HandData[];
+}
+
+export interface FormHand {
+  handName: string;
+  heroPosition: number;
+  villainPosition: number;
+  heroStack: number;
+  villainStack: number;
+  heroCard1: string;
+  heroCard2: string;
+  villainCard1: string;
+  villainCard2: string;
+  preFlopActions: string;
+  preFlopPot: number;
+  flopCard1: string;
+  flopCard2: string;
+  flopCard3: string;
+  flopActions: string;
+  flopPot: number;
+  turnCard: string;
+  turnActions: string;
+  turnPot: number;
+  riverCard: string;
+  riverActions: string;
+  riverPot: number;
+  gameWinner: string;
+  handDescription: string;
 }

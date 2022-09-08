@@ -38,6 +38,7 @@ const CreateForm = (): JSX.Element => {
   const { createHand } = useHandsApi();
   const [formData, setFormData] = useState(initialState);
   const [currentPage, setCurrentPage] = useState(1);
+  const [incorrectFields, setIncorrectFields] = useState(false);
 
   const onChangeData = (event: React.ChangeEvent<any>) => {
     setFormData({
@@ -70,28 +71,37 @@ const CreateForm = (): JSX.Element => {
           actions: [formData.preFlopActions],
           pot: formData.preFlopPot,
         },
-        flop: {
-          board: [formData.flopCard1, formData.flopCard2, formData.flopCard3],
-          actions: [formData.flopActions],
-          pot: formData.flopPot,
-        },
-        turn: {
-          board: formData.turnCard,
-          actions: [formData.turnActions],
-          pot: formData.turnPot,
-        },
-        river: {
-          board: formData.riverCard,
-          actions: [formData.riverActions],
-          pot: formData.riverPot,
-        },
       },
       postGame: {
-        finalPot: formData.riverPot,
+        finalPot: formData.preFlopPot,
         gameWinner: formData.gameWinner,
         handDescription: formData.handDescription,
       },
     };
+    if (formData.flopCard1) {
+      newHand.game.flop = {
+        board: [formData.flopCard1, formData.flopCard2, formData.flopCard3],
+        actions: [formData.flopActions],
+        pot: formData.flopPot,
+      };
+      newHand.postGame.finalPot = formData.flopPot;
+    }
+    if (formData.flopCard1 && formData.turnCard) {
+      newHand.game.turn = {
+        board: formData.turnCard,
+        actions: [formData.turnActions],
+        pot: formData.turnPot,
+      };
+      newHand.postGame.finalPot = formData.turnPot;
+    }
+    if (formData.flopCard1 && formData.turnCard && formData.riverCard) {
+      newHand.game.river = {
+        board: formData.riverCard,
+        actions: [formData.riverActions],
+        pot: formData.riverPot,
+      };
+      newHand.postGame.finalPot = formData.riverPot;
+    }
 
     try {
       await createHand(newHand);
@@ -123,7 +133,7 @@ const CreateForm = (): JSX.Element => {
                 <h3 className="form__group-heading">Hero</h3>
                 <div className="form__group">
                   <label className="form__label" htmlFor="heroPosition">
-                    Position
+                    * Position
                   </label>
                   <select
                     className="form__input form__input--selector"
@@ -158,7 +168,7 @@ const CreateForm = (): JSX.Element => {
                 </div>
                 <div className="form__group">
                   <label className="form__label" htmlFor="heroStack">
-                    Stack
+                    * Stack
                   </label>
                   <input
                     className="form__input form__input--number"
@@ -173,7 +183,7 @@ const CreateForm = (): JSX.Element => {
                 </div>
                 <div className="form__group">
                   <label className="form__label" htmlFor="heroCard1">
-                    Hand
+                    * Hand
                   </label>
                   <div className="form__hand-container">
                     <input
@@ -203,7 +213,7 @@ const CreateForm = (): JSX.Element => {
                 <h3 className="form__group-heading">Villain</h3>
                 <div className="form__group">
                   <label className="form__label" htmlFor="villainPosition">
-                    Position
+                    * Position
                   </label>
                   <select
                     className="form__input form__input--selector"
@@ -238,7 +248,7 @@ const CreateForm = (): JSX.Element => {
                 </div>
                 <div className="form__group">
                   <label className="form__label" htmlFor="villainStack">
-                    Stack
+                    * Stack
                   </label>
                   <input
                     className="form__input form__input--number"
@@ -255,7 +265,7 @@ const CreateForm = (): JSX.Element => {
                 </div>
                 <div className="form__group">
                   <label className="form__label" htmlFor="villainCard1">
-                    Hand
+                    * Hand
                   </label>
                   <div className="form__hand-container">
                     <input
@@ -284,7 +294,7 @@ const CreateForm = (): JSX.Element => {
             </div>
             <div className="form__group">
               <label htmlFor="handName" className="form__label">
-                Hand name
+                * Hand name
               </label>
               <input
                 className="form__input form__input--text"
@@ -310,13 +320,13 @@ const CreateForm = (): JSX.Element => {
           <section className="form__section form__section--streets">
             <h2 className="form__title form__title--streets">Preflop</h2>
             <div className="form__group">
-              <label className="form__label" htmlFor="preflopActions">
-                Actions
+              <label className="form__label" htmlFor="preFlopActions">
+                * Actions
               </label>
               <input
                 className="form__input form__input--text"
                 type="text"
-                id="preflopActions"
+                id="preFlopActions"
                 autoComplete="off"
                 value={formData.preFlopActions}
                 required
@@ -325,7 +335,7 @@ const CreateForm = (): JSX.Element => {
             </div>
             <div className="form__group">
               <label className="form__label" htmlFor="preFlopPot">
-                Pot
+                * Pot
               </label>
               <input
                 className="form__input"
@@ -505,13 +515,12 @@ const CreateForm = (): JSX.Element => {
           <section className="form__section">
             <div className="form__group">
               <label className="form__label" htmlFor="gameWinner">
-                Winner
+                * Winner
               </label>
               <select
                 className="form__input form__input--winner-selector"
                 id="gameWinner"
                 autoComplete="off"
-                required
                 value={formData.gameWinner}
                 onChange={onChangeData}
               >
@@ -550,6 +559,11 @@ const CreateForm = (): JSX.Element => {
                 onChange={onChangeData}
               />
             </div>
+            {incorrectFields && (
+              <span className="form__text">
+                Please complete *required fields
+              </span>
+            )}
           </section>
           <div className="form__footer">
             <ArrowBackIcon
@@ -557,13 +571,16 @@ const CreateForm = (): JSX.Element => {
               className="form__icon"
               onClick={() => setCurrentPage(2)}
             />
-            <ButtonStyled
-              className="form__button"
-              type="submit"
-              disabled={requiredFields}
-            >
-              <DoneIcon className="form__icon" />
-            </ButtonStyled>
+            {requiredFields ? (
+              <DoneIcon
+                className="form__icon"
+                onClick={() => setIncorrectFields(true)}
+              />
+            ) : (
+              <ButtonStyled className="form__button" type="submit">
+                <DoneIcon className="form__icon" />
+              </ButtonStyled>
+            )}
           </div>
         </>
       )}

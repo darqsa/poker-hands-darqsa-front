@@ -24,11 +24,16 @@ const useHandsApi = () => {
   }, [dispatch, token]);
 
   const createHand = async (hand: HandData) => {
-    await axios.post(`${apiURL}hands/create`, hand, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const response: AxiosResponse<string> = await axios.post(
+      `${apiURL}hands/create`,
+      hand,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response;
   };
 
   return { hands, loadHands, createHand };

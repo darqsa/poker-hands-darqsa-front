@@ -23,6 +23,7 @@ const handlers = [
       })
     );
   }),
+
   rest.get(`${apiUrl}hands`, async (req, res, ctx) => {
     return res(
       ctx.status(200),
@@ -30,6 +31,10 @@ const handlers = [
         hands: [fakeHand],
       })
     );
+  }),
+
+  rest.post(`${apiUrl}hands/create`, async (req, res, ctx) => {
+    return res(ctx.status(201), ctx.json("Hand created successfully"));
   }),
 ];
 

@@ -12,6 +12,7 @@ const CreateFormStyled = styled(FormStyled)`
   width: fit-content;
   gap: 10px;
   padding: 25px;
+  position: relative;
   @media (min-width: 700px) {
   }
   .form {
@@ -105,6 +106,7 @@ const CreateFormStyled = styled(FormStyled)`
       width: 100%;
       display: flex;
       justify-content: space-between;
+      margin-top: 10px;
     }
     &__button {
       color: ${styles.colors.main};
@@ -114,6 +116,11 @@ const CreateFormStyled = styled(FormStyled)`
       :hover {
         color: ${styles.colors.red};
       }
+    }
+    &__text {
+      position: absolute;
+      bottom: 65px;
+      color: ${styles.colors.red};
     }
   }
 `;

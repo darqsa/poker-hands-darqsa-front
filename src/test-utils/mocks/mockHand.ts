@@ -11,7 +11,7 @@ export const fakeHand: HandData = {
   id: "1234",
 };
 
-export const completeFakeHand: HandData = {
+export const fakeHandWithoutId: HandData = {
   handName: "Best hand name ever fpodsmfpomf",
   preGame: {
     hero: { hand: ["Ac", "Ad"], initialStack: 100, position: 0 },
@@ -28,5 +28,6 @@ export const completeFakeHand: HandData = {
     river: { board: "6d", actions: ["Everyone is allin"], pot: 200 },
   },
   postGame: { finalPot: 200, gameWinner: "Hero" },
-  id: "1234",
 };
+
+export const completeFakeHand: HandData = { ...fakeHandWithoutId, id: "1234" };

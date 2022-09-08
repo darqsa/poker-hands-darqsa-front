@@ -1,5 +1,8 @@
 import { renderHook } from "@testing-library/react";
-import { fakeHand } from "../../../test-utils/mocks/mockHand";
+import {
+  fakeHand,
+  fakeHandWithoutId,
+} from "../../../test-utils/mocks/mockHand";
 import Wrapper from "../../../test-utils/Wrapper";
 import { loadHandsActionCreator } from "../slices/handsSlice";
 import useHandsApi from "./useHandsApi";
@@ -25,6 +28,21 @@ describe("Given a useHandApi hook", () => {
       expect(mockUseDispatch).toHaveBeenCalledWith(
         loadHandsActionCreator([fakeHand])
       );
+    });
+  });
+
+  describe("When createHand function is called", () => {
+    test("Then it should return a response message", async () => {
+      const expectedMessage = "Hand created successfully";
+      const {
+        result: {
+          current: { createHand },
+        },
+      } = renderHook(useHandsApi, { wrapper: Wrapper });
+
+      const createdHand = await createHand(fakeHandWithoutId);
+
+      expect(createdHand.data).toBe(expectedMessage);
     });
   });
 });

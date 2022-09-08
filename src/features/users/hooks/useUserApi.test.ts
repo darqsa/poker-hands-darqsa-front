@@ -26,7 +26,7 @@ const mockUser: UserData = {
 };
 
 describe("Given a useUserApi hook", () => {
-  describe("When signUp function is called with a User data", () => {
+  describe("When register function is called with a User data", () => {
     test("The it should return the response of the request", async () => {
       const newUser = {
         username: "bobby",

@@ -1,16 +1,21 @@
-import { render, screen } from "@testing-library/react";
+import renderer from "react-test-renderer";
+import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import { store } from "../../app/store";
 import CreatePage from "./CreatePage";
 
 describe("Given a create page component", () => {
   describe("When invoked", () => {
-    test("Then it should render the Create Form component", () => {
-      render(<CreatePage />);
+    test("Then it should match the snapshot", () => {
+      const expectedCreatePage = renderer.create(
+        <Provider store={store}>
+          <BrowserRouter>
+            <CreatePage />
+          </BrowserRouter>
+        </Provider>
+      );
 
-      const expectedHeading = screen.getByRole("heading", {
-        name: "Game info",
-      });
-
-      expect(expectedHeading).toBeInTheDocument();
+      expect(expectedCreatePage).toMatchSnapshot();
     });
   });
 });

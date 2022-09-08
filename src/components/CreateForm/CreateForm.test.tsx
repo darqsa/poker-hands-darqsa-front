@@ -1,11 +1,30 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { Provider } from "react-redux";
+import { store } from "../../app/store";
 import CreateForm from "./CreateForm";
+
+let mockCreateFunction = { create: jest.fn(), login: jest.fn() };
+jest.mock(
+  "../../features/hands/hooks/useHandsApi",
+  () => () => mockCreateFunction
+);
+
+const mockUseDispatch = jest.fn();
+
+jest.mock("../../app/hooks", () => ({
+  ...jest.requireActual("../../app/hooks"),
+  useAppDispatch: () => mockUseDispatch,
+}));
 
 describe("Given a CreateForm component", () => {
   describe("When is firstPage", () => {
     test("Then it should render 3 headings", () => {
-      render(<CreateForm />);
+      render(
+        <Provider store={store}>
+          <CreateForm />
+        </Provider>
+      );
 
       const gameInfoForm = [
         screen.getByRole("heading", { name: "Game info" }),
@@ -17,12 +36,16 @@ describe("Given a CreateForm component", () => {
     });
 
     test("Then it should render 2 position, stack and hand inputs", () => {
-      render(<CreateForm />);
+      render(
+        <Provider store={store}>
+          <CreateForm />
+        </Provider>
+      );
       const expectedInputs = 2;
       const gameInfoForm = [
-        screen.getAllByLabelText("Position"),
-        screen.getAllByLabelText("Stack"),
-        screen.getAllByLabelText("Hand"),
+        screen.getAllByLabelText("* Position"),
+        screen.getAllByLabelText("* Stack"),
+        screen.getAllByLabelText("* Hand"),
       ];
 
       gameInfoForm.forEach((input) =>
@@ -34,11 +57,17 @@ describe("Given a CreateForm component", () => {
       test("Then it should render the value typed in the inputs", () => {
         const newText = "kkkkk";
         const newNumber = 2;
-        render(<CreateForm />);
+        render(
+          <Provider store={store}>
+            <CreateForm />
+          </Provider>
+        );
         const form = {
-          position: screen.getAllByLabelText("Position")[0] as HTMLInputElement,
-          stack: screen.getAllByLabelText("Stack")[0] as HTMLInputElement,
-          hand: screen.getAllByLabelText("Hand")[0] as HTMLInputElement,
+          position: screen.getAllByLabelText(
+            "* Position"
+          )[0] as HTMLInputElement,
+          stack: screen.getAllByLabelText("* Stack")[0] as HTMLInputElement,
+          hand: screen.getAllByLabelText("* Hand")[0] as HTMLInputElement,
         };
 
         fireEvent.change(form.position, { target: { value: newNumber } });
@@ -56,7 +85,11 @@ describe("Given a CreateForm component", () => {
 
   describe("When user clicks in the next page icon (current page 2)", () => {
     test("Then it should render a previous icon that renders back the page 1", async () => {
-      render(<CreateForm />);
+      render(
+        <Provider store={store}>
+          <CreateForm />
+        </Provider>
+      );
       const nextIcon = screen.getByTestId("next-first-page");
       await userEvent.click(nextIcon);
 
@@ -76,14 +109,18 @@ describe("Given a CreateForm component", () => {
       test("Then it should render the value typed in the inputs", async () => {
         const newText = "kkkkk";
         const newWinnerText = "hero";
-        render(<CreateForm />);
+        render(
+          <Provider store={store}>
+            <CreateForm />
+          </Provider>
+        );
         const nextIcon1 = screen.getByTestId("next-first-page");
         await userEvent.click(nextIcon1);
         const nextIcon2 = screen.getByTestId("next-second-page");
         await userEvent.click(nextIcon2);
 
         const form = {
-          winner: screen.getByLabelText("Winner") as HTMLInputElement,
+          winner: screen.getByLabelText("* Winner") as HTMLInputElement,
           description: screen.getByLabelText("Description") as HTMLInputElement,
         };
 
@@ -101,7 +138,11 @@ describe("Given a CreateForm component", () => {
           type: "https://okdiario.com/img/2018/06/04/jugar-al-poker.jpg",
         });
 
-        render(<CreateForm />);
+        render(
+          <Provider store={store}>
+            <CreateForm />
+          </Provider>
+        );
         const nextIcon1 = screen.getByTestId("next-first-page");
         await userEvent.click(nextIcon1);
         const nextIcon2 = screen.getByTestId("next-second-page");
@@ -117,7 +158,11 @@ describe("Given a CreateForm component", () => {
     });
 
     test("Then it should render a previous icon that renders back the page 2", async () => {
-      render(<CreateForm />);
+      render(
+        <Provider store={store}>
+          <CreateForm />
+        </Provider>
+      );
       const nextIcon1 = screen.getByTestId("next-first-page");
       await userEvent.click(nextIcon1);
       const nextIcon2 = screen.getByTestId("next-second-page");

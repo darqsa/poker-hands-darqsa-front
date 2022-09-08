@@ -178,4 +178,69 @@ describe("Given a CreateForm component", () => {
       expect(expectedSecondPageHeading).toBeInTheDocument();
     });
   });
+
+  // describe("When user types in every required field", () => {
+  //   describe("And user clicks on the submit button", () => {
+  //     test("Then it should call the createHand function with the fakeHand", () => {
+  //       render(
+  //         <Provider store={store}>
+  //           <CreateForm />
+  //         </Provider>
+  //       );
+  //       const hand = {
+  //         position: 2,
+  //         stack: 2,
+  //         hand: "Ah",
+  //         handName: "Fake Hand Name",
+  //         preFlopActions: "Fake action",
+  //         preFlopPot: 2,
+  //         gameWinner: "Me",
+  //       };
+
+  //       const firstPageForm = {
+  //         heroPosition: screen.getAllByLabelText(
+  //           "* Position"
+  //         )[0] as HTMLInputElement,
+  //         villainPosition: screen.getAllByLabelText(
+  //           "* Position"
+  //         )[1] as HTMLInputElement,
+  //         heroStack: screen.getAllByLabelText("* Stack")[0] as HTMLInputElement,
+  //         villainStack: screen.getAllByLabelText(
+  //           "* Stack"
+  //         )[1] as HTMLInputElement,
+  //         heroHand1: screen.getAllByLabelText("* Hand")[0] as HTMLInputElement,
+  //         heroHand2: screen.getAllByTestId("hand")[0] as HTMLInputElement,
+  //         villainHand1: screen.getAllByLabelText(
+  //           "* Hand"
+  //         )[1] as HTMLInputElement,
+  //         villainHand2: screen.getAllByTestId("hand")[1] as HTMLInputElement,
+  //       };
+
+  //       fireEvent.change(firstPageForm.heroPosition, {
+  //         target: { value: hand.position },
+  //       });
+  //       fireEvent.change(firstPageForm.villainPosition, {
+  //         target: { value: hand.position },
+  //       });
+  //       fireEvent.change(firstPageForm.heroStack, {
+  //         target: { value: hand.stack },
+  //       });
+  //       fireEvent.change(firstPageForm.villainStack, {
+  //         target: { value: hand.stack },
+  //       });
+  //       fireEvent.change(firstPageForm.heroHand1, {
+  //         target: { value: hand.hand },
+  //       });
+  //       fireEvent.change(firstPageForm.heroHand2, {
+  //         target: { value: hand.hand },
+  //       });
+  //       fireEvent.change(firstPageForm.villainHand1, {
+  //         target: { value: hand.hand },
+  //       });
+  //       fireEvent.change(firstPageForm.villainHand2, {
+  //         target: { value: hand.hand },
+  //       });
+  //     });
+  //   });
+  // });
 });

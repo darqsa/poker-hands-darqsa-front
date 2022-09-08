@@ -30,7 +30,10 @@ function App() {
       <Header />
       <MainContainerStyled>
         <Routes>
-          <Route path="/" element={<Navigate to="/login" />} />ç
+          <Route
+            path="/"
+            element={token ? <Navigate to="/home" /> : <Navigate to="/login" />}
+          />
           <Route
             path="/register"
             element={token ? <Navigate to="/home" /> : <RegisterPage />}

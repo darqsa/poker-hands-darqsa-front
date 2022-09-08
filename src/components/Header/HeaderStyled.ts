@@ -4,6 +4,9 @@ import styles from "../../styles/styles";
 const HeaderStyled = styled.header`
   display: flex;
   flex-direction: column;
+  position: sticky;
+  top: 0;
+  z-index: 3;
   a {
     &::selection {
       background-color: none;

@@ -122,6 +122,31 @@ const CreateForm = (): JSX.Element => {
     formData.preFlopPot <= 0 ||
     formData.gameWinner === "";
 
+  const positionOptions = (
+    <>
+      <option value={0} className="form__list-option">
+        ---
+      </option>
+      <option value={1} className="form__list-option">
+        SB
+      </option>
+      <option value={2} className="form__list-option">
+        BB
+      </option>
+      <option value={3} className="form__list-option">
+        UTG
+      </option>
+      <option value={4} className="form__list-option">
+        MP
+      </option>
+      <option value={5} className="form__list-option">
+        CO
+      </option>
+      <option value={6} className="form__list-option">
+        BTN
+      </option>
+    </>
+  );
   return (
     <CreateFormStyled className="form" onSubmit={sendFormData}>
       {currentPage === 1 && (
@@ -143,27 +168,7 @@ const CreateForm = (): JSX.Element => {
                     onChange={onChangeData}
                     value={formData.heroPosition}
                   >
-                    <option value={0} className="form__list-option">
-                      ---
-                    </option>
-                    <option value={1} className="form__list-option">
-                      SB
-                    </option>
-                    <option value={2} className="form__list-option">
-                      BB
-                    </option>
-                    <option value={3} className="form__list-option">
-                      UTG
-                    </option>
-                    <option value={4} className="form__list-option">
-                      MP
-                    </option>
-                    <option value={5} className="form__list-option">
-                      CO
-                    </option>
-                    <option value={6} className="form__list-option">
-                      BTN
-                    </option>
+                    {positionOptions}
                   </select>
                 </div>
                 <div className="form__group">
@@ -223,27 +228,7 @@ const CreateForm = (): JSX.Element => {
                     value={formData.villainPosition}
                     onChange={onChangeData}
                   >
-                    <option value={0} className="form__list-option">
-                      ---
-                    </option>
-                    <option value={1} className="form__list-option">
-                      SB
-                    </option>
-                    <option value={2} className="form__list-option">
-                      BB
-                    </option>
-                    <option value={3} className="form__list-option">
-                      UTG
-                    </option>
-                    <option value={4} className="form__list-option">
-                      MP
-                    </option>
-                    <option value={5} className="form__list-option">
-                      CO
-                    </option>
-                    <option value={6} className="form__list-option">
-                      BTN
-                    </option>
+                    {positionOptions}
                   </select>
                 </div>
                 <div className="form__group">

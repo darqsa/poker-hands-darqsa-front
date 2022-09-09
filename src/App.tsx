@@ -9,8 +9,6 @@ import CloseIcon from "@mui/icons-material/Close";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 import { closeAlertActionCreator } from "./features/ui/slices/alertSlice";
 import HomePage from "./pages/HomePage/HomePage";
-import { loginUserActionCreator } from "./features/users/slices/userSlice";
-import fetchToken from "./utils/auth";
 import CreatePage from "./pages/CreatePage/CreatePage";
 
 function App() {
@@ -18,11 +16,6 @@ function App() {
   const alert = useAppSelector((state) => state.alert);
   const token = localStorage.getItem("token");
   useNavigate();
-
-  if (token) {
-    const user = fetchToken(token);
-    dispatch(loginUserActionCreator(user));
-  }
 
   return (
     <>

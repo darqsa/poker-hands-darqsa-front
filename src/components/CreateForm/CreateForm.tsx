@@ -369,6 +369,7 @@ const CreateForm = (): JSX.Element => {
                   className="form__input form__input--hand"
                   type="text"
                   id="flopCard2"
+                  data-testid="board-hand2"
                   value={formData.flopCard2}
                   autoComplete="off"
                   onChange={onChangeData}
@@ -376,6 +377,7 @@ const CreateForm = (): JSX.Element => {
                 <input
                   className="form__input form__input--hand"
                   type="text"
+                  data-testid="board-hand3"
                   id="flopCard3"
                   value={formData.flopCard3}
                   autoComplete="off"

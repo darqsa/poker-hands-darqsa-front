@@ -130,6 +130,7 @@ exports[`Given a create page component When invoked Then it should match the sna
             <input
               autoComplete="off"
               className="form__input form__input--hand"
+              data-testid="hero-hand-2"
               id="heroCard2"
               maxLength={2}
               onChange={[Function]}
@@ -254,6 +255,7 @@ exports[`Given a create page component When invoked Then it should match the sna
             <input
               autoComplete="off"
               className="form__input form__input--hand"
+              data-testid="villain-hand-2"
               id="villainCard2"
               maxLength={2}
               onChange={[Function]}

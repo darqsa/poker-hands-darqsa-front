@@ -1,11 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import getInitialUser from "../../../utils/getInitialUser";
 import { LoginUserData } from "../models/User";
 
-const initialState: LoginUserData = {
-  id: "",
-  token: "",
-  username: "",
-};
+const initialState = getInitialUser();
 
 const userSlice = createSlice({
   name: "user",

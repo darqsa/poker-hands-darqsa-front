@@ -40,6 +40,10 @@ const handlers = [
   rest.delete(`${apiUrl}hands/delete/1234`, async (req, res, ctx) => {
     return res(ctx.status(201), ctx.json("Hand deleted successfully"));
   }),
+
+  rest.get(`${apiUrl}hands/1234`, async (req, res, ctx) => {
+    return res(ctx.status(201), ctx.json({ fakeHand }));
+  }),
 ];
 
 export default handlers;

@@ -69,7 +69,7 @@ const Header = (): JSX.Element => {
             {pathname === "/create" && "Create"}
             {pathname === "/login" && "Login"}
             {pathname === "/register" && "Register"}
-            {handPathname === "/hand" && "Details"}
+            {handPathname === "/hand" && "Hand"}
           </h1>
         </div>
         <div className="header-container__item">

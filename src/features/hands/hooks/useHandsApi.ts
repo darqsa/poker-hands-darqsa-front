@@ -49,6 +49,16 @@ const useHandsApi = () => {
     dispatch(deleteHandActionCreator(id));
   };
 
-  return { hands, loadHands, createHand, deleteHand };
+  const loadHandById = async (id: string) => {
+    const hand = await axios.get(`${apiURL}hands/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return hand;
+  };
+
+  return { hands, loadHands, createHand, deleteHand, loadHandById };
 };
 export default useHandsApi;

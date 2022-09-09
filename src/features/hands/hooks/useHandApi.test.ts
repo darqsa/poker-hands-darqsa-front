@@ -66,4 +66,20 @@ describe("Given a useHandApi hook", () => {
       );
     });
   });
+
+  describe("When loadHandById function is called with an fakeId", () => {
+    test("Then it should return a fake hand with the fakeId", async () => {
+      const fakeId = "1234";
+
+      const {
+        result: {
+          current: { loadHandById },
+        },
+      } = renderHook(useHandsApi, { wrapper: Wrapper });
+
+      const expectedHand = await loadHandById(fakeId);
+
+      expect(expectedHand.data).toStrictEqual({ fakeHand });
+    });
+  });
 });

@@ -1,27 +1,32 @@
+import { fakeHand } from "../../../test-utils/mocks/mockHand";
 import { HandData } from "../models/Hand";
-import handsSlice, { loadHandsActionCreator } from "./handsSlice";
+import handsSlice, {
+  deleteHandActionCreator,
+  loadHandsActionCreator,
+} from "./handsSlice";
 
-describe("Given a usersSlice function", () => {
-  describe("When invoked with an initial state as previous users and a loadUsers with a fakeUser inside", () => {
-    test("Then it should return an array with the fakeUser", () => {
+describe("Given a handsSlice function", () => {
+  describe("When invoked with an initial state as previous hands and a loadHands with a fakeUser inside", () => {
+    test("Then it should return an array with the fakeHand", () => {
       const initialState: HandData[] = [];
-      const fakeHand: HandData = {
-        handName: "Best hand name ever",
-        preGame: {
-          hero: { hand: ["Ac", "Ad"], initialStack: 100, position: 0 },
-          villains: [{ hand: ["Ah", "As"], initialStack: 100, position: 1 }],
-        },
-        game: { preFlop: { actions: ["Everyone is allin"], pot: 200 } },
-        postGame: { finalPot: 200, gameWinner: "Hero" },
-        id: "1234",
-      };
 
-      const users = handsSlice(
+      const hands = handsSlice(
         initialState,
         loadHandsActionCreator([fakeHand])
       );
 
-      expect(users).toStrictEqual([fakeHand]);
+      expect(hands).toStrictEqual([fakeHand]);
+    });
+  });
+
+  describe("When deleteHand reducer is called with a fake id as payload", () => {
+    test("Then it should return the previous state without the hand that has the fakeId", () => {
+      const hands = handsSlice(
+        [fakeHand],
+        deleteHandActionCreator(fakeHand.id as string)
+      );
+
+      expect(hands).not.toContain(fakeHand);
     });
   });
 });

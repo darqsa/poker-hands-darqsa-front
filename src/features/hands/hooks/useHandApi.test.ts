@@ -4,7 +4,10 @@ import {
   fakeHandWithoutId,
 } from "../../../test-utils/mocks/mockHand";
 import Wrapper from "../../../test-utils/Wrapper";
-import { loadHandsActionCreator } from "../slices/handsSlice";
+import {
+  deleteHandActionCreator,
+  loadHandsActionCreator,
+} from "../slices/handsSlice";
 import useHandsApi from "./useHandsApi";
 
 const mockUseDispatch = jest.fn();
@@ -43,6 +46,24 @@ describe("Given a useHandApi hook", () => {
       const createdHand = await createHand(fakeHandWithoutId);
 
       expect(createdHand.data).toBe(expectedMessage);
+    });
+  });
+
+  describe("When deleteHand function is called with an fakeId", () => {
+    test("Then it should call the mockDispatch with an action creator and the fakeId", async () => {
+      const fakeId = "1234";
+
+      const {
+        result: {
+          current: { deleteHand },
+        },
+      } = renderHook(useHandsApi, { wrapper: Wrapper });
+
+      await deleteHand(fakeId);
+
+      expect(mockUseDispatch).toHaveBeenCalledWith(
+        deleteHandActionCreator(fakeId)
+      );
     });
   });
 });

@@ -10,8 +10,13 @@ const handsSlice = createSlice({
     loadHands: (previousUsers, action: PayloadAction<HandData[]>) => [
       ...action.payload,
     ],
+    deleteHand: (previousState, action: PayloadAction<string>) =>
+      previousState.filter((hand) => hand.id !== action.payload),
   },
 });
 
-export const { loadHands: loadHandsActionCreator } = handsSlice.actions;
+export const {
+  loadHands: loadHandsActionCreator,
+  deleteHand: deleteHandActionCreator,
+} = handsSlice.actions;
 export default handsSlice.reducer;

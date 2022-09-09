@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 import { store } from "../../app/store";
 import { completeFakeHand, fakeHand } from "../../test-utils/mocks/mockHand";
 import Hand from "./Hand";
@@ -16,9 +17,11 @@ describe("Given a hand component", () => {
   describe("When it receives a finishedFakeHand as pros", () => {
     test("Then it shouldnt render any flop, turn and river hand", () => {
       render(
-        <Provider store={store}>
-          <Hand hand={fakeHand} />
-        </Provider>
+        <BrowserRouter>
+          <Provider store={store}>
+            <Hand hand={fakeHand} />
+          </Provider>
+        </BrowserRouter>
       );
 
       const expectedNumberOfImages = 2;
@@ -40,9 +43,11 @@ describe("Given a hand component", () => {
   describe("When it receives a completeFakeHand as props", () => {
     test("Then it should render 2 hero cards, the hand name and the board hands", () => {
       render(
-        <Provider store={store}>
-          <Hand hand={completeFakeHand} />
-        </Provider>
+        <BrowserRouter>
+          <Provider store={store}>
+            <Hand hand={completeFakeHand} />
+          </Provider>
+        </BrowserRouter>
       );
       const handItems = [
         screen.getByRole("img", {
@@ -69,9 +74,11 @@ describe("Given a hand component", () => {
 
     test("Then it should render a 'more' button that renders a delete icon on click", async () => {
       render(
-        <Provider store={store}>
-          <Hand hand={completeFakeHand} />
-        </Provider>
+        <BrowserRouter>
+          <Provider store={store}>
+            <Hand hand={completeFakeHand} />
+          </Provider>
+        </BrowserRouter>
       );
       const moreVert = screen.getByTestId("more-vert");
       await userEvent.click(moreVert);

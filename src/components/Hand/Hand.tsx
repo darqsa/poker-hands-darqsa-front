@@ -4,6 +4,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import HandStyled from "./HandStyled";
 import { useState } from "react";
 import useHandsApi from "../../features/hands/hooks/useHandsApi";
+import { useNavigate } from "react-router-dom";
 
 interface HandProps {
   hand: HandData;
@@ -11,11 +12,17 @@ interface HandProps {
 const Hand = ({ hand }: HandProps): JSX.Element => {
   const [menuStatus, setMenuStatus] = useState(false);
   const { deleteHand } = useHandsApi();
+  const navigate = useNavigate();
 
   const handRoute = "./img/pokerCards/";
   return (
     <HandStyled className="hand">
-      <div className="hand__hero-img-group">
+      <div
+        onClick={() => {
+          navigate(`/hand/${hand.id as string}`);
+        }}
+        className="hand__hero-img-group"
+      >
         <img
           height={75}
           src={`${handRoute}${hand.preGame.hero.hand[0]}.webp`}
@@ -30,7 +37,14 @@ const Hand = ({ hand }: HandProps): JSX.Element => {
         />
       </div>
       <div className="hand__hand-container">
-        <span className="hand__name">{hand.handName}</span>
+        <span
+          onClick={() => {
+            navigate(`/hand/${hand.id as string}`);
+          }}
+          className="hand__name"
+        >
+          {hand.handName}
+        </span>
         <div className="hand__board-img-group">
           {hand.game.flop?.board[0] && (
             <>

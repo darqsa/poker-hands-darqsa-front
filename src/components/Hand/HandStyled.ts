@@ -21,6 +21,9 @@ const HandStyled = styled.article`
     &__hero-card {
       position: absolute;
       top: 20px;
+      &:hover {
+        cursor: pointer;
+      }
       &:nth-child(2) {
         left: 38px;
         top: 38px;

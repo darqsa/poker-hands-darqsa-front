@@ -1,13 +1,13 @@
 import { configureStore, createReducer } from "@reduxjs/toolkit";
 import { HandData } from "../../features/hands/models/Hand";
 import { LoginUserData } from "../../features/users/models/User";
-import { fakeHand } from "./mockHand";
+import { completeFakeHand, fakeHand } from "./mockHand";
 
 const initialState: HandData[] = [fakeHand];
 const userInitialState: LoginUserData = { id: "", token: "", username: "" };
 
 const mockHandsReducer = createReducer(initialState, (builder) => {
-  builder.addDefaultCase((state) => state);
+  builder.addDefaultCase((state) => [completeFakeHand]);
 });
 
 const emptyMockHandsReducer = createReducer(initialState, (builder) => {

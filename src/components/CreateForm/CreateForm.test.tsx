@@ -1,6 +1,7 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 import { store } from "../../app/store";
 import CreateForm from "./CreateForm";
 
@@ -21,9 +22,11 @@ describe("Given a CreateForm component", () => {
   describe("When is firstPage", () => {
     test("Then it should render 3 headings", () => {
       render(
-        <Provider store={store}>
-          <CreateForm />
-        </Provider>
+        <BrowserRouter>
+          <Provider store={store}>
+            <CreateForm />
+          </Provider>
+        </BrowserRouter>
       );
 
       const gameInfoForm = [
@@ -37,9 +40,11 @@ describe("Given a CreateForm component", () => {
 
     test("Then it should render 2 position, stack and hand inputs", () => {
       render(
-        <Provider store={store}>
-          <CreateForm />
-        </Provider>
+        <BrowserRouter>
+          <Provider store={store}>
+            <CreateForm />
+          </Provider>
+        </BrowserRouter>
       );
       const expectedInputs = 2;
       const gameInfoForm = [
@@ -58,9 +63,11 @@ describe("Given a CreateForm component", () => {
         const newText = "kkkkk";
         const newNumber = 2;
         render(
-          <Provider store={store}>
-            <CreateForm />
-          </Provider>
+          <BrowserRouter>
+            <Provider store={store}>
+              <CreateForm />
+            </Provider>
+          </BrowserRouter>
         );
         const form = {
           position: screen.getAllByLabelText(
@@ -86,9 +93,11 @@ describe("Given a CreateForm component", () => {
   describe("When user clicks in the next page icon (current page 2)", () => {
     test("Then it should render a previous icon that renders back the page 1", async () => {
       render(
-        <Provider store={store}>
-          <CreateForm />
-        </Provider>
+        <BrowserRouter>
+          <Provider store={store}>
+            <CreateForm />
+          </Provider>
+        </BrowserRouter>
       );
       const nextIcon = screen.getByTestId("next-first-page");
       await userEvent.click(nextIcon);
@@ -110,9 +119,11 @@ describe("Given a CreateForm component", () => {
         const newText = "kkkkk";
         const newWinnerText = "hero";
         render(
-          <Provider store={store}>
-            <CreateForm />
-          </Provider>
+          <BrowserRouter>
+            <Provider store={store}>
+              <CreateForm />
+            </Provider>
+          </BrowserRouter>
         );
         const nextIcon1 = screen.getByTestId("next-first-page");
         await userEvent.click(nextIcon1);
@@ -139,9 +150,11 @@ describe("Given a CreateForm component", () => {
         });
 
         render(
-          <Provider store={store}>
-            <CreateForm />
-          </Provider>
+          <BrowserRouter>
+            <Provider store={store}>
+              <CreateForm />
+            </Provider>
+          </BrowserRouter>
         );
         const nextIcon1 = screen.getByTestId("next-first-page");
         await userEvent.click(nextIcon1);
@@ -159,9 +172,11 @@ describe("Given a CreateForm component", () => {
 
     test("Then it should render a previous icon that renders back the page 2", async () => {
       render(
-        <Provider store={store}>
-          <CreateForm />
-        </Provider>
+        <BrowserRouter>
+          <Provider store={store}>
+            <CreateForm />
+          </Provider>
+        </BrowserRouter>
       );
       const nextIcon1 = screen.getByTestId("next-first-page");
       await userEvent.click(nextIcon1);

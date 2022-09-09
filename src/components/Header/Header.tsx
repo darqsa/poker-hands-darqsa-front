@@ -23,6 +23,8 @@ const Header = (): JSX.Element => {
     logout();
   };
 
+  const handPathname = pathname.slice(0, -25);
+
   return (
     <HeaderStyled className="header-container">
       <div className="header-container__container">
@@ -36,6 +38,14 @@ const Header = (): JSX.Element => {
             </Link>
           )}
           {pathname === "/details" && (
+            <Link to={`/home`}>
+              <KeyboardArrowLeftIcon
+                data-testid="arrow-left"
+                className="header-container__icon header-container__icon--left"
+              />
+            </Link>
+          )}
+          {handPathname === "/hand" && (
             <Link to={`/home`}>
               <KeyboardArrowLeftIcon
                 data-testid="arrow-left"
@@ -59,6 +69,7 @@ const Header = (): JSX.Element => {
             {pathname === "/create" && "Create"}
             {pathname === "/login" && "Login"}
             {pathname === "/register" && "Register"}
+            {handPathname === "/hand" && "Details"}
           </h1>
         </div>
         <div className="header-container__item">

@@ -110,6 +110,7 @@ const CreateForm = (): JSX.Element => {
       newHand.postGame.handDescription = formData.handDescription;
     }
     try {
+      debugger;
       await createHand(newHand);
 
       navigate("/home");

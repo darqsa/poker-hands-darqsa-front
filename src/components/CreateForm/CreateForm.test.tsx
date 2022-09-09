@@ -5,7 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import { store } from "../../app/store";
 import CreateForm from "./CreateForm";
 
-let mockCreateFunction = { create: jest.fn(), login: jest.fn() };
+let mockCreateFunction = { createHand: jest.fn() };
 jest.mock(
   "../../features/hands/hooks/useHandsApi",
   () => () => mockCreateFunction
@@ -207,7 +207,8 @@ describe("Given a CreateForm component", () => {
         const hand = {
           heroPosition: 2,
           villainPosition: 2,
-          stack: 2,
+          heroStack: 2,
+          villainStack: 2,
           hand1: "Ah",
           hand2: "Ah",
           hand3: "Ah",
@@ -240,13 +241,16 @@ describe("Given a CreateForm component", () => {
           handName: screen.getByLabelText("* Hand name") as HTMLInputElement,
         };
 
-        await userEvent.type(firstPageForm.heroPosition, hand.heroPosition);
-        await userEvent.type(
-          firstPageForm.villainPosition,
-          hand.villainPosition
-        );
-        await userEvent.type(firstPageForm.heroStack, `${hand.stack}`);
-        await userEvent.type(firstPageForm.villainStack, `${hand.stack}`);
+        fireEvent.change(firstPageForm.heroPosition, {
+          target: { value: hand.heroPosition },
+        });
+        fireEvent.change(firstPageForm.villainPosition, {
+          target: { value: hand.villainPosition },
+        });
+        await userEvent.click(firstPageForm.heroStack);
+        await userEvent.keyboard(`${hand.heroStack}`);
+        await userEvent.click(firstPageForm.villainStack);
+        await userEvent.keyboard(`${hand.villainStack}`);
         await userEvent.type(firstPageForm.heroHand1, `${hand.hand1}`);
         await userEvent.type(firstPageForm.heroHand2, `${hand.hand2}`);
         await userEvent.type(firstPageForm.villainHand1, `${hand.hand3}`);
@@ -267,7 +271,8 @@ describe("Given a CreateForm component", () => {
           secondPageForm.preFlopActions,
           `${hand.preFlopActions}`
         );
-        await userEvent.type(secondPageForm.preFlopPot, hand.preFlopPot);
+        await userEvent.click(secondPageForm.preFlopPot);
+        await userEvent.keyboard(`${hand.preFlopPot}`);
 
         const nextIcon2 = screen.getByTestId("next-second-page");
         await userEvent.click(nextIcon2);
@@ -276,14 +281,14 @@ describe("Given a CreateForm component", () => {
           gameWinner: screen.getByLabelText("* Winner") as HTMLInputElement,
         };
 
-        await userEvent.type(thirdPageForm.gameWinner, `${hand.gameWinner}`);
+        fireEvent.change(thirdPageForm.gameWinner, {
+          target: { value: hand.gameWinner },
+        });
 
         const submitButton = screen.getByRole("button");
         await userEvent.click(submitButton);
 
-        const homeHeading = screen.getByRole("heading", { name: "Home" });
-
-        expect(homeHeading).toBeInTheDocument();
+        expect(mockCreateFunction.createHand).toHaveBeenCalled();
       });
     });
   });

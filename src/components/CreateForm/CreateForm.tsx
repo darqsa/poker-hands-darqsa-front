@@ -201,7 +201,7 @@ const CreateForm = (): JSX.Element => {
                   />
                 </div>
                 <div className="form__group">
-                  <label className="form__label" htmlFor="heroCard1">
+                  <label htmlFor="heroCard1" className="form__label">
                     * Hand
                   </label>
                   <div className="form__hand-container">
@@ -219,6 +219,7 @@ const CreateForm = (): JSX.Element => {
                       className="form__input form__input--hand"
                       type="text"
                       id="heroCard2"
+                      data-testid="hero-hand-2"
                       autoComplete="off"
                       value={formData.heroCard2}
                       required
@@ -263,7 +264,7 @@ const CreateForm = (): JSX.Element => {
                   />
                 </div>
                 <div className="form__group">
-                  <label className="form__label" htmlFor="villainCard1">
+                  <label htmlFor="villainCard1" className="form__label">
                     * Hand
                   </label>
                   <div className="form__hand-container">
@@ -281,6 +282,7 @@ const CreateForm = (): JSX.Element => {
                       className="form__input form__input--hand"
                       type="text"
                       id="villainCard2"
+                      data-testid="villain-hand-2"
                       autoComplete="off"
                       required
                       value={formData.villainCard2}

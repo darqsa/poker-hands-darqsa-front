@@ -194,68 +194,97 @@ describe("Given a CreateForm component", () => {
     });
   });
 
-  // describe("When user types in every required field", () => {
-  //   describe("And user clicks on the submit button", () => {
-  //     test("Then it should call the createHand function with the fakeHand", () => {
-  //       render(
-  //         <Provider store={store}>
-  //           <CreateForm />
-  //         </Provider>
-  //       );
-  //       const hand = {
-  //         position: 2,
-  //         stack: 2,
-  //         hand: "Ah",
-  //         handName: "Fake Hand Name",
-  //         preFlopActions: "Fake action",
-  //         preFlopPot: 2,
-  //         gameWinner: "Me",
-  //       };
+  describe("When user types in every required field", () => {
+    describe("And user clicks on the submit button", () => {
+      test("Then it should navigate to /home", async () => {
+        render(
+          <BrowserRouter>
+            <Provider store={store}>
+              <CreateForm />
+            </Provider>
+          </BrowserRouter>
+        );
+        const hand = {
+          heroPosition: 2,
+          villainPosition: 2,
+          stack: 2,
+          hand1: "Ah",
+          hand2: "Ah",
+          hand3: "Ah",
+          hand4: "Ah",
+          handName: "Fake Hand Name",
+          preFlopActions: "Fake action",
+          preFlopPot: 2,
+          gameWinner: "hero",
+        };
 
-  //       const firstPageForm = {
-  //         heroPosition: screen.getAllByLabelText(
-  //           "* Position"
-  //         )[0] as HTMLInputElement,
-  //         villainPosition: screen.getAllByLabelText(
-  //           "* Position"
-  //         )[1] as HTMLInputElement,
-  //         heroStack: screen.getAllByLabelText("* Stack")[0] as HTMLInputElement,
-  //         villainStack: screen.getAllByLabelText(
-  //           "* Stack"
-  //         )[1] as HTMLInputElement,
-  //         heroHand1: screen.getAllByLabelText("* Hand")[0] as HTMLInputElement,
-  //         heroHand2: screen.getAllByTestId("hand")[0] as HTMLInputElement,
-  //         villainHand1: screen.getAllByLabelText(
-  //           "* Hand"
-  //         )[1] as HTMLInputElement,
-  //         villainHand2: screen.getAllByTestId("hand")[1] as HTMLInputElement,
-  //       };
+        const firstPageForm = {
+          heroPosition: screen.getAllByLabelText(
+            "* Position"
+          )[0] as HTMLInputElement,
+          villainPosition: screen.getAllByLabelText(
+            "* Position"
+          )[1] as HTMLInputElement,
+          heroStack: screen.getAllByLabelText("* Stack")[0] as HTMLInputElement,
+          villainStack: screen.getAllByLabelText(
+            "* Stack"
+          )[1] as HTMLInputElement,
+          heroHand1: screen.getAllByLabelText("* Hand")[0] as HTMLInputElement,
+          heroHand2: screen.getByTestId("hero-hand-2") as HTMLInputElement,
+          villainHand1: screen.getAllByLabelText(
+            "* Hand"
+          )[1] as HTMLInputElement,
+          villainHand2: screen.getByTestId(
+            "villain-hand-2"
+          ) as HTMLInputElement,
+          handName: screen.getByLabelText("* Hand name") as HTMLInputElement,
+        };
 
-  //       fireEvent.change(firstPageForm.heroPosition, {
-  //         target: { value: hand.position },
-  //       });
-  //       fireEvent.change(firstPageForm.villainPosition, {
-  //         target: { value: hand.position },
-  //       });
-  //       fireEvent.change(firstPageForm.heroStack, {
-  //         target: { value: hand.stack },
-  //       });
-  //       fireEvent.change(firstPageForm.villainStack, {
-  //         target: { value: hand.stack },
-  //       });
-  //       fireEvent.change(firstPageForm.heroHand1, {
-  //         target: { value: hand.hand },
-  //       });
-  //       fireEvent.change(firstPageForm.heroHand2, {
-  //         target: { value: hand.hand },
-  //       });
-  //       fireEvent.change(firstPageForm.villainHand1, {
-  //         target: { value: hand.hand },
-  //       });
-  //       fireEvent.change(firstPageForm.villainHand2, {
-  //         target: { value: hand.hand },
-  //       });
-  //     });
-  //   });
-  // });
+        await userEvent.type(firstPageForm.heroPosition, hand.heroPosition);
+        await userEvent.type(
+          firstPageForm.villainPosition,
+          hand.villainPosition
+        );
+        await userEvent.type(firstPageForm.heroStack, `${hand.stack}`);
+        await userEvent.type(firstPageForm.villainStack, `${hand.stack}`);
+        await userEvent.type(firstPageForm.heroHand1, `${hand.hand1}`);
+        await userEvent.type(firstPageForm.heroHand2, `${hand.hand2}`);
+        await userEvent.type(firstPageForm.villainHand1, `${hand.hand3}`);
+        await userEvent.type(firstPageForm.villainHand2, `${hand.hand4}`);
+        await userEvent.type(firstPageForm.handName, `${hand.handName}`);
+
+        const nextIcon1 = screen.getByTestId("next-first-page");
+        await userEvent.click(nextIcon1);
+
+        const secondPageForm = {
+          preFlopActions: screen.getByLabelText(
+            "* Actions"
+          ) as HTMLInputElement,
+          preFlopPot: screen.getByLabelText("* Pot") as HTMLInputElement,
+        };
+
+        await userEvent.type(
+          secondPageForm.preFlopActions,
+          `${hand.preFlopActions}`
+        );
+        await userEvent.type(secondPageForm.preFlopPot, hand.preFlopPot);
+
+        const nextIcon2 = screen.getByTestId("next-second-page");
+        await userEvent.click(nextIcon2);
+
+        const thirdPageForm = {
+          gameWinner: screen.getByLabelText("* Winner") as HTMLInputElement,
+        };
+
+        await userEvent.type(thirdPageForm.gameWinner, `${hand.gameWinner}`);
+
+        const submitButton = screen.getByRole("button");
+        await userEvent.click(submitButton);
+
+        const homeHeading = screen.getByRole("heading", { name: "Home" });
+
+        expect(homeHeading).toBeInTheDocument();
+      });
+    });
+  });
 });

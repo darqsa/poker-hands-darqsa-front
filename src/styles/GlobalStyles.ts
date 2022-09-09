@@ -33,8 +33,11 @@ export const MainContainerStyled = styled.main`
     left: 10%;
     position: sticky;
     right: 10%;
+    z-index: 2;
     font-family: inter;
+    margin: 0 auto;
     @media (min-width: 700px) {
+      margin: 0;
       width: 350px;
       left: 50px;
     }

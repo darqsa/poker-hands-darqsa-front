@@ -6,6 +6,9 @@ import CreateFormStyled from "./CreateFormStyled";
 import DoneIcon from "@mui/icons-material/Done";
 import useHandsApi from "../../features/hands/hooks/useHandsApi";
 import { FormHand, HandData } from "../../features/hands/models/Hand";
+import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../app/hooks";
+import { openAlertActionCreator } from "../../features/ui/slices/alertSlice";
 
 const CreateForm = (): JSX.Element => {
   const initialState: FormHand = {
@@ -39,6 +42,8 @@ const CreateForm = (): JSX.Element => {
   const [formData, setFormData] = useState(initialState);
   const [currentPage, setCurrentPage] = useState(1);
   const [incorrectFields, setIncorrectFields] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const onChangeData = (event: React.ChangeEvent<any>) => {
     setFormData({
@@ -75,7 +80,6 @@ const CreateForm = (): JSX.Element => {
       postGame: {
         finalPot: formData.preFlopPot,
         gameWinner: formData.gameWinner,
-        handDescription: formData.handDescription,
       },
     };
     if (formData.flopCard1) {
@@ -102,9 +106,19 @@ const CreateForm = (): JSX.Element => {
       };
       newHand.postGame.finalPot = formData.riverPot;
     }
-
+    if (formData.handDescription) {
+      newHand.postGame.handDescription = formData.handDescription;
+    }
     try {
       await createHand(newHand);
+
+      navigate("/home");
+
+      dispatch(
+        openAlertActionCreator(
+          `Your hand: ${formData.handName}, has been created successfully 👍`
+        )
+      );
     } catch (error) {}
   };
 

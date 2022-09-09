@@ -11,7 +11,7 @@ const handsSlice = createSlice({
       ...action.payload,
     ],
     deleteHand: (previousState, action: PayloadAction<string>) =>
-      previousState.filter((project) => project.id !== action.payload),
+      previousState.filter((hand) => hand.id !== action.payload),
   },
 });
 

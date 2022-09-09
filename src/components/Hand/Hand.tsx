@@ -3,12 +3,14 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import DeleteIcon from "@mui/icons-material/Delete";
 import HandStyled from "./HandStyled";
 import { useState } from "react";
+import useHandsApi from "../../features/hands/hooks/useHandsApi";
 
 interface HandProps {
   hand: HandData;
 }
 const Hand = ({ hand }: HandProps): JSX.Element => {
   const [menuStatus, setMenuStatus] = useState(false);
+  const { deleteHand } = useHandsApi();
 
   const handRoute = "./img/pokerCards/";
   return (
@@ -83,7 +85,11 @@ const Hand = ({ hand }: HandProps): JSX.Element => {
       />
       {menuStatus && (
         <div className="hand__menu">
-          <DeleteIcon data-testid="delete" className="hand__delete-button" />
+          <DeleteIcon
+            data-testid="delete"
+            className="hand__delete-button"
+            onClick={() => deleteHand(hand.id as string)}
+          />
         </div>
       )}
     </HandStyled>

@@ -2,7 +2,10 @@ import axios, { AxiosResponse } from "axios";
 import { useCallback } from "react";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
 import { GetHands, HandData } from "../models/Hand";
-import { loadHandsActionCreator } from "../slices/handsSlice";
+import {
+  deleteHandActionCreator,
+  loadHandsActionCreator,
+} from "../slices/handsSlice";
 
 export const apiURL = process.env.REACT_APP_API_URL;
 
@@ -36,6 +39,16 @@ const useHandsApi = () => {
     return response;
   };
 
-  return { hands, loadHands, createHand };
+  const deleteHand = async (id: string) => {
+    await axios.delete(`${apiURL}hands/delete/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    dispatch(deleteHandActionCreator(id));
+  };
+
+  return { hands, loadHands, createHand, deleteHand };
 };
 export default useHandsApi;

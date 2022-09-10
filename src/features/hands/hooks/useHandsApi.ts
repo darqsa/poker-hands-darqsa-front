@@ -49,15 +49,18 @@ const useHandsApi = () => {
     dispatch(deleteHandActionCreator(id));
   };
 
-  const loadHandById = async (id: string) => {
-    const hand = await axios.get(`${apiURL}hands/${id}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+  const loadHandById = useCallback(
+    async (id: string) => {
+      const { data: hand } = await axios.get(`${apiURL}hands/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-    return hand;
-  };
+      return hand as HandData;
+    },
+    [token]
+  );
 
   return { hands, loadHands, createHand, deleteHand, loadHandById };
 };

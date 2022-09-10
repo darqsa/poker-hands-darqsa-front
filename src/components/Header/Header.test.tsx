@@ -139,5 +139,23 @@ describe("Given a Header component", () => {
         expect(icon).toBeInTheDocument();
       });
     });
+
+    describe("When invoked and the page is details", () => {
+      test("Then it should return a Hand heading, KeyboardArrowLeftIcon", () => {
+        render(
+          <Provider store={store}>
+            <MemoryRouter initialEntries={["/hand/6316388ea1279da93a82f9db"]}>
+              <Header />
+            </MemoryRouter>
+          </Provider>
+        );
+
+        const heading = screen.getByRole("heading", { name: "Hand" });
+        const icon = screen.getByTestId("arrow-left");
+
+        expect(heading).toBeInTheDocument();
+        expect(icon).toBeInTheDocument();
+      });
+    });
   });
 });

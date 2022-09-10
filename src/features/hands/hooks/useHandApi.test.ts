@@ -79,7 +79,7 @@ describe("Given a useHandApi hook", () => {
 
       const expectedHand = await loadHandById(fakeId);
 
-      expect(expectedHand.data).toStrictEqual({ fakeHand });
+      expect(expectedHand).toStrictEqual({ fakeHand });
     });
   });
 });

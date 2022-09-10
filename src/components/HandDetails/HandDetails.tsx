@@ -9,7 +9,7 @@ const HandDetails = ({ hand }: HandDetailsProps): JSX.Element => {
 
   return (
     <div className="details">
-      <div className="details__header-container">
+      <div className="details__hand-header">
         <div className="details__img-group">
           <img
             height={75}
@@ -81,8 +81,8 @@ const HandDetails = ({ hand }: HandDetailsProps): JSX.Element => {
                 height={60}
                 width={45.2}
                 className="hand__board-card"
-                src={`${handRoute}${hand.game.turn.board[0]}.webp`}
-                alt={`The ${hand.game.turn.board[0]} poker hand.`}
+                src={`${handRoute}${hand.game.turn.board}.webp`}
+                alt={`The ${hand.game.turn.board} poker hand.`}
               />
             </div>
             <span className="details__info">{`Action: ${hand.game.turn.actions[0]}`}</span>
@@ -97,8 +97,8 @@ const HandDetails = ({ hand }: HandDetailsProps): JSX.Element => {
                 height={60}
                 width={45.2}
                 className="hand__board-card"
-                src={`${handRoute}${hand.game.river.board[0]}.webp`}
-                alt={`The ${hand.game.river.board[0]} poker hand.`}
+                src={`${handRoute}${hand.game.river.board}.webp`}
+                alt={`The ${hand.game.river.board} poker hand.`}
               />
             </div>
             <span className="details__info">{`Action: ${hand.game.river.actions[0]}`}</span>
@@ -106,6 +106,17 @@ const HandDetails = ({ hand }: HandDetailsProps): JSX.Element => {
           </section>
         )}
       </article>
+      <div className="details__hand-footer">
+        <span className="details__info">
+          {hand.postGame.gameWinner === "hero"
+            ? `(${positions[hand.preGame.hero.position - 1]}) Hero won ${
+                hand.postGame.finalPot
+              }bb`
+            : `(${
+                positions[hand.preGame.villains[0].position - 1]
+              }) Villain won ${hand.postGame.finalPot}bb`}
+        </span>
+      </div>
     </div>
   );
 };

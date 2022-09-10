@@ -141,6 +141,25 @@ const HandDetails = ({ hand }: HandDetailsProps): JSX.Element => {
                   positions[hand.preGame.villains[0].position - 1]
                 }) Villain won ${hand.postGame.finalPot}bb`}
           </span>
+          <span className="details__info">Villain shows:</span>
+          {hand.preGame.villains[0].hand[0] && (
+            <img
+              height={60}
+              width={45.2}
+              className="hand__board-card"
+              src={`${handRoute}${hand.preGame.villains[0].hand[0]}.webp`}
+              alt={`The ${hand.preGame.villains[0].hand[0]} poker hand.`}
+            />
+          )}
+          {hand.preGame.villains[0].hand[1] && (
+            <img
+              height={60}
+              width={45.2}
+              className="hand__board-card"
+              src={`${handRoute}${hand.preGame.villains[0].hand[1]}.webp`}
+              alt={`The ${hand.preGame.villains[0].hand[1]} poker hand.`}
+            />
+          )}
         </section>
         {hand.postGame.handImage && (
           <section className="details__game-section">

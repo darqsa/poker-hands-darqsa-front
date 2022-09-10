@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import HandDetails from "../../components/HandDetails/HandDetails";
 import useHandsApi from "../../features/hands/hooks/useHandsApi";
 import { HandData } from "../../features/hands/models/Hand";
@@ -27,13 +27,18 @@ const DetailsPage = (): JSX.Element => {
   const { handId } = useParams();
   const { loadHandById } = useHandsApi();
   const [hand, setHand] = useState(initialState);
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
       const idHand: HandData = await loadHandById(handId!);
-      setHand(idHand);
+      !idHand ? navigate("/home") : setHand(idHand);
     })();
-  }, [loadHandById, handId]);
-  return <HandDetails hand={hand} />;
+  }, [loadHandById, handId, navigate]);
+  return (
+    <>
+      <HandDetails hand={hand} />
+    </>
+  );
 };
 export default DetailsPage;

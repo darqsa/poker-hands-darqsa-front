@@ -56,7 +56,6 @@ const useHandsApi = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-
       return hand;
     },
     [token]

@@ -13,6 +13,12 @@ jest.mock("../../app/hooks", () => ({
   useAppDispatch: () => mockUseDispatch,
 }));
 
+let mockDeleteFunction = { deleteHand: jest.fn() };
+jest.mock(
+  "../../features/hands/hooks/useHandsApi",
+  () => () => mockDeleteFunction
+);
+
 describe("Given a hand component", () => {
   describe("When it receives a finishedFakeHand as pros", () => {
     test("Then it shouldnt render any flop, turn and river hand", () => {
@@ -72,7 +78,7 @@ describe("Given a hand component", () => {
       handItems.forEach((item) => expect(item).toBeInTheDocument());
     });
 
-    test("Then it should render a 'more' button that renders a delete icon on click", async () => {
+    test("Then it should render a 'more' button that renders a delete icon on click that calls deleteHand function", async () => {
       render(
         <BrowserRouter>
           <Provider store={store}>
@@ -83,9 +89,10 @@ describe("Given a hand component", () => {
       const moreVert = screen.getByTestId("more-vert");
       await userEvent.click(moreVert);
 
-      const expectedDeleteButton = screen.getByTestId("delete");
+      const deleteButton = screen.getByTestId("delete");
+      await userEvent.click(deleteButton);
 
-      expect(expectedDeleteButton).toBeInTheDocument();
+      expect(mockDeleteFunction.deleteHand).toHaveBeenCalled();
     });
   });
 });

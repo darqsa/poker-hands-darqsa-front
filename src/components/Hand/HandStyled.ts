@@ -81,11 +81,11 @@ const HandStyled = styled.article`
       position: absolute;
       height: 100%;
       width: 100%;
-      gap: 40px;
+      gap: 30px;
       top: 0;
       right: 0;
     }
-    &__delete-button {
+    &__icon {
       position: relative;
       width: 48px;
       height: 48px;

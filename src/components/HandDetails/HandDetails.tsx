@@ -37,11 +37,22 @@ const HandDetails = ({ hand }: HandDetailsProps): JSX.Element => {
           <span className="details__info">{`(${
             positions[hand.preGame.villains[0].position - 1]
           }) Villain - ${hand.preGame.villains[0].initialStack}bb`}</span>
+          {hand.postGame.handDescription && (
+            <p className="details__info">
+              <strong>Description: </strong>
+              {hand.postGame.handDescription}
+            </p>
+          )}
         </section>
         <section className="details__game-section">
           <h3 className="details__section-heading">Preflop</h3>
-          <span className="details__info">{`Action: ${hand.game.preFlop.actions[0]}`}</span>
-          <span className="details__info">{`Pot: ${hand.game.preFlop.pot}`}</span>
+          <span className="details__info">
+            <strong>Action:</strong> {hand.game.preFlop.actions[0]}
+          </span>
+          <span className="details__info">
+            <strong>Pot:</strong>
+            {`${hand.game.preFlop.pot}bb`}
+          </span>
         </section>
         {hand.game.flop && (
           <section className="details__game-section">
@@ -69,8 +80,13 @@ const HandDetails = ({ hand }: HandDetailsProps): JSX.Element => {
                 alt={`The ${hand.game.flop.board[2]} poker hand.`}
               />
             </div>
-            <span className="details__info">{`Action: ${hand.game.flop.actions[0]}`}</span>
-            <span className="details__info">{`Pot: ${hand.game.flop.pot}`}</span>
+            <span className="details__info">
+              <strong>Action:</strong> {hand.game.flop.actions[0]}
+            </span>
+            <span className="details__info">
+              <strong>Pot:</strong>
+              {`${hand.game.flop.pot}bb`}
+            </span>
           </section>
         )}
         {hand.game.turn && (
@@ -84,9 +100,14 @@ const HandDetails = ({ hand }: HandDetailsProps): JSX.Element => {
                 src={`${handRoute}${hand.game.turn.board}.webp`}
                 alt={`The ${hand.game.turn.board} poker hand.`}
               />
-            </div>
-            <span className="details__info">{`Action: ${hand.game.turn.actions[0]}`}</span>
-            <span className="details__info">{`Pot: ${hand.game.turn.pot}`}</span>
+            </div>{" "}
+            <span className="details__info">
+              <strong>Action:</strong> {hand.game.turn.actions[0]}
+            </span>
+            <span className="details__info">
+              <strong>Pot:</strong>
+              {`${hand.game.turn.pot}bb`}
+            </span>
           </section>
         )}
         {hand.game.river && (
@@ -100,23 +121,37 @@ const HandDetails = ({ hand }: HandDetailsProps): JSX.Element => {
                 src={`${handRoute}${hand.game.river.board}.webp`}
                 alt={`The ${hand.game.river.board} poker hand.`}
               />
-            </div>
-            <span className="details__info">{`Action: ${hand.game.river.actions[0]}`}</span>
-            <span className="details__info">{`Pot: ${hand.game.river.pot}`}</span>
+            </div>{" "}
+            <span className="details__info">
+              <strong>Action:</strong> {hand.game.river.actions[0]}
+            </span>
+            <span className="details__info">
+              <strong>Pot:</strong>
+              {`${hand.game.river.pot}bb`}
+            </span>
+          </section>
+        )}
+        <section className="details__game-section">
+          <span className="details__info">
+            {hand.postGame.gameWinner === "hero"
+              ? `(${positions[hand.preGame.hero.position - 1]}) Hero won ${
+                  hand.postGame.finalPot
+                }bb`
+              : `(${
+                  positions[hand.preGame.villains[0].position - 1]
+                }) Villain won ${hand.postGame.finalPot}bb`}
+          </span>
+        </section>
+        {hand.postGame.handImage && (
+          <section className="details__game-section">
+            <img
+              className="hand__description-img"
+              src={hand.postGame.handImage}
+              alt={`Hand extra info by user`}
+            />
           </section>
         )}
       </article>
-      <div className="details__hand-footer">
-        <span className="details__info">
-          {hand.postGame.gameWinner === "hero"
-            ? `(${positions[hand.preGame.hero.position - 1]}) Hero won ${
-                hand.postGame.finalPot
-              }bb`
-            : `(${
-                positions[hand.preGame.villains[0].position - 1]
-              }) Villain won ${hand.postGame.finalPot}bb`}
-        </span>
-      </div>
     </div>
   );
 };

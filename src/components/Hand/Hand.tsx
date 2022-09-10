@@ -1,6 +1,7 @@
 import { HandData } from "../../features/hands/models/Hand";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import HandStyled from "./HandStyled";
 import { useState } from "react";
 import useHandsApi from "../../features/hands/hooks/useHandsApi";
@@ -108,9 +109,10 @@ const Hand = ({ hand }: HandProps): JSX.Element => {
         <div className="hand__menu">
           <DeleteIcon
             data-testid="delete"
-            className="hand__delete-button"
+            className="hand__icon"
             onClick={() => deleteHand(hand.id!)}
           />
+          <EditIcon className="hand__icon" />
         </div>
       )}
     </HandStyled>

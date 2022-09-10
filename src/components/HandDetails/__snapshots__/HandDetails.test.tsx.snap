@@ -2,7 +2,7 @@
 
 exports[`Given a HandDetails component When receives a completeFakeHand by props Then it should render every property from the completeFakeHand object 1`] = `
 <div
-  className="details"
+  className="sc-bczRLJ fvPtGq details"
 >
   <div
     className="details__hand-header"
@@ -13,16 +13,16 @@ exports[`Given a HandDetails component When receives a completeFakeHand by props
       <img
         alt="The Ac poker hand."
         className="details__hero-card"
-        height={75}
+        height={60}
         src="../img/pokerCards/Ac.webp"
-        width={56.5}
+        width={45.2}
       />
       <img
         alt="The Ad poker hand."
         className="details__hero-card"
-        height={75}
+        height={60}
         src="../img/pokerCards/Ad.webp"
-        width={56.5}
+        width={45.2}
       />
     </div>
     <h2
@@ -82,7 +82,7 @@ exports[`Given a HandDetails component When receives a completeFakeHand by props
         className="details__info"
       >
         <strong>
-          Pot:
+          Pot: 
         </strong>
         200bb
       </span>
@@ -133,7 +133,7 @@ exports[`Given a HandDetails component When receives a completeFakeHand by props
         className="details__info"
       >
         <strong>
-          Pot:
+          Pot: 
         </strong>
         200bb
       </span>
@@ -171,7 +171,7 @@ exports[`Given a HandDetails component When receives a completeFakeHand by props
         className="details__info"
       >
         <strong>
-          Pot:
+          Pot: 
         </strong>
         200bb
       </span>
@@ -209,7 +209,7 @@ exports[`Given a HandDetails component When receives a completeFakeHand by props
         className="details__info"
       >
         <strong>
-          Pot:
+          Pot: 
         </strong>
         200bb
       </span>
@@ -217,40 +217,50 @@ exports[`Given a HandDetails component When receives a completeFakeHand by props
     <section
       className="details__game-section"
     >
-      <span
-        className="details__info"
+      <h3
+        className="details__section-heading"
       >
-        (BB) Villain won 200bb
-      </span>
+        Summary:
+      </h3>
       <span
         className="details__info"
       >
         Villain shows:
       </span>
-      <img
-        alt="The Ah poker hand."
-        className="hand__board-card"
-        height={60}
-        src="../img/pokerCards/Ah.webp"
-        width={45.2}
-      />
-      <img
-        alt="The As poker hand."
-        className="hand__board-card"
-        height={60}
-        src="../img/pokerCards/As.webp"
-        width={45.2}
-      />
+      <div
+        className="details__board-img-group"
+      >
+        <img
+          alt="The Ah poker hand."
+          className="hand__board-card"
+          height={60}
+          src="../img/pokerCards/Ah.webp"
+          width={45.2}
+        />
+        <img
+          alt="The As poker hand."
+          className="hand__board-card"
+          height={60}
+          src="../img/pokerCards/As.webp"
+          width={45.2}
+        />
+      </div>
+      <span
+        className="details__info"
+      >
+        (BB) Villain won 200bb
+      </span>
     </section>
-    <section
-      className="details__game-section"
+    <div
+      className="details__game-img-container"
     >
       <img
         alt="Hand extra info by user"
         className="hand__description-img"
         src="https://www.ldoceonline.com/media/english/illustration/slice_pizza.jpg?version=1.2.55"
+        width={290}
       />
-    </section>
+    </div>
   </article>
 </div>
 `;

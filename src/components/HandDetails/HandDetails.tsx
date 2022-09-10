@@ -1,4 +1,5 @@
 import { HandData } from "../../features/hands/models/Hand";
+import DetailsStyled from "./HandDetailsStyled";
 
 interface HandDetailsProps {
   hand: HandData;
@@ -8,19 +9,19 @@ const HandDetails = ({ hand }: HandDetailsProps): JSX.Element => {
   const positions = ["SB", "BB", "UTG", "MP", "CO", "BTN"];
 
   return (
-    <div className="details">
+    <DetailsStyled className="details">
       <div className="details__hand-header">
         <div className="details__img-group">
           <img
-            height={75}
-            width={56.5}
+            height={60}
+            width={45.2}
             src={`${handRoute}${hand.preGame.hero.hand[0]}.webp`}
             alt={`The ${hand.preGame.hero.hand[0]} poker hand.`}
             className="details__hero-card"
           />
           <img
-            height={75}
-            width={56.5}
+            height={60}
+            width={45.2}
             src={`${handRoute}${hand.preGame.hero.hand[1]}.webp`}
             alt={`The ${hand.preGame.hero.hand[1]} poker hand.`}
             className="details__hero-card"
@@ -50,7 +51,7 @@ const HandDetails = ({ hand }: HandDetailsProps): JSX.Element => {
             <strong>Action:</strong> {hand.game.preFlop.actions[0]}
           </span>
           <span className="details__info">
-            <strong>Pot:</strong>
+            <strong>Pot: </strong>
             {`${hand.game.preFlop.pot}bb`}
           </span>
         </section>
@@ -84,7 +85,7 @@ const HandDetails = ({ hand }: HandDetailsProps): JSX.Element => {
               <strong>Action:</strong> {hand.game.flop.actions[0]}
             </span>
             <span className="details__info">
-              <strong>Pot:</strong>
+              <strong>Pot: </strong>
               {`${hand.game.flop.pot}bb`}
             </span>
           </section>
@@ -105,7 +106,7 @@ const HandDetails = ({ hand }: HandDetailsProps): JSX.Element => {
               <strong>Action:</strong> {hand.game.turn.actions[0]}
             </span>
             <span className="details__info">
-              <strong>Pot:</strong>
+              <strong>Pot: </strong>
               {`${hand.game.turn.pot}bb`}
             </span>
           </section>
@@ -126,12 +127,34 @@ const HandDetails = ({ hand }: HandDetailsProps): JSX.Element => {
               <strong>Action:</strong> {hand.game.river.actions[0]}
             </span>
             <span className="details__info">
-              <strong>Pot:</strong>
+              <strong>Pot: </strong>
               {`${hand.game.river.pot}bb`}
             </span>
           </section>
         )}
         <section className="details__game-section">
+          <h3 className="details__section-heading">Summary:</h3>
+          <span className="details__info">Villain shows:</span>
+          <div className="details__board-img-group">
+            {hand.preGame.villains[0].hand[0] && (
+              <img
+                height={60}
+                width={45.2}
+                className="hand__board-card"
+                src={`${handRoute}${hand.preGame.villains[0].hand[0]}.webp`}
+                alt={`The ${hand.preGame.villains[0].hand[0]} poker hand.`}
+              />
+            )}
+            {hand.preGame.villains[0].hand[1] && (
+              <img
+                height={60}
+                width={45.2}
+                className="hand__board-card"
+                src={`${handRoute}${hand.preGame.villains[0].hand[1]}.webp`}
+                alt={`The ${hand.preGame.villains[0].hand[1]} poker hand.`}
+              />
+            )}
+          </div>
           <span className="details__info">
             {hand.postGame.gameWinner === "hero"
               ? `(${positions[hand.preGame.hero.position - 1]}) Hero won ${
@@ -141,37 +164,19 @@ const HandDetails = ({ hand }: HandDetailsProps): JSX.Element => {
                   positions[hand.preGame.villains[0].position - 1]
                 }) Villain won ${hand.postGame.finalPot}bb`}
           </span>
-          <span className="details__info">Villain shows:</span>
-          {hand.preGame.villains[0].hand[0] && (
-            <img
-              height={60}
-              width={45.2}
-              className="hand__board-card"
-              src={`${handRoute}${hand.preGame.villains[0].hand[0]}.webp`}
-              alt={`The ${hand.preGame.villains[0].hand[0]} poker hand.`}
-            />
-          )}
-          {hand.preGame.villains[0].hand[1] && (
-            <img
-              height={60}
-              width={45.2}
-              className="hand__board-card"
-              src={`${handRoute}${hand.preGame.villains[0].hand[1]}.webp`}
-              alt={`The ${hand.preGame.villains[0].hand[1]} poker hand.`}
-            />
-          )}
         </section>
         {hand.postGame.handImage && (
-          <section className="details__game-section">
+          <div className="details__game-img-container">
             <img
               className="hand__description-img"
+              width={290}
               src={hand.postGame.handImage}
               alt={`Hand extra info by user`}
             />
-          </section>
+          </div>
         )}
       </article>
-    </div>
+    </DetailsStyled>
   );
 };
 export default HandDetails;

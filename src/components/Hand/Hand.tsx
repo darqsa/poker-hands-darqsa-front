@@ -19,18 +19,20 @@ const Hand = ({ hand }: HandProps): JSX.Element => {
     <HandStyled className="hand">
       <div
         onClick={() => {
-          navigate(`/hand/${hand.id as string}`);
+          navigate(`/hand/${hand.id!}`);
         }}
         className="hand__hero-img-group"
       >
         <img
           height={75}
+          width={56.5}
           src={`${handRoute}${hand.preGame.hero.hand[0]}.webp`}
           alt={`The ${hand.preGame.hero.hand[0]} poker hand.`}
           className="hand__hero-card"
         />
         <img
           height={75}
+          width={56.5}
           src={`${handRoute}${hand.preGame.hero.hand[1]}.webp`}
           alt={`The ${hand.preGame.hero.hand[1]} poker hand.`}
           className="hand__hero-card"
@@ -39,7 +41,7 @@ const Hand = ({ hand }: HandProps): JSX.Element => {
       <div className="hand__hand-container">
         <span
           onClick={() => {
-            navigate(`/hand/${hand.id as string}`);
+            navigate(`/hand/${hand.id!}`);
           }}
           className="hand__name"
         >
@@ -50,38 +52,43 @@ const Hand = ({ hand }: HandProps): JSX.Element => {
             <>
               <img
                 height={60}
+                width={45.2}
                 className="hand__board-card"
-                src={`${handRoute}${hand.game.flop?.board[0]}.webp`}
-                alt={`The ${hand.game.flop?.board[0]} poker hand.`}
+                src={`${handRoute}${hand.game.flop.board[0]}.webp`}
+                alt={`The ${hand.game.flop.board[0]} poker hand.`}
               />
               <img
                 height={60}
+                width={45.2}
                 className="hand__board-card"
-                src={`${handRoute}${hand.game.flop?.board[1]}.webp`}
-                alt={`The ${hand.game.flop?.board[1]} poker hand.`}
+                src={`${handRoute}${hand.game.flop.board[1]}.webp`}
+                alt={`The ${hand.game.flop.board[1]} poker hand.`}
               />
               <img
                 height={60}
+                width={45.2}
                 className="hand__board-card"
-                src={`${handRoute}${hand.game.flop?.board[2]}.webp`}
-                alt={`The ${hand.game.flop?.board[2]} poker hand.`}
+                src={`${handRoute}${hand.game.flop.board[2]}.webp`}
+                alt={`The ${hand.game.flop.board[2]} poker hand.`}
               />
             </>
           )}
           {hand.game.turn?.board && (
             <img
               height={60}
+              width={45.2}
               className="hand__board-card"
-              src={`${handRoute}${hand.game.turn?.board}.webp`}
-              alt={`The ${hand.game.turn?.board} poker hand.`}
+              src={`${handRoute}${hand.game.turn.board}.webp`}
+              alt={`The ${hand.game.turn.board} poker hand.`}
             />
           )}
           {hand.game.river?.board && (
             <img
               height={60}
+              width={45.2}
               className="hand__board-card"
-              src={`${handRoute}${hand.game.river?.board}.webp`}
-              alt={`The ${hand.game.river?.board} poker hand.`}
+              src={`${handRoute}${hand.game.river.board}.webp`}
+              alt={`The ${hand.game.river.board} poker hand.`}
             />
           )}
         </div>
@@ -102,7 +109,7 @@ const Hand = ({ hand }: HandProps): JSX.Element => {
           <DeleteIcon
             data-testid="delete"
             className="hand__delete-button"
-            onClick={() => deleteHand(hand.id as string)}
+            onClick={() => deleteHand(hand.id!)}
           />
         </div>
       )}

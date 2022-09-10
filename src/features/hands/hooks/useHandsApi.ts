@@ -57,7 +57,7 @@ const useHandsApi = () => {
         },
       });
 
-      return hand as HandData;
+      return hand!;
     },
     [token]
   );

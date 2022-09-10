@@ -74,19 +74,28 @@ const CreateFormStyled = styled(FormStyled)`
       width: 80px;
       padding: 10px;
       border-radius: 5px;
+      text-align: center;
       &--hand {
         padding: 10px 8px;
         width: 40px;
       }
       &--text {
         width: 215px;
+        text-align: start;
       }
       &--text-area {
-        width: 315px;
+        width: 235px;
         height: 110px;
+        text-align: start;
+        @media (min-width: 700px) {
+          width: 350px;
+        }
       }
       &--image {
-        width: 315px;
+        width: 235px;
+        @media (min-width: 700px) {
+          width: 350px;
+        }
       }
       &--winner-selector {
         width: 90px;
@@ -94,7 +103,7 @@ const CreateFormStyled = styled(FormStyled)`
     }
     &__icon {
       align-self: flex-end;
-      margin: 10px 0 0 0;
+      margin: 8px 0 0 0;
       width: 36px;
       height: 36px;
       :hover {
@@ -107,6 +116,7 @@ const CreateFormStyled = styled(FormStyled)`
       display: flex;
       justify-content: space-between;
       margin-top: 10px;
+      height: 50px;
     }
     &__button {
       color: ${styles.colors.main};

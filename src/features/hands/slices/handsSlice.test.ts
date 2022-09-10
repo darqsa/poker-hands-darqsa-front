@@ -23,7 +23,7 @@ describe("Given a handsSlice function", () => {
     test("Then it should return the previous state without the hand that has the fakeId", () => {
       const hands = handsSlice(
         [fakeHand],
-        deleteHandActionCreator(fakeHand.id as string)
+        deleteHandActionCreator(fakeHand.id!)
       );
 
       expect(hands).not.toContain(fakeHand);

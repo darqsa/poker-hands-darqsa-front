@@ -1,7 +1,7 @@
 import { rest } from "msw";
 import { fakeHand } from "./mockHand";
 
-const apiUrl = process.env.REACT_APP_API_URL as string;
+const apiUrl = process.env.REACT_APP_API_URL!;
 
 const handlers = [
   rest.post(`${apiUrl}users/register`, (req, res, ctx) => {

@@ -37,14 +37,6 @@ const Header = (): JSX.Element => {
               />
             </Link>
           )}
-          {pathname === "/details" && (
-            <Link to={`/home`}>
-              <KeyboardArrowLeftIcon
-                data-testid="arrow-left"
-                className="header-container__icon header-container__icon--left"
-              />
-            </Link>
-          )}
           {handPathname === "/hand" && (
             <Link to={`/home`}>
               <KeyboardArrowLeftIcon
@@ -65,7 +57,6 @@ const Header = (): JSX.Element => {
         <div className="header-container__item-heading">
           <h1 className="header-container__heading">
             {pathname === "/home" && "Hands"}
-            {pathname === "/details" && "Details"}
             {pathname === "/create" && "Create"}
             {pathname === "/login" && "Login"}
             {pathname === "/register" && "Register"}
@@ -120,7 +111,7 @@ const Header = (): JSX.Element => {
               onClick={() => setIsProfileShown(!isProfileShown)}
             />
           )}
-          {pathname === "/details" && (
+          {handPathname === "/hand" && (
             <EditIcon data-testid="edit" className="header-container__icon" />
           )}
         </div>

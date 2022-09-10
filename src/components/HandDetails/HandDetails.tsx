@@ -133,17 +133,8 @@ const HandDetails = ({ hand }: HandDetailsProps): JSX.Element => {
           </section>
         )}
         <section className="details__game-section">
-          <span className="details__info">
-            {hand.postGame.gameWinner === "hero"
-              ? `(${positions[hand.preGame.hero.position - 1]}) Hero won ${
-                  hand.postGame.finalPot
-                }bb`
-              : `(${
-                  positions[hand.preGame.villains[0].position - 1]
-                }) Villain won ${hand.postGame.finalPot}bb`}
-          </span>
-          <h3 className="details__section-heading">Villain shows:</h3>
-
+          <h3 className="details__section-heading">Summary:</h3>
+          <span className="details__info">Villain shows:</span>
           <div className="details__board-img-group">
             {hand.preGame.villains[0].hand[0] && (
               <img
@@ -164,6 +155,15 @@ const HandDetails = ({ hand }: HandDetailsProps): JSX.Element => {
               />
             )}
           </div>
+          <span className="details__info">
+            {hand.postGame.gameWinner === "hero"
+              ? `(${positions[hand.preGame.hero.position - 1]}) Hero won ${
+                  hand.postGame.finalPot
+                }bb`
+              : `(${
+                  positions[hand.preGame.villains[0].position - 1]
+                }) Villain won ${hand.postGame.finalPot}bb`}
+          </span>
         </section>
         {hand.postGame.handImage && (
           <div className="details__game-img-container">

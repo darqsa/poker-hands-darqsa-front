@@ -6,23 +6,33 @@ const DetailsStyled = styled.div`
   background-color: ${styles.colors.grey};
   flex-direction: column;
   margin: 15px 0;
-  padding: 20px;
-  gap: 20px;
+  padding: 25px;
   color: ${styles.colors.main};
   border-radius: 15px;
-
+  @media (min-width: 700px) {
+    width: 65%;
+    margin: 30px auto;
+    padding: 25px 50px;
+  }
   p {
     margin: 10px 0 0 0;
   }
   .details {
+    &__info-container {
+      @media (min-width: 700px) {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+      }
+    }
     &__hand-header {
       display: flex;
       position: relative;
       justify-content: flex-start;
-      margin-bottom: 10px;
+      height: 80px;
     }
     &__img-group {
-      width: 90px;
+      width: 80px;
     }
     &__hero-card {
       position: absolute;
@@ -34,9 +44,12 @@ const DetailsStyled = styled.div`
     &__name {
       flex: 2.5;
       font-weight: ${styles.fontWeights.bolder};
-      font-size: ${styles.fontSizes.medium};
+      font-size: ${styles.fontSizes.big};
       font-style: italic;
       margin: 0;
+      @media (min-width: 700px) {
+        margin: auto 0;
+      }
     }
     &__section-heading {
       margin-bottom: 0;
@@ -45,6 +58,9 @@ const DetailsStyled = styled.div`
       display: flex;
       flex-direction: column;
       gap: 5px;
+      @media (min-width: 700px) {
+        width: 45%;
+      }
     }
     &__game-img-container {
       width: 100%;

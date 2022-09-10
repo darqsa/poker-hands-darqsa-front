@@ -1,0 +1,256 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Given a HandDetails component When receives a completeFakeHand by props Then it should render every property from the completeFakeHand object 1`] = `
+<div
+  className="details"
+>
+  <div
+    className="details__hand-header"
+  >
+    <div
+      className="details__img-group"
+    >
+      <img
+        alt="The Ac poker hand."
+        className="details__hero-card"
+        height={75}
+        src="../img/pokerCards/Ac.webp"
+        width={56.5}
+      />
+      <img
+        alt="The Ad poker hand."
+        className="details__hero-card"
+        height={75}
+        src="../img/pokerCards/Ad.webp"
+        width={56.5}
+      />
+    </div>
+    <h2
+      className="details__name"
+    >
+      Best hand name ever fpodsmfpomf
+    </h2>
+  </div>
+  <article
+    className="details__info-container"
+  >
+    <section
+      className="details__game-section"
+    >
+      <h3
+        className="details__section-heading"
+      >
+        Game Info
+      </h3>
+      <span
+        className="details__info"
+      >
+        (SB) Hero - 100bb
+      </span>
+      <span
+        className="details__info"
+      >
+        (BB) Villain - 100bb
+      </span>
+      <p
+        className="details__info"
+      >
+        <strong>
+          Description: 
+        </strong>
+        test
+      </p>
+    </section>
+    <section
+      className="details__game-section"
+    >
+      <h3
+        className="details__section-heading"
+      >
+        Preflop
+      </h3>
+      <span
+        className="details__info"
+      >
+        <strong>
+          Action:
+        </strong>
+         
+        Everyone is allin
+      </span>
+      <span
+        className="details__info"
+      >
+        <strong>
+          Pot:
+        </strong>
+        200bb
+      </span>
+    </section>
+    <section
+      className="details__game-section"
+    >
+      <h3
+        className="details__section-heading"
+      >
+        Flop
+      </h3>
+      <div
+        className="details__board-img-group"
+      >
+        <img
+          alt="The Ts poker hand."
+          className="hand__board-card"
+          height={60}
+          src="../img/pokerCards/Ts.webp"
+          width={45.2}
+        />
+        <img
+          alt="The 9c poker hand."
+          className="hand__board-card"
+          height={60}
+          src="../img/pokerCards/9c.webp"
+          width={45.2}
+        />
+        <img
+          alt="The 8h poker hand."
+          className="hand__board-card"
+          height={60}
+          src="../img/pokerCards/8h.webp"
+          width={45.2}
+        />
+      </div>
+      <span
+        className="details__info"
+      >
+        <strong>
+          Action:
+        </strong>
+         
+        Everyone is allin
+      </span>
+      <span
+        className="details__info"
+      >
+        <strong>
+          Pot:
+        </strong>
+        200bb
+      </span>
+    </section>
+    <section
+      className="details__game-section"
+    >
+      <h3
+        className="details__section-heading"
+      >
+        Turn
+      </h3>
+      <div
+        className="details__board-img-group"
+      >
+        <img
+          alt="The 7d poker hand."
+          className="hand__board-card"
+          height={60}
+          src="../img/pokerCards/7d.webp"
+          width={45.2}
+        />
+      </div>
+       
+      <span
+        className="details__info"
+      >
+        <strong>
+          Action:
+        </strong>
+         
+        Everyone is allin
+      </span>
+      <span
+        className="details__info"
+      >
+        <strong>
+          Pot:
+        </strong>
+        200bb
+      </span>
+    </section>
+    <section
+      className="details__game-section"
+    >
+      <h3
+        className="details__section-heading"
+      >
+        River
+      </h3>
+      <div
+        className="details__board-img-group"
+      >
+        <img
+          alt="The 6d poker hand."
+          className="hand__board-card"
+          height={60}
+          src="../img/pokerCards/6d.webp"
+          width={45.2}
+        />
+      </div>
+       
+      <span
+        className="details__info"
+      >
+        <strong>
+          Action:
+        </strong>
+         
+        Everyone is allin
+      </span>
+      <span
+        className="details__info"
+      >
+        <strong>
+          Pot:
+        </strong>
+        200bb
+      </span>
+    </section>
+    <section
+      className="details__game-section"
+    >
+      <span
+        className="details__info"
+      >
+        (BB) Villain won 200bb
+      </span>
+      <span
+        className="details__info"
+      >
+        Villain shows:
+      </span>
+      <img
+        alt="The Ah poker hand."
+        className="hand__board-card"
+        height={60}
+        src="../img/pokerCards/Ah.webp"
+        width={45.2}
+      />
+      <img
+        alt="The As poker hand."
+        className="hand__board-card"
+        height={60}
+        src="../img/pokerCards/As.webp"
+        width={45.2}
+      />
+    </section>
+    <section
+      className="details__game-section"
+    >
+      <img
+        alt="Hand extra info by user"
+        className="hand__description-img"
+        src="https://www.ldoceonline.com/media/english/illustration/slice_pizza.jpg?version=1.2.55"
+      />
+    </section>
+  </article>
+</div>
+`;

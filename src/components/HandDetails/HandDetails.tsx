@@ -169,9 +169,9 @@ const HandDetails = ({ hand }: HandDetailsProps): JSX.Element => {
           <div className="details__game-img-container">
             <img
               className="hand__description-img"
-              width={290}
               src={hand.postGame.handImage}
               alt={`Hand extra info by user`}
+              width={290}
             />
           </div>
         )}

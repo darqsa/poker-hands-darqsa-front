@@ -16,14 +16,14 @@ const useHandsApi = () => {
 
   const loadHands = useCallback(async () => {
     const {
-      data: { hands },
+      data: { userHands },
     }: AxiosResponse<GetHands> = await axios.get(`${apiURL}hands`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
 
-    dispatch(loadHandsActionCreator(hands));
+    dispatch(loadHandsActionCreator(userHands));
   }, [dispatch, token]);
 
   const createHand = async (hand: HandData) => {

@@ -42,10 +42,11 @@ export interface HandData {
     handImage?: string;
   };
   id?: string;
+  owner?: string;
 }
 
 export interface GetHands extends HandData {
-  hands: HandData[];
+  userHands: HandData[];
 }
 
 export interface FormHand {

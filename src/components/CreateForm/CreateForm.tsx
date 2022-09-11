@@ -7,7 +7,7 @@ import DoneIcon from "@mui/icons-material/Done";
 import useHandsApi from "../../features/hands/hooks/useHandsApi";
 import { FormHand, HandData } from "../../features/hands/models/Hand";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { openAlertActionCreator } from "../../features/ui/slices/alertSlice";
 
 const CreateForm = (): JSX.Element => {
@@ -38,6 +38,7 @@ const CreateForm = (): JSX.Element => {
     handDescription: "",
   };
 
+  const userId = useAppSelector((state) => state.user.id);
   const { createHand } = useHandsApi();
   const [formData, setFormData] = useState(initialState);
   const [currentPage, setCurrentPage] = useState(1);
@@ -81,6 +82,7 @@ const CreateForm = (): JSX.Element => {
         finalPot: formData.preFlopPot,
         gameWinner: formData.gameWinner,
       },
+      owner: userId,
     };
     if (formData.flopCard1) {
       newHand.game.flop = {

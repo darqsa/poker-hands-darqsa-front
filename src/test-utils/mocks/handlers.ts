@@ -28,7 +28,7 @@ const handlers = [
     return res(
       ctx.status(200),
       ctx.json({
-        hands: [fakeHand],
+        userHands: [fakeHand],
       })
     );
   }),

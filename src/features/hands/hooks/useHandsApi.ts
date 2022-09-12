@@ -39,6 +39,22 @@ const useHandsApi = () => {
     return response;
   };
 
+  const editHand = useCallback(
+    async (hand: FormData, id: string) => {
+      const response: AxiosResponse<string> = await axios.put(
+        `${apiURL}hands/edit/${id}`,
+        hand,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return response;
+    },
+    [token]
+  );
+
   const deleteHand = async (id: string) => {
     await axios.delete(`${apiURL}hands/delete/${id}`, {
       headers: {
@@ -61,6 +77,6 @@ const useHandsApi = () => {
     [token]
   );
 
-  return { hands, loadHands, createHand, deleteHand, loadHandById };
+  return { hands, loadHands, createHand, editHand, deleteHand, loadHandById };
 };
 export default useHandsApi;

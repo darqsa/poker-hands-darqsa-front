@@ -12,12 +12,6 @@ const HandList = (): JSX.Element => {
 
   return (
     <HandListContainerStyled className="hand-list-container">
-      {!hands && (
-        <p className="hands-list-container__no-hands-text">
-          You currently have no hands in your list... Try clicking at the
-          top-left icon to create a new hand.
-        </p>
-      )}
       <ul className="hands-list-container__list">
         {hands.map((hand) => (
           <li className="hands-list-container__list-item" key={hand.id}>

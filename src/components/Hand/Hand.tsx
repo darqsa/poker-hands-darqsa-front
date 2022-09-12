@@ -112,7 +112,10 @@ const Hand = ({ hand }: HandProps): JSX.Element => {
             className="hand__icon"
             onClick={() => deleteHand(hand.id!)}
           />
-          <EditIcon className="hand__icon" />
+          <EditIcon
+            className="hand__icon"
+            onClick={() => navigate(`/hand/edit/${hand.id!}`)}
+          />
         </div>
       )}
     </HandStyled>

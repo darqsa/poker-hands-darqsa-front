@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { store } from "../../app/store";
-import CreateForm from "./CreateForm";
+import HandForm from "./HandForm";
 
 let mockCreateFunction = { createHand: jest.fn() };
 jest.mock(
@@ -24,7 +24,7 @@ describe("Given a CreateForm component", () => {
       render(
         <BrowserRouter>
           <Provider store={store}>
-            <CreateForm />
+            <HandForm formFunction="create" />
           </Provider>
         </BrowserRouter>
       );
@@ -42,7 +42,7 @@ describe("Given a CreateForm component", () => {
       render(
         <BrowserRouter>
           <Provider store={store}>
-            <CreateForm />
+            <HandForm formFunction="create" />
           </Provider>
         </BrowserRouter>
       );
@@ -65,7 +65,7 @@ describe("Given a CreateForm component", () => {
         render(
           <BrowserRouter>
             <Provider store={store}>
-              <CreateForm />
+              <HandForm formFunction="create" />
             </Provider>
           </BrowserRouter>
         );
@@ -95,7 +95,7 @@ describe("Given a CreateForm component", () => {
       render(
         <BrowserRouter>
           <Provider store={store}>
-            <CreateForm />
+            <HandForm formFunction="create" />
           </Provider>
         </BrowserRouter>
       );
@@ -121,7 +121,7 @@ describe("Given a CreateForm component", () => {
         render(
           <BrowserRouter>
             <Provider store={store}>
-              <CreateForm />
+              <HandForm formFunction="create" />
             </Provider>
           </BrowserRouter>
         );
@@ -152,7 +152,7 @@ describe("Given a CreateForm component", () => {
         render(
           <BrowserRouter>
             <Provider store={store}>
-              <CreateForm />
+              <HandForm formFunction="create" />
             </Provider>
           </BrowserRouter>
         );
@@ -164,8 +164,6 @@ describe("Given a CreateForm component", () => {
         const imageInput = screen.getByLabelText("Image") as HTMLInputElement;
         await userEvent.upload(imageInput, image);
 
-        const expectedImage = "C:\\fakepath\\image.png";
-
         expect(imageInput.value).toBe("");
       });
     });
@@ -174,7 +172,7 @@ describe("Given a CreateForm component", () => {
       render(
         <BrowserRouter>
           <Provider store={store}>
-            <CreateForm />
+            <HandForm formFunction="create" />
           </Provider>
         </BrowserRouter>
       );
@@ -200,7 +198,7 @@ describe("Given a CreateForm component", () => {
         render(
           <BrowserRouter>
             <Provider store={store}>
-              <CreateForm />
+              <HandForm formFunction="create" />
             </Provider>
           </BrowserRouter>
         );
@@ -299,7 +297,7 @@ describe("Given a CreateForm component", () => {
         render(
           <BrowserRouter>
             <Provider store={store}>
-              <CreateForm />
+              <HandForm formFunction="create" />
             </Provider>
           </BrowserRouter>
         );
@@ -448,7 +446,7 @@ describe("Given a CreateForm component", () => {
       render(
         <BrowserRouter>
           <Provider store={store}>
-            <CreateForm />
+            <HandForm formFunction="create" />
           </Provider>
         </BrowserRouter>
       );

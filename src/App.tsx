@@ -11,6 +11,7 @@ import { closeAlertActionCreator } from "./features/ui/slices/alertSlice";
 import HomePage from "./pages/HomePage/HomePage";
 import CreatePage from "./pages/CreatePage/CreatePage";
 import DetailsPage from "./pages/DetailsPage/DetailsPage";
+import EditPage from "./pages/EditPage/EditPage";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -45,6 +46,7 @@ function App() {
             element={token ? <CreatePage /> : <Navigate to="/login" />}
           />
           <Route path="/hand/:handId" element={<DetailsPage />} />
+          <Route path="/hand/edit/:handId" element={<EditPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
         {alert.isAlertShown && (

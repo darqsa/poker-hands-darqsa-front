@@ -23,7 +23,6 @@ export default GlobalStyles;
 
 export const MainContainerStyled = styled.main`
   .alert {
-    position: absolute;
     width: 80%;
     border: 2px solid ${styles.colors.main};
     font-size: ${styles.fontSizes.small};
@@ -31,7 +30,7 @@ export const MainContainerStyled = styled.main`
     bottom: 5%;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     left: 10%;
-    position: sticky;
+    position: fixed;
     right: 10%;
     z-index: 2;
     font-family: inter;
@@ -41,5 +40,12 @@ export const MainContainerStyled = styled.main`
       width: 350px;
       left: 50px;
     }
+  }
+  .loading {
+    position: fixed;
+    z-index: -1;
+    left: 48%;
+    top: 15%;
+    color: ${styles.colors.red};
   }
 `;

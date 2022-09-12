@@ -65,7 +65,7 @@ function App() {
             {ui.alertMessage}
           </Alert>
         )}
-        <CircularProgress />
+        {ui.isLoadingShown && <CircularProgress className="loading" />}
       </MainContainerStyled>
     </>
   );

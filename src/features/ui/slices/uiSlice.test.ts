@@ -9,6 +9,7 @@ describe("Given an openAlert slice", () => {
       const initialState = {
         isAlertShown: false,
         alertMessage: "",
+        isLoadingShown: false,
       };
       const newMessage = "hibob";
 
@@ -26,6 +27,7 @@ describe("Given an closeAlert slice", () => {
       const initialState = {
         isAlertShown: true,
         alertMessage: "",
+        isLoadingShown: false,
       };
 
       const alert = uiSlice(initialState, closeAlertActionCreator());

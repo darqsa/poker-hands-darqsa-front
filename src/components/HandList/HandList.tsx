@@ -9,9 +9,10 @@ const HandList = (): JSX.Element => {
   useEffect(() => {
     loadHands();
   }, [loadHands]);
+
   return (
     <HandListContainerStyled className="hand-list-container">
-      {hands.length === 0 && (
+      {!hands && (
         <p className="hands-list-container__no-hands-text">
           You currently have no hands in your list... Try clicking at the
           top-left icon to create a new hand.

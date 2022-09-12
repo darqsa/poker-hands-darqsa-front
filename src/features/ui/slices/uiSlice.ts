@@ -1,6 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState = { isAlertShown: false, alertMessage: "" };
+const initialState = {
+  isAlertShown: false,
+  isLoadingShown: false,
+  alertMessage: "",
+};
 
 const uiSlice = createSlice({
   name: "user",
@@ -11,9 +15,19 @@ const uiSlice = createSlice({
       isAlertShown: true,
       alertMessage: action.payload,
     }),
-    closeAlert: (previousState) => initialState,
-    openLoading: (previousState) => ({ ...previousState, isAlertShown: true }),
-    closeLoading: (previousState) => ({ ...previousState, isAlertShown: true }),
+    closeAlert: (previousState) => ({
+      ...previousState,
+      isAlertShown: initialState.isAlertShown,
+      alertMessage: initialState.alertMessage,
+    }),
+    openLoading: (previousState) => ({
+      ...previousState,
+      isLoadingShown: true,
+    }),
+    closeLoading: (previousState) => ({
+      ...previousState,
+      isLoadingShown: initialState.isLoadingShown,
+    }),
   },
 });
 

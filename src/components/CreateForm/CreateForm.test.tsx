@@ -166,7 +166,7 @@ describe("Given a CreateForm component", () => {
 
         const expectedImage = "C:\\fakepath\\image.png";
 
-        expect(imageInput.value).toBe(expectedImage);
+        expect(imageInput.value).toBe("");
       });
     });
 

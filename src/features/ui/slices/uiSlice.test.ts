@@ -1,6 +1,8 @@
 import uiSlice, {
   closeAlertActionCreator,
+  closeLoadingActionCreator,
   openAlertActionCreator,
+  openLoadingActionCreator,
 } from "./uiSlice";
 
 describe("Given an openAlert slice", () => {
@@ -34,6 +36,40 @@ describe("Given an closeAlert slice", () => {
       const expectedNewState = false;
 
       expect(alert.isAlertShown).toStrictEqual(expectedNewState);
+    });
+  });
+});
+
+describe("Given an openLoading slice", () => {
+  describe("When invoked", () => {
+    test("Then it should open the loading", () => {
+      const initialState = {
+        isAlertShown: false,
+        alertMessage: "",
+        isLoadingShown: false,
+      };
+
+      const alert = uiSlice(initialState, openLoadingActionCreator());
+      const expectedNewState = true;
+
+      expect(alert.isLoadingShown).toStrictEqual(expectedNewState);
+    });
+  });
+});
+
+describe("Given an closeLoading slice", () => {
+  describe("When invoked", () => {
+    test("Then it should close the loading", () => {
+      const initialState = {
+        isAlertShown: false,
+        alertMessage: "",
+        isLoadingShown: false,
+      };
+
+      const alert = uiSlice(initialState, closeLoadingActionCreator());
+      const expectedNewState = false;
+
+      expect(alert.isLoadingShown).toStrictEqual(expectedNewState);
     });
   });
 });

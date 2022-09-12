@@ -4,7 +4,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import EditIcon from "@mui/icons-material/Edit";
 import HeaderStyled from "./HeaderStyled";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAppSelector } from "../../app/hooks";
 import useUserApi from "../../features/users/hooks/useUserApi";
@@ -16,6 +16,7 @@ const Header = (): JSX.Element => {
   const { pathname } = useLocation();
   const [isProfileShown, setIsProfileShown] = useState(true);
   const { logout } = useUserApi();
+  const navigate = useNavigate();
   const matches = useMediaQuery("(min-width:700px)");
 
   const logoutUser = () => {
@@ -61,10 +62,19 @@ const Header = (): JSX.Element => {
             {pathname === "/login" && "Login"}
             {pathname === "/register" && "Register"}
             {handPathname === "/hand" && "Hand"}
+            {handPathname === "/hand/edit" && "Edit"}
           </h1>
         </div>
         <div className="header-container__item">
           {pathname === "/create" && (
+            <Link to={`/home`}>
+              <CloseIcon
+                data-testid="arrow-left"
+                className="header-container__icon header-container__icon--left"
+              />
+            </Link>
+          )}
+          {handPathname === "/hand/edit" && (
             <Link to={`/home`}>
               <CloseIcon
                 data-testid="arrow-left"
@@ -112,7 +122,11 @@ const Header = (): JSX.Element => {
             />
           )}
           {handPathname === "/hand" && (
-            <EditIcon data-testid="edit" className="header-container__icon" />
+            <EditIcon
+              data-testid="edit"
+              onClick={() => navigate(`/hand/edit/${pathname.slice(6)}`)}
+              className="header-container__icon"
+            />
           )}
         </div>
       </div>

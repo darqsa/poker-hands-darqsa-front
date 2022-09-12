@@ -2,7 +2,7 @@ import styled from "styled-components";
 import FormStyled from "../../styles/components/FormStyled";
 import styles from "../../styles/styles";
 
-const CreateFormStyled = styled(FormStyled)`
+const HandFormStyled = styled(FormStyled)`
   background-color: ${styles.colors.grey};
   width: fit-content;
   margin: 20px auto;
@@ -135,4 +135,4 @@ const CreateFormStyled = styled(FormStyled)`
   }
 `;
 
-export default CreateFormStyled;
+export default HandFormStyled;

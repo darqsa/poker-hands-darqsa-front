@@ -1,6 +1,6 @@
-import CreateForm from "../../components/CreateForm/CreateForm";
+import HandForm from "../../components/HandForm/HandForm";
 
 const CreatePage = (): JSX.Element => {
-  return <CreateForm />;
+  return <HandForm formFunction="create" />;
 };
 export default CreatePage;

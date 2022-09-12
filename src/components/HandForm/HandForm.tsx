@@ -2,7 +2,7 @@ import { SyntheticEvent, useState } from "react";
 import ButtonStyled from "../../styles/components/ButtonStyled";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import CreateFormStyled from "./CreateFormStyled";
+import HandFormStyled from "./HandFormStyled";
 import DoneIcon from "@mui/icons-material/Done";
 import useHandsApi from "../../features/hands/hooks/useHandsApi";
 import { FormHand, HandData } from "../../features/hands/models/Hand";
@@ -11,8 +11,10 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { openAlertActionCreator } from "../../features/ui/slices/alertSlice";
 
 let formData = new FormData();
-
-const CreateForm = (): JSX.Element => {
+interface HandFormProps {
+  formFunction: "edit" | "create";
+}
+const HandForm = ({ formFunction }: HandFormProps): JSX.Element => {
   const initialState: FormHand = {
     handName: "",
     heroPosition: 0,
@@ -173,7 +175,7 @@ const CreateForm = (): JSX.Element => {
     </>
   );
   return (
-    <CreateFormStyled className="form" onSubmit={sendformInfo}>
+    <HandFormStyled className="form" onSubmit={sendformInfo}>
       {currentPage === 1 && (
         <>
           <h2 className="form__title">Game info</h2>
@@ -599,7 +601,7 @@ const CreateForm = (): JSX.Element => {
           </div>
         </>
       )}
-    </CreateFormStyled>
+    </HandFormStyled>
   );
 };
-export default CreateForm;
+export default HandForm;

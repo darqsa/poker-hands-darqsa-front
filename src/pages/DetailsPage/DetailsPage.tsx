@@ -21,8 +21,8 @@ const DetailsPage = (): JSX.Element => {
       finalPot: 0,
       gameWinner: "",
       handDescription: "",
-      handImage: "",
     },
+    handImage: "",
   };
   const { handId } = useParams();
   const { loadHandById } = useHandsApi();

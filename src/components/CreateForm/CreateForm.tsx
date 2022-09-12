@@ -36,107 +36,120 @@ const CreateForm = (): JSX.Element => {
     riverPot: 0,
     gameWinner: "",
     handDescription: "",
+    handImage: "",
   };
+  let formData = new FormData();
 
   const userId = useAppSelector((state) => state.user.id);
   const { createHand } = useHandsApi();
-  const [formData, setFormData] = useState(initialState);
+  const [formInfo, setFormInfo] = useState(initialState);
   const [currentPage, setCurrentPage] = useState(1);
   const [incorrectFields, setIncorrectFields] = useState(false);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const onChangeData = (event: React.ChangeEvent<any>) => {
-    setFormData({
-      ...formData,
+  const onChangeInfo = (event: React.ChangeEvent<any>) => {
+    setFormInfo({
+      ...formInfo,
       [event.target.id]: event.target.value,
     });
   };
 
-  const sendFormData = async (event: SyntheticEvent) => {
+  const onChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
+    // formData.append("image", event.target.files![0]);
+
+    setFormInfo({
+      ...formInfo,
+      handImage: event.target.value,
+    });
+  };
+
+  const sendformInfo = async (event: SyntheticEvent) => {
     event.preventDefault();
 
     const newHand: HandData = {
-      handName: formData.handName,
+      handName: formInfo.handName,
       preGame: {
         hero: {
-          position: formData.heroPosition,
-          initialStack: formData.heroStack,
-          hand: [formData.heroCard1, formData.heroCard2],
+          position: formInfo.heroPosition,
+          initialStack: formInfo.heroStack,
+          hand: [formInfo.heroCard1, formInfo.heroCard2],
         },
         villains: [
           {
-            position: formData.villainPosition,
-            initialStack: formData.villainStack,
-            hand: [formData.villainCard1, formData.villainCard2],
+            position: formInfo.villainPosition,
+            initialStack: formInfo.villainStack,
+            hand: [formInfo.villainCard1, formInfo.villainCard2],
           },
         ],
       },
       game: {
         preFlop: {
-          actions: [formData.preFlopActions],
-          pot: formData.preFlopPot,
+          actions: [formInfo.preFlopActions],
+          pot: formInfo.preFlopPot,
         },
       },
       postGame: {
-        finalPot: formData.preFlopPot,
-        gameWinner: formData.gameWinner,
+        finalPot: formInfo.preFlopPot,
+        gameWinner: formInfo.gameWinner,
       },
       owner: userId,
     };
-    if (formData.flopCard1) {
+    if (formInfo.flopCard1) {
       newHand.game.flop = {
-        board: [formData.flopCard1, formData.flopCard2, formData.flopCard3],
-        actions: [formData.flopActions],
-        pot: formData.flopPot,
+        board: [formInfo.flopCard1, formInfo.flopCard2, formInfo.flopCard3],
+        actions: [formInfo.flopActions],
+        pot: formInfo.flopPot,
       };
-      newHand.postGame.finalPot = formData.flopPot;
+      newHand.postGame.finalPot = formInfo.flopPot;
     }
-    if (formData.flopCard1 && formData.turnCard) {
+    if (formInfo.flopCard1 && formInfo.turnCard) {
       newHand.game.turn = {
-        board: formData.turnCard,
-        actions: [formData.turnActions],
-        pot: formData.turnPot,
+        board: formInfo.turnCard,
+        actions: [formInfo.turnActions],
+        pot: formInfo.turnPot,
       };
-      newHand.postGame.finalPot = formData.turnPot;
+      newHand.postGame.finalPot = formInfo.turnPot;
     }
-    if (formData.flopCard1 && formData.turnCard && formData.riverCard) {
+    if (formInfo.flopCard1 && formInfo.turnCard && formInfo.riverCard) {
       newHand.game.river = {
-        board: formData.riverCard,
-        actions: [formData.riverActions],
-        pot: formData.riverPot,
+        board: formInfo.riverCard,
+        actions: [formInfo.riverActions],
+        pot: formInfo.riverPot,
       };
-      newHand.postGame.finalPot = formData.riverPot;
+      newHand.postGame.finalPot = formInfo.riverPot;
     }
-    if (formData.handDescription) {
-      newHand.postGame.handDescription = formData.handDescription;
+    if (formInfo.handDescription) {
+      newHand.postGame.handDescription = formInfo.handDescription;
     }
     try {
-      await createHand(newHand);
+      formData.append("userHand", JSON.stringify(newHand));
+      await createHand(formData);
+      formData = new FormData();
 
       navigate("/home");
 
       dispatch(
         openAlertActionCreator(
-          `Your hand: ${formData.handName}, has been created successfully 👍`
+          `Your hand: ${formInfo.handName}, has been created successfully 👍`
         )
       );
     } catch (error) {}
   };
 
   const requiredFields =
-    formData.heroPosition === 0 ||
-    formData.villainPosition === 0 ||
-    formData.heroStack <= 0 ||
-    formData.villainStack <= 0 ||
-    formData.heroCard1 === "" ||
-    formData.heroCard2 === "" ||
-    formData.villainCard1 === "" ||
-    formData.villainCard2 === "" ||
-    formData.handName === "" ||
-    formData.preFlopActions === "" ||
-    formData.preFlopPot <= 0 ||
-    formData.gameWinner === "";
+    formInfo.heroPosition === 0 ||
+    formInfo.villainPosition === 0 ||
+    formInfo.heroStack <= 0 ||
+    formInfo.villainStack <= 0 ||
+    formInfo.heroCard1 === "" ||
+    formInfo.heroCard2 === "" ||
+    formInfo.villainCard1 === "" ||
+    formInfo.villainCard2 === "" ||
+    formInfo.handName === "" ||
+    formInfo.preFlopActions === "" ||
+    formInfo.preFlopPot <= 0 ||
+    formInfo.gameWinner === "";
 
   const positionOptions = (
     <>
@@ -164,7 +177,7 @@ const CreateForm = (): JSX.Element => {
     </>
   );
   return (
-    <CreateFormStyled className="form" onSubmit={sendFormData}>
+    <CreateFormStyled className="form" onSubmit={sendformInfo}>
       {currentPage === 1 && (
         <>
           <h2 className="form__title">Game info</h2>
@@ -181,8 +194,8 @@ const CreateForm = (): JSX.Element => {
                     id="heroPosition"
                     autoComplete="off"
                     required
-                    onChange={onChangeData}
-                    value={formData.heroPosition}
+                    onChange={onChangeInfo}
+                    value={formInfo.heroPosition}
                   >
                     {positionOptions}
                   </select>
@@ -197,8 +210,8 @@ const CreateForm = (): JSX.Element => {
                     id="heroStack"
                     autoComplete="off"
                     required
-                    value={formData.heroStack > 0 ? formData.heroStack : ""}
-                    onChange={onChangeData}
+                    value={formInfo.heroStack > 0 ? formInfo.heroStack : ""}
+                    onChange={onChangeInfo}
                     max={999}
                   />
                 </div>
@@ -213,8 +226,8 @@ const CreateForm = (): JSX.Element => {
                       id="heroCard1"
                       autoComplete="off"
                       required
-                      value={formData.heroCard1}
-                      onChange={onChangeData}
+                      value={formInfo.heroCard1}
+                      onChange={onChangeInfo}
                       maxLength={2}
                     />
                     <input
@@ -223,9 +236,9 @@ const CreateForm = (): JSX.Element => {
                       id="heroCard2"
                       data-testid="hero-hand-2"
                       autoComplete="off"
-                      value={formData.heroCard2}
+                      value={formInfo.heroCard2}
                       required
-                      onChange={onChangeData}
+                      onChange={onChangeInfo}
                       maxLength={2}
                     />
                   </div>
@@ -242,8 +255,8 @@ const CreateForm = (): JSX.Element => {
                     id="villainPosition"
                     autoComplete="off"
                     required
-                    value={formData.villainPosition}
-                    onChange={onChangeData}
+                    value={formInfo.villainPosition}
+                    onChange={onChangeInfo}
                   >
                     {positionOptions}
                   </select>
@@ -259,9 +272,9 @@ const CreateForm = (): JSX.Element => {
                     autoComplete="off"
                     required
                     value={
-                      formData.villainStack > 0 ? formData.villainStack : ""
+                      formInfo.villainStack > 0 ? formInfo.villainStack : ""
                     }
-                    onChange={onChangeData}
+                    onChange={onChangeInfo}
                     max={999}
                   />
                 </div>
@@ -276,8 +289,8 @@ const CreateForm = (): JSX.Element => {
                       id="villainCard1"
                       autoComplete="off"
                       required
-                      value={formData.villainCard1}
-                      onChange={onChangeData}
+                      value={formInfo.villainCard1}
+                      onChange={onChangeInfo}
                       maxLength={2}
                     />
                     <input
@@ -287,8 +300,8 @@ const CreateForm = (): JSX.Element => {
                       data-testid="villain-hand-2"
                       autoComplete="off"
                       required
-                      value={formData.villainCard2}
-                      onChange={onChangeData}
+                      value={formInfo.villainCard2}
+                      onChange={onChangeInfo}
                       maxLength={2}
                     />
                   </div>
@@ -305,8 +318,8 @@ const CreateForm = (): JSX.Element => {
                 id="handName"
                 autoComplete="off"
                 required
-                value={formData.handName}
-                onChange={onChangeData}
+                value={formInfo.handName}
+                onChange={onChangeInfo}
                 maxLength={40}
               />
             </div>
@@ -331,9 +344,9 @@ const CreateForm = (): JSX.Element => {
                 type="text"
                 id="preFlopActions"
                 autoComplete="off"
-                value={formData.preFlopActions}
+                value={formInfo.preFlopActions}
                 required
-                onChange={onChangeData}
+                onChange={onChangeInfo}
               />
             </div>
             <div className="form__group">
@@ -344,10 +357,10 @@ const CreateForm = (): JSX.Element => {
                 className="form__input"
                 type="number"
                 id="preFlopPot"
-                value={formData.preFlopPot > 0 ? formData.preFlopPot : ""}
+                value={formInfo.preFlopPot > 0 ? formInfo.preFlopPot : ""}
                 autoComplete="off"
                 required
-                onChange={onChangeData}
+                onChange={onChangeInfo}
               />
             </div>
           </section>
@@ -362,27 +375,27 @@ const CreateForm = (): JSX.Element => {
                   className="form__input form__input--hand"
                   type="text"
                   id="flopCard1"
-                  value={formData.flopCard1}
+                  value={formInfo.flopCard1}
                   autoComplete="off"
-                  onChange={onChangeData}
+                  onChange={onChangeInfo}
                 />
                 <input
                   className="form__input form__input--hand"
                   type="text"
                   id="flopCard2"
                   data-testid="board-hand2"
-                  value={formData.flopCard2}
+                  value={formInfo.flopCard2}
                   autoComplete="off"
-                  onChange={onChangeData}
+                  onChange={onChangeInfo}
                 />
                 <input
                   className="form__input form__input--hand"
                   type="text"
                   data-testid="board-hand3"
                   id="flopCard3"
-                  value={formData.flopCard3}
+                  value={formInfo.flopCard3}
                   autoComplete="off"
-                  onChange={onChangeData}
+                  onChange={onChangeInfo}
                 />
               </div>
             </div>
@@ -394,9 +407,9 @@ const CreateForm = (): JSX.Element => {
                 className="form__input form__input--text"
                 type="text"
                 id="flopActions"
-                value={formData.flopActions}
+                value={formInfo.flopActions}
                 autoComplete="off"
-                onChange={onChangeData}
+                onChange={onChangeInfo}
               />
             </div>
             <div className="form__group">
@@ -409,8 +422,8 @@ const CreateForm = (): JSX.Element => {
                 id="flopPot"
                 autoComplete="off"
                 required
-                value={formData.flopPot > 0 ? formData.flopPot : ""}
-                onChange={onChangeData}
+                value={formInfo.flopPot > 0 ? formInfo.flopPot : ""}
+                onChange={onChangeInfo}
               />
             </div>
           </section>
@@ -424,9 +437,9 @@ const CreateForm = (): JSX.Element => {
                 className="form__input  form__input--hand"
                 type="text"
                 id="turnCard"
-                value={formData.turnCard}
+                value={formInfo.turnCard}
                 autoComplete="off"
-                onChange={onChangeData}
+                onChange={onChangeInfo}
               />
             </div>
             <div className="form__group">
@@ -437,9 +450,9 @@ const CreateForm = (): JSX.Element => {
                 className="form__input form__input--text"
                 type="text"
                 id="turnActions"
-                value={formData.turnActions}
+                value={formInfo.turnActions}
                 autoComplete="off"
-                onChange={onChangeData}
+                onChange={onChangeInfo}
               />
             </div>
             <div className="form__group">
@@ -450,10 +463,10 @@ const CreateForm = (): JSX.Element => {
                 className="form__input"
                 type="number"
                 id="turnPot"
-                value={formData.turnPot > 0 ? formData.turnPot : ""}
+                value={formInfo.turnPot > 0 ? formInfo.turnPot : ""}
                 autoComplete="off"
                 required
-                onChange={onChangeData}
+                onChange={onChangeInfo}
               />
             </div>
           </section>
@@ -467,9 +480,9 @@ const CreateForm = (): JSX.Element => {
                 className="form__input form__input--hand"
                 type="text"
                 id="riverCard"
-                value={formData.riverCard}
+                value={formInfo.riverCard}
                 autoComplete="off"
-                onChange={onChangeData}
+                onChange={onChangeInfo}
               />
             </div>
             <div className="form__group">
@@ -481,8 +494,8 @@ const CreateForm = (): JSX.Element => {
                 type="text"
                 id="riverActions"
                 autoComplete="off"
-                onChange={onChangeData}
-                value={formData.riverActions}
+                onChange={onChangeInfo}
+                value={formInfo.riverActions}
               />
             </div>
             <div className="form__group">
@@ -495,8 +508,8 @@ const CreateForm = (): JSX.Element => {
                 id="riverPot"
                 autoComplete="off"
                 required
-                value={formData.riverPot > 0 ? formData.riverPot : ""}
-                onChange={onChangeData}
+                value={formInfo.riverPot > 0 ? formInfo.riverPot : ""}
+                onChange={onChangeInfo}
               />
             </div>
           </section>
@@ -526,8 +539,8 @@ const CreateForm = (): JSX.Element => {
                 className="form__input form__input--winner-selector"
                 id="gameWinner"
                 autoComplete="off"
-                value={formData.gameWinner}
-                onChange={onChangeData}
+                value={formInfo.gameWinner}
+                onChange={onChangeInfo}
               >
                 <option value="" className="form__list-option">
                   ------
@@ -548,8 +561,8 @@ const CreateForm = (): JSX.Element => {
                 className="form__input form__input--text-area"
                 id="handDescription"
                 autoComplete="off"
-                value={formData.handDescription}
-                onChange={onChangeData}
+                value={formInfo.handDescription}
+                onChange={onChangeInfo}
               />
             </div>
             <div className="form__group">
@@ -561,7 +574,8 @@ const CreateForm = (): JSX.Element => {
                 type="file"
                 id="handImage"
                 autoComplete="off"
-                onChange={onChangeData}
+                value={formInfo.handImage}
+                onChange={onChangeFile}
               />
             </div>
             {incorrectFields && (

@@ -31,9 +31,9 @@ export const fakeHandWithoutId: HandData = {
     finalPot: 200,
     gameWinner: "Hero",
     handDescription: "test",
-    handImage:
-      "https://www.ldoceonline.com/media/english/illustration/slice_pizza.jpg?version=1.2.55",
   },
+  handImage:
+    "https://www.ldoceonline.com/media/english/illustration/slice_pizza.jpg?version=1.2.55",
 };
 
 export const completeFakeHand: HandData = { ...fakeHandWithoutId, id: "1234" };

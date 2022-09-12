@@ -23,9 +23,7 @@ const Header = (): JSX.Element => {
     setIsProfileShown(!isProfileShown);
     logout();
   };
-
   const handPathname = pathname.slice(0, -25);
-
   return (
     <HeaderStyled className="header-container">
       <div className="header-container__container">
@@ -122,11 +120,15 @@ const Header = (): JSX.Element => {
             />
           )}
           {handPathname === "/hand" && (
-            <EditIcon
-              data-testid="edit"
-              onClick={() => navigate(`/hand/edit/${pathname.slice(6)}`)}
-              className="header-container__icon"
-            />
+            <>
+              {user.token && (
+                <EditIcon
+                  data-testid="edit"
+                  onClick={() => navigate(`/hand/edit/${pathname.slice(6)}`)}
+                  className="header-container__icon"
+                />
+              )}
+            </>
           )}
         </div>
       </div>

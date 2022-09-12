@@ -47,7 +47,7 @@ describe("Given a Header component", () => {
   });
 
   describe("When invoked and the page is details", () => {
-    test("Then it should return a details heading, KeyboardArrowLeftIcon and a EditIcon", () => {
+    test("Then it should return a details heading, KeyboardArrowLeftIcon", () => {
       render(
         <Provider store={store}>
           <MemoryRouter initialEntries={["/hand/6316388ea1279da93a82f9db"]}>
@@ -57,12 +57,10 @@ describe("Given a Header component", () => {
       );
 
       const heading = screen.getByRole("heading", { name: "Hand" });
-      const icon1 = screen.getByTestId("arrow-left");
-      const icon2 = screen.getByTestId("edit");
+      const icon = screen.getByTestId("arrow-left");
 
       expect(heading).toBeInTheDocument();
-      expect(icon1).toBeInTheDocument();
-      expect(icon2).toBeInTheDocument();
+      expect(icon).toBeInTheDocument();
     });
   });
 

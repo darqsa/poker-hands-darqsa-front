@@ -1,4 +1,4 @@
-import { SyntheticEvent, useState } from "react";
+import { SyntheticEvent, useEffect, useState } from "react";
 import ButtonStyled from "../../styles/components/ButtonStyled";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
@@ -6,7 +6,7 @@ import HandFormStyled from "./HandFormStyled";
 import DoneIcon from "@mui/icons-material/Done";
 import useHandsApi from "../../features/hands/hooks/useHandsApi";
 import { FormHand, HandData } from "../../features/hands/models/Hand";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { openAlertActionCreator } from "../../features/ui/slices/alertSlice";
 
@@ -15,7 +15,7 @@ interface HandFormProps {
   formFunction: "edit" | "create";
 }
 const HandForm = ({ formFunction }: HandFormProps): JSX.Element => {
-  const initialState: FormHand = {
+  let initialState: FormHand = {
     handName: "",
     heroPosition: 0,
     villainPosition: 0,
@@ -44,12 +44,52 @@ const HandForm = ({ formFunction }: HandFormProps): JSX.Element => {
   };
 
   const userId = useAppSelector((state) => state.user.id);
-  const { createHand } = useHandsApi();
+  const { createHand, loadHandById, editHand } = useHandsApi();
   const [formInfo, setFormInfo] = useState(initialState);
   const [currentPage, setCurrentPage] = useState(1);
   const [incorrectFields, setIncorrectFields] = useState(false);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const { handId } = useParams();
+
+  const parseToFormInfo = (hand: HandData) => {
+    return {
+      handName: hand.handName,
+      heroPosition: hand.preGame.hero.position,
+      villainPosition: hand.preGame.villains[0].position,
+      heroStack: hand.preGame.hero.initialStack,
+      villainStack: hand.preGame.villains[0].initialStack,
+      heroCard1: hand.preGame.hero.hand[0],
+      heroCard2: hand.preGame.hero.hand[1],
+      villainCard1: hand.preGame.villains[0].hand[0],
+      villainCard2: hand.preGame.villains[0].hand[0],
+      preFlopActions: hand.game.preFlop.actions[0],
+      preFlopPot: hand.game.preFlop.pot,
+      flopCard1: hand.game.flop?.board[0] ?? "",
+      flopCard2: hand.game.flop?.board[1] ?? "",
+      flopCard3: hand.game.flop?.board[2] ?? "",
+      flopActions: hand.game.flop?.actions[0] ?? "",
+      flopPot: hand.game.flop?.pot ?? 0,
+      turnCard: hand.game.turn?.board ?? "",
+      turnActions: hand.game.turn?.actions[0] ?? "",
+      turnPot: hand.game.turn?.pot ?? 0,
+      riverCard: hand.game.river?.board ?? "",
+      riverActions: hand.game.river?.actions[0] ?? "",
+      riverPot: hand.game.river?.pot ?? 0,
+      gameWinner: hand.postGame.gameWinner,
+      handDescription: hand.postGame.handDescription ?? "",
+      handImage: "",
+    };
+  };
+
+  useEffect(() => {
+    (async () => {
+      if (formFunction === "edit") {
+        let idHand: HandData = await loadHandById(handId!);
+        !idHand ? navigate("/home") : setFormInfo(parseToFormInfo(idHand));
+      }
+    })();
+  }, [loadHandById, handId, navigate, formFunction]);
 
   const onChangeInfo = (event: React.ChangeEvent<any>) => {
     setFormInfo({
@@ -122,14 +162,19 @@ const HandForm = ({ formFunction }: HandFormProps): JSX.Element => {
     }
     try {
       formData.append("userHand", JSON.stringify(newHand));
-      await createHand(formData);
+      formFunction === "create"
+        ? await createHand(formData)
+        : await editHand(formData, handId!);
+
       formData = new FormData();
 
       navigate("/home");
 
       dispatch(
         openAlertActionCreator(
-          `Your hand: ${formInfo.handName}, has been created successfully 👍`
+          `Your hand: ${formInfo.handName}, has been ${
+            formFunction === "create" ? "created" : "edited"
+          } successfully 👍`
         )
       );
     } catch (error) {}

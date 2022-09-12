@@ -257,7 +257,6 @@ exports[`Given a HandDetails component When receives a completeFakeHand by props
       <img
         alt="Hand extra info by user"
         className="hand__description-img"
-        src="https://www.ldoceonline.com/media/english/illustration/slice_pizza.jpg?version=1.2.55"
         width={290}
       />
     </div>

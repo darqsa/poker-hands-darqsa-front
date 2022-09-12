@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { openAlertActionCreator } from "../../features/ui/slices/alertSlice";
+import { openAlertActionCreator } from "../../features/ui/slices/uiSlice";
 import Register from "./Register";
 
 let mockRegisterFunction = { register: jest.fn(), login: jest.fn() };

@@ -1,6 +1,10 @@
 import axios, { AxiosResponse } from "axios";
 import { useCallback } from "react";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
+import {
+  closeLoadingActionCreator,
+  openLoadingActionCreator,
+} from "../../ui/slices/uiSlice";
 import { GetHands } from "../models/Hand";
 import {
   deleteHandActionCreator,
@@ -11,10 +15,12 @@ export const apiURL = process.env.REACT_APP_API_URL;
 
 const useHandsApi = () => {
   const dispatch = useAppDispatch();
-  const hands = useAppSelector((state) => state.hands);
+  let hands = useAppSelector((state) => state.hands);
   const token = useAppSelector((state) => state.user.token);
 
   const loadHands = useCallback(async () => {
+    dispatch(openLoadingActionCreator());
+
     const {
       data: { userHands },
     }: AxiosResponse<GetHands> = await axios.get(`${apiURL}hands`, {
@@ -22,7 +28,7 @@ const useHandsApi = () => {
         Authorization: `Bearer ${token}`,
       },
     });
-
+    dispatch(closeLoadingActionCreator());
     dispatch(loadHandsActionCreator(userHands));
   }, [dispatch, token]);
 

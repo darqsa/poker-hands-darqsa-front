@@ -4,11 +4,6 @@ exports[`Given a home page component When invoked Then it should match the snaps
 <div
   className="sc-gsnTZi guCkqu hand-list-container"
 >
-  <p
-    className="hands-list-container__no-hands-text"
-  >
-    You currently have no hands in your list... Try clicking at the top-left icon to create a new hand.
-  </p>
   <ul
     className="hands-list-container__list"
   />

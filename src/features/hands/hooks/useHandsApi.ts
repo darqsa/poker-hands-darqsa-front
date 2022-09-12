@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { useCallback } from "react";
 import { useAppDispatch, useAppSelector } from "../../../app/hooks";
-import { GetHands, HandData } from "../models/Hand";
+import { GetHands } from "../models/Hand";
 import {
   deleteHandActionCreator,
   loadHandsActionCreator,
@@ -26,7 +26,7 @@ const useHandsApi = () => {
     dispatch(loadHandsActionCreator(userHands));
   }, [dispatch, token]);
 
-  const createHand = async (hand: HandData) => {
+  const createHand = async (hand: FormData) => {
     const response: AxiosResponse<string> = await axios.post(
       `${apiURL}hands/create`,
       hand,

@@ -43,7 +43,9 @@ describe("Given a useHandApi hook", () => {
         },
       } = renderHook(useHandsApi, { wrapper: Wrapper });
 
-      const createdHand = await createHand(fakeHandWithoutId);
+      const formData = new FormData();
+      formData.append("hand", JSON.stringify(fakeHandWithoutId));
+      const createdHand = await createHand(formData);
 
       expect(createdHand.data).toBe(expectedMessage);
     });

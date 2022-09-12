@@ -7,7 +7,6 @@ interface HandDetailsProps {
 const HandDetails = ({ hand }: HandDetailsProps): JSX.Element => {
   const handRoute = "../img/pokerCards/";
   const positions = ["SB", "BB", "UTG", "MP", "CO", "BTN"];
-
   return (
     <DetailsStyled className="details">
       <div className="details__hand-header">
@@ -165,11 +164,11 @@ const HandDetails = ({ hand }: HandDetailsProps): JSX.Element => {
                 }) Villain won ${hand.postGame.finalPot}bb`}
           </span>
         </section>
-        {hand.postGame.handImage && (
+        {hand.handImage && (
           <div className="details__game-img-container">
             <img
               className="hand__description-img"
-              src={hand.postGame.handImage}
+              src={hand.handImageBackup}
               alt={`Hand extra info by user`}
               width={290}
             />

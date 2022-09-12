@@ -39,8 +39,9 @@ export interface HandData {
     finalPot: number;
     gameWinner: string;
     handDescription?: string;
-    handImage?: string;
   };
+  handImage?: string;
+  handImageBackup?: string;
   id?: string;
   owner?: string;
 }
@@ -74,4 +75,5 @@ export interface FormHand {
   riverPot: number;
   gameWinner: string;
   handDescription: string;
+  handImage: string;
 }

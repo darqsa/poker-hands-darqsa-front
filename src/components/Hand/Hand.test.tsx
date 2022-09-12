@@ -94,5 +94,24 @@ describe("Given a hand component", () => {
 
       expect(mockDeleteFunction.deleteHand).toHaveBeenCalled();
     });
+
+    test("Then it should render a 'more' button that renders a edit icon on click that calls deleteHand function", async () => {
+      render(
+        <BrowserRouter>
+          <Provider store={store}>
+            <Hand hand={completeFakeHand} />
+          </Provider>
+        </BrowserRouter>
+      );
+      const moreVert = screen.getByTestId("more-vert");
+      await userEvent.click(moreVert);
+
+      const editButton = screen.getByTestId("EditIcon");
+      await userEvent.click(editButton);
+
+      const expectedText = screen.getByText(completeFakeHand.handName);
+
+      expect(expectedText).toBeInTheDocument();
+    });
   });
 });

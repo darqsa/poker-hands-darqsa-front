@@ -44,14 +44,13 @@ const HandForm = ({ formFunction }: HandFormProps): JSX.Element => {
   };
 
   const userId = useAppSelector((state) => state.user.id);
-  const { createHand } = useHandsApi();
+  const { createHand, loadHandById, editHand } = useHandsApi();
   const [formInfo, setFormInfo] = useState(initialState);
   const [currentPage, setCurrentPage] = useState(1);
   const [incorrectFields, setIncorrectFields] = useState(false);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { handId } = useParams();
-  const { loadHandById } = useHandsApi();
 
   const parseToFormInfo = (hand: HandData) => {
     return {
@@ -163,14 +162,19 @@ const HandForm = ({ formFunction }: HandFormProps): JSX.Element => {
     }
     try {
       formData.append("userHand", JSON.stringify(newHand));
-      await createHand(formData);
+      formFunction === "create"
+        ? await createHand(formData)
+        : await editHand(formData, handId!);
+
       formData = new FormData();
 
       navigate("/home");
 
       dispatch(
         openAlertActionCreator(
-          `Your hand: ${formInfo.handName}, has been created successfully 👍`
+          `Your hand: ${formInfo.handName}, has been ${
+            formFunction === "create" ? "created" : "edited"
+          } successfully 👍`
         )
       );
     } catch (error) {}

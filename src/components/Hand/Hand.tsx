@@ -6,6 +6,9 @@ import HandStyled from "./HandStyled";
 import { useState } from "react";
 import useHandsApi from "../../features/hands/hooks/useHandsApi";
 import { useNavigate } from "react-router-dom";
+import ShareIcon from "@mui/icons-material/Share";
+import { useAppDispatch } from "../../app/hooks";
+import { openAlertActionCreator } from "../../features/ui/slices/alertSlice";
 
 interface HandProps {
   hand: HandData;
@@ -14,6 +17,12 @@ const Hand = ({ hand }: HandProps): JSX.Element => {
   const [menuStatus, setMenuStatus] = useState(false);
   const { deleteHand } = useHandsApi();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const shareHand = () => {
+    navigator.clipboard.writeText(`${window.location.origin}/hand/${hand.id}`);
+    dispatch(openAlertActionCreator("Hand copied to clipboard 📎"));
+  };
 
   const handRoute = "./img/pokerCards/";
   return (
@@ -116,6 +125,7 @@ const Hand = ({ hand }: HandProps): JSX.Element => {
             className="hand__icon"
             onClick={() => navigate(`/hand/edit/${hand.id!}`)}
           />
+          <ShareIcon className="hand__icon" onClick={shareHand} />
         </div>
       )}
     </HandStyled>

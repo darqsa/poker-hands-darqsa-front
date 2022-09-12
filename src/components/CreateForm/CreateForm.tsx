@@ -10,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { openAlertActionCreator } from "../../features/ui/slices/alertSlice";
 
+let formData = new FormData();
+
 const CreateForm = (): JSX.Element => {
   const initialState: FormHand = {
     handName: "",
@@ -38,7 +40,6 @@ const CreateForm = (): JSX.Element => {
     handDescription: "",
     handImage: "",
   };
-  let formData = new FormData();
 
   const userId = useAppSelector((state) => state.user.id);
   const { createHand } = useHandsApi();
@@ -56,12 +57,7 @@ const CreateForm = (): JSX.Element => {
   };
 
   const onChangeFile = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // formData.append("image", event.target.files![0]);
-
-    setFormInfo({
-      ...formInfo,
-      handImage: event.target.value,
-    });
+    formData.append("handImage", event.target.files![0]);
   };
 
   const sendformInfo = async (event: SyntheticEvent) => {

@@ -7,15 +7,16 @@ import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import GlobalStyles, { MainContainerStyled } from "./styles/GlobalStyles";
 import CloseIcon from "@mui/icons-material/Close";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
-import { closeAlertActionCreator } from "./features/ui/slices/alertSlice";
+import { closeAlertActionCreator } from "./features/ui/slices/uiSlice";
 import HomePage from "./pages/HomePage/HomePage";
 import CreatePage from "./pages/CreatePage/CreatePage";
 import DetailsPage from "./pages/DetailsPage/DetailsPage";
 import EditPage from "./pages/EditPage/EditPage";
+import CircularProgress from "@mui/material/CircularProgress";
 
 function App() {
   const dispatch = useAppDispatch();
-  const alert = useAppSelector((state) => state.alert);
+  const ui = useAppSelector((state) => state.ui);
   const token = localStorage.getItem("token");
   useNavigate();
 
@@ -49,7 +50,7 @@ function App() {
           <Route path="/hand/edit/:handId" element={<EditPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
-        {alert.isAlertShown && (
+        {ui.isAlertShown && (
           <Alert
             onClick={() => {
               dispatch(closeAlertActionCreator());
@@ -61,9 +62,10 @@ function App() {
               </IconButton>
             }
           >
-            {alert.alertMessage}
+            {ui.alertMessage}
           </Alert>
         )}
+        <CircularProgress />
       </MainContainerStyled>
     </>
   );

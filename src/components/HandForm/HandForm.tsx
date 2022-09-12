@@ -8,7 +8,7 @@ import useHandsApi from "../../features/hands/hooks/useHandsApi";
 import { FormHand, HandData } from "../../features/hands/models/Hand";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { openAlertActionCreator } from "../../features/ui/slices/alertSlice";
+import { openAlertActionCreator } from "../../features/ui/slices/uiSlice";
 
 let formData = new FormData();
 interface HandFormProps {

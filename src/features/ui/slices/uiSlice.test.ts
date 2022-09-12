@@ -1,7 +1,7 @@
-import alertSlice, {
+import uiSlice, {
   closeAlertActionCreator,
   openAlertActionCreator,
-} from "./alertSlice";
+} from "./uiSlice";
 
 describe("Given an openAlert slice", () => {
   describe("When invoked with an initial state as previous alert state and a message", () => {
@@ -12,10 +12,7 @@ describe("Given an openAlert slice", () => {
       };
       const newMessage = "hibob";
 
-      const alert = alertSlice(
-        initialState,
-        openAlertActionCreator(newMessage)
-      );
+      const alert = uiSlice(initialState, openAlertActionCreator(newMessage));
       const expectedNewState = true;
 
       expect(alert.isAlertShown).toStrictEqual(expectedNewState);
@@ -31,7 +28,7 @@ describe("Given an closeAlert slice", () => {
         alertMessage: "",
       };
 
-      const alert = alertSlice(initialState, closeAlertActionCreator());
+      const alert = uiSlice(initialState, closeAlertActionCreator());
       const expectedNewState = false;
 
       expect(alert.isAlertShown).toStrictEqual(expectedNewState);

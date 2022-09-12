@@ -8,7 +8,7 @@ import useHandsApi from "../../features/hands/hooks/useHandsApi";
 import { useNavigate } from "react-router-dom";
 import ShareIcon from "@mui/icons-material/Share";
 import { useAppDispatch } from "../../app/hooks";
-import { openAlertActionCreator } from "../../features/ui/slices/alertSlice";
+import { openAlertActionCreator } from "../../features/ui/slices/uiSlice";
 
 interface HandProps {
   hand: HandData;

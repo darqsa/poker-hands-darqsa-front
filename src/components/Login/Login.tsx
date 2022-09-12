@@ -1,7 +1,7 @@
 import { SyntheticEvent, useState } from "react";
 import { useAppDispatch } from "../../app/hooks";
 import useUserApi from "../../features/users/hooks/useUserApi";
-import { openAlertActionCreator } from "../../features/ui/slices/alertSlice";
+import { openAlertActionCreator } from "../../features/ui/slices/uiSlice";
 import ButtonStyled from "../../styles/components/ButtonStyled";
 import FormStyled from "../../styles/components/FormStyled";
 

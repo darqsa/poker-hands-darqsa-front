@@ -22,7 +22,6 @@ const Search = (): JSX.Element => {
 
     const hands = await searchHandByHandName(searchText);
     if (hands === false) {
-      debugger;
       dispatch(closeLoadingActionCreator());
       setIsThereResult("no-result");
     } else {

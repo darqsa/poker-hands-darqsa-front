@@ -31,6 +31,7 @@ const DetailsPage = (): JSX.Element => {
 
   useEffect(() => {
     (async () => {
+      debugger;
       const idHand: HandData = await loadHandById(handId!);
       !idHand ? navigate("/home") : setHand(idHand);
     })();

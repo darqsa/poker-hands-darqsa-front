@@ -117,5 +117,19 @@ describe("Given a useHandApi hook", () => {
         loadHandsActionCreator([fakeHand])
       );
     });
+
+    test("Then if hands is empty it should return false", async () => {
+      const fakeName = "bobspongebutempty";
+
+      const {
+        result: {
+          current: { searchHandByHandName },
+        },
+      } = renderHook(useHandsApi, { wrapper: Wrapper });
+
+      const result = await searchHandByHandName(fakeName);
+
+      expect(result).toBe(false);
+    });
   });
 });

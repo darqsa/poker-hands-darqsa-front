@@ -19,12 +19,14 @@ const Search = (): JSX.Element => {
 
   const onSubmitData = async (event: SyntheticEvent) => {
     event.preventDefault();
-    try {
-      await searchHandByHandName(searchText);
-      setIsThereResult("result");
-    } catch (error) {
+
+    const hands = await searchHandByHandName(searchText);
+    if (hands === false) {
+      debugger;
       dispatch(closeLoadingActionCreator());
       setIsThereResult("no-result");
+    } else {
+      setIsThereResult("result");
     }
   };
 
@@ -56,8 +58,7 @@ const Search = (): JSX.Element => {
         {isThereResult === "result" ? (
           <div className="form__button-container">
             <ButtonStyled onClick={returnToList} className="form__button">
-              {" "}
-              Return{" "}
+              Return
             </ButtonStyled>
             <ButtonStyled
               className="form__button"

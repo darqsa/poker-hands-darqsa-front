@@ -1,39 +1,49 @@
 import styled from "styled-components";
+import FormStyled from "../../styles/components/FormStyled";
 import styles from "../../styles/styles";
 
-const SearchStyled = styled.input`
-  &:placeholder {
-    color: ${styles.colors.placeholder};
-  }
-  font-family: inherit;
-  font-size: ${styles.fontSizes.small};
-  font-weight: ${styles.fontWeights.regular};
-  padding: 14px 16px 14px 48px;
-  border-radius: 10px;
-  border: 2px solid ${styles.colors.main};
-  width: 280px;
+const SearchStyled = styled(FormStyled)`
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   position: absolute;
+  margin-top: 18px;
+  width: 280px;
   @media (min-width: 700px) {
-    width: 500px;
+    width: 320px;
   }
-  max-width: 500px;
-  background-image: url("./img/searchIcon.png");
-  background-repeat: no-repeat;
-  background-size: 32px;
-  background-position: 8px 8px;
-  margin-top: 16px;
-  &:focus {
-    border-color: black;
-    outline: none;
-  }
-  &--wrong {
-    border: 2px solid ${styles.colors.red};
-    &::placeholder {
-      color: ${styles.colors.red};
-      opacity: 70%;
+  .form {
+    &__input {
+      width: 100%;
+      background-image: url("./img/searchIcon.png");
+      background-repeat: no-repeat;
+      background-size: 32px;
+      background-position: 8px 8px;
+      padding-left: 45px;
+      &--no-results {
+        border: 2px solid ${styles.colors.red};
+        :focus {
+          border: 2px solid ${styles.colors.red};
+        }
+      }
     }
-    &:focus {
-      border: 2px solid ${styles.colors.red};
+    &__no-hands-text {
+      position: absolute;
+      color: ${styles.colors.red};
+      top: 56px;
+      font-size: ${styles.fontSizes.smaller};
+      @media (min-width: 700px) {
+        font-size: ${styles.fontSizes.small};
+      }
+    }
+    &__button {
+      margin-bottom: 0;
+      margin-top: 0;
+    }
+    &__button-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
   }
 `;

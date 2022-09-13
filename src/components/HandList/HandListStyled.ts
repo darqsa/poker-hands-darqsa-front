@@ -32,7 +32,7 @@ const HandListContainerStyled = styled.div`
       padding: 0;
       min-width: 320px;
       justify-content: center;
-      margin-top: 84px;
+      margin-top: 100px;
     }
     &__list-item {
       width: 380px;

@@ -86,17 +86,14 @@ const useHandsApi = () => {
   const searchHandByHandName = useCallback(
     async (handName: string) => {
       dispatch(openLoadingActionCreator());
-      const {
-        data: { userHands },
-      } = await axios.get(`${apiURL}hands/${handName}`, {
+      const { data } = await axios.get(`${apiURL}hands/${handName}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       });
 
+      dispatch(loadHandsActionCreator(data));
       dispatch(closeLoadingActionCreator());
-
-      dispatch(loadHandsActionCreator(userHands));
     },
     [token, dispatch]
   );

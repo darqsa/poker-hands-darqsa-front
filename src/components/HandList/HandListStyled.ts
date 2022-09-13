@@ -5,7 +5,6 @@ const HandListContainerStyled = styled.div`
   display: flex;
   color: ${styles.colors.main};
   justify-content: center;
-
   @media (min-width: 1200px) {
     width: 85%;
   }
@@ -33,6 +32,7 @@ const HandListContainerStyled = styled.div`
       padding: 0;
       min-width: 320px;
       justify-content: center;
+      margin-top: 84px;
     }
     &__list-item {
       width: 380px;

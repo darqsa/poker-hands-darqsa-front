@@ -84,4 +84,22 @@ describe("Given a useHandApi hook", () => {
       expect(expectedHand).toStrictEqual({ fakeHand });
     });
   });
+
+  describe("When searchHandByHandName function is called with an fakeName", () => {
+    test("Then it should return a fake hand array with the fakehand", async () => {
+      const fakeName = "bobsponge";
+
+      const {
+        result: {
+          current: { searchHandByHandName },
+        },
+      } = renderHook(useHandsApi, { wrapper: Wrapper });
+
+      await searchHandByHandName(fakeName);
+
+      expect(mockUseDispatch).toHaveBeenCalledWith(
+        loadHandsActionCreator([fakeHand])
+      );
+    });
+  });
 });

@@ -37,6 +37,10 @@ const handlers = [
     return res(ctx.status(201), ctx.json("Hand created successfully"));
   }),
 
+  rest.put(`${apiUrl}hands/edit/1234`, async (req, res, ctx) => {
+    return res(ctx.status(201), ctx.json("Hand edited successfully"));
+  }),
+
   rest.delete(`${apiUrl}hands/delete/1234`, async (req, res, ctx) => {
     return res(ctx.status(201), ctx.json("Hand deleted successfully"));
   }),

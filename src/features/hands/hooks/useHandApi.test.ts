@@ -50,6 +50,22 @@ describe("Given a useHandApi hook", () => {
       expect(createdHand.data).toBe(expectedMessage);
     });
   });
+  describe("When editHand function is called", () => {
+    test("Then it should return a response message", async () => {
+      const expectedMessage = "Hand edited successfully";
+      const {
+        result: {
+          current: { editHand },
+        },
+      } = renderHook(useHandsApi, { wrapper: Wrapper });
+
+      const formData = new FormData();
+      formData.append("hand", JSON.stringify(fakeHandWithoutId));
+      const response = await editHand(formData, "1234");
+
+      expect(response.data).toBe(expectedMessage);
+    });
+  });
 
   describe("When deleteHand function is called with an fakeId", () => {
     test("Then it should call the mockDispatch with an action creator and the fakeId", async () => {
@@ -86,7 +102,7 @@ describe("Given a useHandApi hook", () => {
   });
 
   describe("When searchHandByHandName function is called with an fakeName", () => {
-    test("Then it should return a fake hand array with the fakehand", async () => {
+    test("Then it should call the mockDispatch a fake hand array with the fakehand", async () => {
       const fakeName = "bobsponge";
 
       const {

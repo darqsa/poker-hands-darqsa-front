@@ -88,12 +88,13 @@ const HeaderStyled = styled.header`
       top: 60px;
       flex-direction: column;
       background-color: ${styles.colors.red};
-      width: 100%;
+      width: fit-content;
       justify-content: center;
-      align-items: center;
-      border-radius: 0 0 20px 20px;
-      padding: 10px 10px 20px 10px;
+      align-items: flex-end;
+      border-radius: 0 0 0 20px;
+      padding: 15px;
       gap: 10px;
+      right: 0;
       z-index: 2;
     }
     &__current-user-text {
@@ -102,6 +103,7 @@ const HeaderStyled = styled.header`
       color: ${styles.colors.white};
       font-size: ${styles.fontSizes.medium};
       font-weight: ${styles.fontWeights.medium};
+      text-align: end;
     }
   }
 `;

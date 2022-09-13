@@ -1,4 +1,4 @@
-import { Alert, IconButton } from "@mui/material";
+import { Alert, IconButton, Snackbar } from "@mui/material";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "./app/hooks";
 import Header from "./components/Header/Header";
@@ -50,7 +50,13 @@ function App() {
           <Route path="/hand/edit/:handId" element={<EditPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
-        {ui.isAlertShown && (
+        <Snackbar
+          open={ui.isAlertShown}
+          disableWindowBlurListener
+          transitionDuration={100}
+          autoHideDuration={4000}
+          onClose={() => dispatch(closeAlertActionCreator())}
+        >
           <Alert
             onClick={() => {
               dispatch(closeAlertActionCreator());
@@ -64,7 +70,7 @@ function App() {
           >
             {ui.alertMessage}
           </Alert>
-        )}
+        </Snackbar>
         {ui.isLoadingShown && <CircularProgress className="loading" />}
       </MainContainerStyled>
     </>

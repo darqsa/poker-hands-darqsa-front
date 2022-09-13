@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import ShareIcon from "@mui/icons-material/Share";
 import { useAppDispatch } from "../../app/hooks";
 import { openAlertActionCreator } from "../../features/ui/slices/uiSlice";
+import { Fade } from "@mui/material";
 
 interface HandProps {
   hand: HandData;
@@ -22,6 +23,11 @@ const Hand = ({ hand }: HandProps): JSX.Element => {
   const shareHand = () => {
     navigator.clipboard.writeText(`${window.location.origin}/hand/${hand.id}`);
     dispatch(openAlertActionCreator("Hand copied to clipboard 📎"));
+  };
+
+  const deleteUserHand = () => {
+    deleteHand(hand.id!);
+    dispatch(openAlertActionCreator(`Hand deleted successfully 💀`));
   };
 
   const handRoute = "./img/pokerCards/";
@@ -114,12 +120,12 @@ const Hand = ({ hand }: HandProps): JSX.Element => {
             : "hand__more-icon"
         }
       />
-      {menuStatus && (
+      <Fade in={menuStatus}>
         <div className="hand__menu">
           <DeleteIcon
             data-testid="delete"
             className="hand__icon"
-            onClick={() => deleteHand(hand.id!)}
+            onClick={deleteUserHand}
           />
           <EditIcon
             className="hand__icon"
@@ -127,7 +133,7 @@ const Hand = ({ hand }: HandProps): JSX.Element => {
           />
           <ShareIcon className="hand__icon" onClick={shareHand} />
         </div>
-      )}
+      </Fade>
     </HandStyled>
   );
 };

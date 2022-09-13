@@ -6,10 +6,14 @@ import HeaderStyled from "./HeaderStyled";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useAppSelector } from "../../app/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import useUserApi from "../../features/users/hooks/useUserApi";
-import { useMediaQuery } from "@mui/material";
+import { Slide, useMediaQuery } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import {
+  closeAlertActionCreator,
+  closeLoadingActionCreator,
+} from "../../features/ui/slices/uiSlice";
 
 const Header = (): JSX.Element => {
   const user = useAppSelector((state) => state.user);
@@ -18,11 +22,15 @@ const Header = (): JSX.Element => {
   const { logout } = useUserApi();
   const navigate = useNavigate();
   const matches = useMediaQuery("(min-width:700px)");
+  const dispatch = useAppDispatch();
 
   const logoutUser = () => {
     setIsProfileShown(!isProfileShown);
+    dispatch(closeLoadingActionCreator());
+    dispatch(closeAlertActionCreator());
     logout();
   };
+
   const handPathname = pathname.slice(0, -25);
   return (
     <HeaderStyled className="header-container">
@@ -132,7 +140,13 @@ const Header = (): JSX.Element => {
           )}
         </div>
       </div>
-      {!matches && !isProfileShown && (
+      <Slide
+        timeout={100}
+        direction={"left"}
+        in={!isProfileShown && !matches}
+        mountOnEnter
+        unmountOnExit
+      >
         <div className="header-container__profile-mobile">
           <span className="header-container__current-user-text">
             Logged as {user.username}
@@ -151,7 +165,7 @@ const Header = (): JSX.Element => {
             </span>
           </Link>
         </div>
-      )}
+      </Slide>
     </HeaderStyled>
   );
 };

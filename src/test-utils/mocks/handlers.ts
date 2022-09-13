@@ -44,10 +44,6 @@ const handlers = [
   rest.get(`${apiUrl}hands/1234`, async (req, res, ctx) => {
     return res(ctx.status(201), ctx.json({ fakeHand }));
   }),
-
-  rest.get(`${apiUrl}hands/filter/1234`, async (req, res, ctx) => {
-    return res(ctx.status(201), ctx.json([{ fakeHand }]));
-  }),
 ];
 
 export default handlers;

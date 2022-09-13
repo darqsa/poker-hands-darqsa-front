@@ -52,6 +52,10 @@ const handlers = [
   rest.get(`${apiUrl}hands/filter/bobsponge`, async (req, res, ctx) => {
     return res(ctx.status(201), ctx.json([fakeHand]));
   }),
+
+  rest.get(`${apiUrl}hands/filter/bobspongebutempty`, async (req, res, ctx) => {
+    return res(ctx.status(201), ctx.json([]));
+  }),
 ];
 
 export default handlers;

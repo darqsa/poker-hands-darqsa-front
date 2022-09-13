@@ -141,7 +141,7 @@ const Header = (): JSX.Element => {
         </div>
       </div>
       <Slide
-        timeout={200}
+        timeout={100}
         direction={"left"}
         in={!isProfileShown && !matches}
         mountOnEnter

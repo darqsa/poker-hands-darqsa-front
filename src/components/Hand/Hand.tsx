@@ -25,6 +25,11 @@ const Hand = ({ hand }: HandProps): JSX.Element => {
     dispatch(openAlertActionCreator("Hand copied to clipboard 📎"));
   };
 
+  const deleteUserHand = () => {
+    deleteHand(hand.id!);
+    dispatch(openAlertActionCreator(`Hand deleted successfully 💀`));
+  };
+
   const handRoute = "./img/pokerCards/";
   return (
     <HandStyled className="hand">
@@ -120,7 +125,7 @@ const Hand = ({ hand }: HandProps): JSX.Element => {
           <DeleteIcon
             data-testid="delete"
             className="hand__icon"
-            onClick={() => deleteHand(hand.id!)}
+            onClick={deleteUserHand}
           />
           <EditIcon
             className="hand__icon"

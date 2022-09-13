@@ -83,6 +83,32 @@ const useHandsApi = () => {
     [token]
   );
 
-  return { hands, loadHands, createHand, editHand, deleteHand, loadHandById };
+  const searchHandByHandName = useCallback(
+    async (handName: string) => {
+      dispatch(openLoadingActionCreator());
+      const {
+        data: { userHands },
+      } = await axios.get(`${apiURL}hands/${handName}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      dispatch(closeLoadingActionCreator());
+
+      dispatch(loadHandsActionCreator(userHands));
+    },
+    [token, dispatch]
+  );
+
+  return {
+    hands,
+    loadHands,
+    createHand,
+    editHand,
+    deleteHand,
+    loadHandById,
+    searchHandByHandName,
+  };
 };
 export default useHandsApi;

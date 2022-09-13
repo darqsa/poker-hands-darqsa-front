@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import ShareIcon from "@mui/icons-material/Share";
 import { useAppDispatch } from "../../app/hooks";
 import { openAlertActionCreator } from "../../features/ui/slices/uiSlice";
+import { Fade } from "@mui/material";
 
 interface HandProps {
   hand: HandData;
@@ -114,7 +115,7 @@ const Hand = ({ hand }: HandProps): JSX.Element => {
             : "hand__more-icon"
         }
       />
-      {menuStatus && (
+      <Fade in={menuStatus}>
         <div className="hand__menu">
           <DeleteIcon
             data-testid="delete"
@@ -127,7 +128,7 @@ const Hand = ({ hand }: HandProps): JSX.Element => {
           />
           <ShareIcon className="hand__icon" onClick={shareHand} />
         </div>
-      )}
+      </Fade>
     </HandStyled>
   );
 };

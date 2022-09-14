@@ -245,7 +245,7 @@ const HandForm = ({ formFunction }: HandFormProps): JSX.Element => {
                 </div>
                 <div className="form__group">
                   <label className="form__label" htmlFor="heroStack">
-                    * Stack (bb)
+                    * Stack
                   </label>
                   <input
                     className="form__input form__input--number"
@@ -306,7 +306,7 @@ const HandForm = ({ formFunction }: HandFormProps): JSX.Element => {
                 </div>
                 <div className="form__group">
                   <label className="form__label" htmlFor="villainStack">
-                    * Stack (bb)
+                    * Stack
                   </label>
                   <input
                     className="form__input form__input--number"

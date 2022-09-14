@@ -93,7 +93,7 @@ describe("Given a hand component", () => {
           </Provider>
         </BrowserRouter>
       );
-      const moreVert = screen.getByTestId("more-vert");
+      const moreVert = screen.getByTestId("MoreVertIcon");
       await userEvent.click(moreVert);
 
       const deleteButton = screen.getByTestId("DeleteIcon");
@@ -109,7 +109,7 @@ describe("Given a hand component", () => {
           </Provider>
         </BrowserRouter>
       );
-      const moreVert = screen.getByTestId("more-vert");
+      const moreVert = screen.getByTestId("MoreVertIcon");
       await userEvent.click(moreVert);
 
       const shareButton = screen.getByTestId("ShareIcon");
@@ -130,7 +130,7 @@ describe("Given a hand component", () => {
           </Provider>
         </BrowserRouter>
       );
-      const moreVert = screen.getByTestId("more-vert");
+      const moreVert = screen.getByTestId("MoreVertIcon");
       await userEvent.click(moreVert);
 
       const editButton = screen.getByTestId("EditIcon");

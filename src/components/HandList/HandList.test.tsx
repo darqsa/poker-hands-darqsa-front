@@ -15,7 +15,7 @@ describe("Given a Hand List component", () => {
         </Provider>
       );
 
-      const hands = screen.getAllByTestId("more-vert");
+      const hands = screen.getAllByTestId("MoreVertIcon");
 
       hands.forEach((hand) => expect(hand).toBeInTheDocument());
     });

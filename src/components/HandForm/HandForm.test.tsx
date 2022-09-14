@@ -104,10 +104,10 @@ describe("Given a HandForm  component", () => {
           </Provider>
         </BrowserRouter>
       );
-      const nextIcon = screen.getByTestId("next-first-page");
+      const nextIcon = screen.getByTestId("ArrowForwardIcon");
       await userEvent.click(nextIcon);
 
-      const previousIcon = screen.getByTestId("previous-second-page");
+      const previousIcon = screen.getByTestId("ArrowBackIcon");
       await userEvent.click(previousIcon);
 
       const expectedFirstPageHeading = screen.getByRole("heading", {
@@ -130,9 +130,9 @@ describe("Given a HandForm  component", () => {
             </Provider>
           </BrowserRouter>
         );
-        const nextIcon1 = screen.getByTestId("next-first-page");
+        const nextIcon1 = screen.getByTestId("ArrowForwardIcon");
         await userEvent.click(nextIcon1);
-        const nextIcon2 = screen.getByTestId("next-second-page");
+        const nextIcon2 = screen.getByTestId("ArrowForwardIcon");
         await userEvent.click(nextIcon2);
 
         const form = {
@@ -161,9 +161,9 @@ describe("Given a HandForm  component", () => {
             </Provider>
           </BrowserRouter>
         );
-        const nextIcon1 = screen.getByTestId("next-first-page");
+        const nextIcon1 = screen.getByTestId("ArrowForwardIcon");
         await userEvent.click(nextIcon1);
-        const nextIcon2 = screen.getByTestId("next-second-page");
+        const nextIcon2 = screen.getByTestId("ArrowForwardIcon");
         await userEvent.click(nextIcon2);
 
         const imageInput = screen.getByLabelText("Image") as HTMLInputElement;
@@ -181,12 +181,12 @@ describe("Given a HandForm  component", () => {
           </Provider>
         </BrowserRouter>
       );
-      const nextIcon1 = screen.getByTestId("next-first-page");
+      const nextIcon1 = screen.getByTestId("ArrowForwardIcon");
       await userEvent.click(nextIcon1);
-      const nextIcon2 = screen.getByTestId("next-second-page");
+      const nextIcon2 = screen.getByTestId("ArrowForwardIcon");
       await userEvent.click(nextIcon2);
 
-      const previousIcon = screen.getByTestId("previous-third-page");
+      const previousIcon = screen.getByTestId("ArrowBackIcon");
       await userEvent.click(previousIcon);
 
       const expectedSecondPageHeading = screen.getByRole("heading", {
@@ -260,7 +260,7 @@ describe("Given a HandForm  component", () => {
         await userEvent.type(firstPageForm.villainHand2, `${hand.hand4}`);
         await userEvent.type(firstPageForm.handName, `${hand.handName}`);
 
-        const nextIcon1 = screen.getByTestId("next-first-page");
+        const nextIcon1 = screen.getByTestId("ArrowForwardIcon");
         await userEvent.click(nextIcon1);
 
         const secondPageForm = {
@@ -277,7 +277,7 @@ describe("Given a HandForm  component", () => {
         await userEvent.click(secondPageForm.preFlopPot);
         await userEvent.keyboard(`${hand.preFlopPot}`);
 
-        const nextIcon2 = screen.getByTestId("next-second-page");
+        const nextIcon2 = screen.getByTestId("ArrowForwardIcon");
         await userEvent.click(nextIcon2);
 
         const thirdPageForm = {
@@ -371,7 +371,7 @@ describe("Given a HandForm  component", () => {
         await userEvent.type(firstPageForm.villainHand2, `${hand.hand4}`);
         await userEvent.type(firstPageForm.handName, `${hand.handName}`);
 
-        const nextIcon1 = screen.getByTestId("next-first-page");
+        const nextIcon1 = screen.getByTestId("ArrowForwardIcon");
         await userEvent.click(nextIcon1);
 
         const secondPageForm = {
@@ -422,7 +422,7 @@ describe("Given a HandForm  component", () => {
         await userEvent.click(secondPageForm.riverPot);
         await userEvent.keyboard(`${hand.riverPot}`);
 
-        const nextIcon2 = screen.getByTestId("next-second-page");
+        const nextIcon2 = screen.getByTestId("ArrowForwardIcon");
         await userEvent.click(nextIcon2);
 
         const thirdPageForm = {
@@ -455,9 +455,9 @@ describe("Given a HandForm  component", () => {
           </Provider>
         </BrowserRouter>
       );
-      const nextIcon1 = screen.getByTestId("next-first-page");
+      const nextIcon1 = screen.getByTestId("ArrowForwardIcon");
       await userEvent.click(nextIcon1);
-      const nextIcon2 = screen.getByTestId("next-second-page");
+      const nextIcon2 = screen.getByTestId("ArrowForwardIcon");
       await userEvent.click(nextIcon2);
 
       const submitButton = screen.getByTestId("DoneIcon");
@@ -491,10 +491,10 @@ describe("Given a HandForm  component", () => {
 
         await userEvent.type(handName, `${text}`);
 
-        const nextIcon1 = screen.getByTestId("next-first-page");
+        const nextIcon1 = screen.getByTestId("ArrowForwardIcon");
         await userEvent.click(nextIcon1);
 
-        const nextIcon2 = screen.getByTestId("next-second-page");
+        const nextIcon2 = screen.getByTestId("ArrowForwardIcon");
         await userEvent.click(nextIcon2);
 
         const submitButton = screen.getByRole("button");
@@ -527,10 +527,10 @@ describe("Given a HandForm  component", () => {
 
         await userEvent.type(handName, `${text}`);
 
-        const nextIcon1 = screen.getByTestId("next-first-page");
+        const nextIcon1 = screen.getByTestId("ArrowForwardIcon");
         await userEvent.click(nextIcon1);
 
-        const nextIcon2 = screen.getByTestId("next-second-page");
+        const nextIcon2 = screen.getByTestId("ArrowForwardIcon");
         await userEvent.click(nextIcon2);
 
         const submitButton = screen.getByRole("button");

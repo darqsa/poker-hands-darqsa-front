@@ -3,7 +3,6 @@ import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { store } from "../../app/store";
-import { openAlertActionCreator } from "../../features/ui/slices/uiSlice";
 import { completeFakeHand, fakeHand } from "../../test-utils/mocks/mockHand";
 import HandForm from "./HandForm";
 
@@ -476,6 +475,42 @@ describe("Given a HandForm  component", () => {
         mockUseHandsFunctions.loadHandById = jest
           .fn()
           .mockReturnValue(completeFakeHand);
+
+        render(
+          <BrowserRouter>
+            <Provider store={store}>
+              <HandForm formFunction="edit" />
+            </Provider>
+          </BrowserRouter>
+        );
+        const text = "new fake hand name";
+
+        const handName = screen.getByLabelText(
+          "* Hand name"
+        ) as HTMLInputElement;
+
+        await userEvent.type(handName, `${text}`);
+
+        const nextIcon1 = screen.getByTestId("next-first-page");
+        await userEvent.click(nextIcon1);
+
+        const nextIcon2 = screen.getByTestId("next-second-page");
+        await userEvent.click(nextIcon2);
+
+        const submitButton = screen.getByRole("button");
+        await userEvent.click(submitButton);
+
+        expect(mockUseHandsFunctions.editHand).toHaveBeenCalled();
+      });
+    });
+  });
+
+  describe("When user types in every required field and the form is 'edit'", () => {
+    describe("And user clicks on the submit button", () => {
+      test("Then it should call the edit hand function with the object completed", async () => {
+        mockUseHandsFunctions.loadHandById = jest
+          .fn()
+          .mockReturnValue(fakeHand);
 
         render(
           <BrowserRouter>

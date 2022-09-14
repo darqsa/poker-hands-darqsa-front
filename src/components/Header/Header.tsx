@@ -38,26 +38,17 @@ const Header = (): JSX.Element => {
         <div className="header-container__item">
           {pathname === "/register" && (
             <Link to={`/login`}>
-              <KeyboardArrowLeftIcon
-                data-testid="arrow-left"
-                className="header-container__icon header-container__icon--left"
-              />
+              <KeyboardArrowLeftIcon className="header-container__icon header-container__icon--left" />
             </Link>
           )}
           {handPathname === "/hand" && (
             <Link to={`/home`}>
-              <KeyboardArrowLeftIcon
-                data-testid="arrow-left"
-                className="header-container__icon header-container__icon--left"
-              />
+              <KeyboardArrowLeftIcon className="header-container__icon header-container__icon--left" />
             </Link>
           )}
           {pathname === "/home" && (
             <Link to={`/create`}>
-              <AddIcon
-                data-testid="add"
-                className="header-container__icon header-container__icon--left"
-              />
+              <AddIcon className="header-container__icon header-container__icon--left" />
             </Link>
           )}
         </div>
@@ -74,18 +65,12 @@ const Header = (): JSX.Element => {
         <div className="header-container__item">
           {pathname === "/create" && (
             <Link to={`/home`}>
-              <CloseIcon
-                data-testid="arrow-left"
-                className="header-container__icon header-container__icon--left"
-              />
+              <CloseIcon className="header-container__icon header-container__icon--left" />
             </Link>
           )}
           {handPathname === "/hand/edit" && (
             <Link to={`/home`}>
-              <CloseIcon
-                data-testid="arrow-left"
-                className="header-container__icon header-container__icon--left"
-              />
+              <CloseIcon className="header-container__icon header-container__icon--left" />
             </Link>
           )}
           {pathname === "/home" && matches && (
@@ -97,10 +82,7 @@ const Header = (): JSX.Element => {
               >
                 {isProfileShown ? (
                   <>
-                    <PersonIcon
-                      data-testid="user"
-                      className="header-container__icon header-container__icon--right"
-                    />
+                    <PersonIcon className="header-container__icon header-container__icon--right" />
                     <span className="header-container__current-user-text">
                       {user.username}
                     </span>
@@ -122,7 +104,6 @@ const Header = (): JSX.Element => {
           )}
           {pathname === "/home" && !matches && (
             <PersonIcon
-              data-testid="user"
               className="header-container__icon"
               onClick={() => setIsProfileShown(!isProfileShown)}
             />
@@ -131,7 +112,6 @@ const Header = (): JSX.Element => {
             <>
               {user.token && (
                 <EditIcon
-                  data-testid="edit"
                   onClick={() => navigate(`/hand/edit/${pathname.slice(6)}`)}
                   className="header-container__icon"
                 />
@@ -157,10 +137,7 @@ const Header = (): JSX.Element => {
             className="header-container__logout"
           >
             <span className="header-container__current-user-text">
-              <LogoutIcon
-                data-testid="logout"
-                className="header-container__icon header-container__icon--right"
-              />
+              <LogoutIcon className="header-container__icon header-container__icon--right" />
               logout
             </span>
           </Link>

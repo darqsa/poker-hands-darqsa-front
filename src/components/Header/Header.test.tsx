@@ -39,7 +39,7 @@ describe("Given a Header component", () => {
       );
 
       const heading = screen.getByRole("heading", { name: "Register" });
-      const icon = screen.getByTestId("arrow-left");
+      const icon = screen.getByTestId("KeyboardArrowLeftIcon");
 
       expect(heading).toBeInTheDocument();
       expect(icon).toBeInTheDocument();
@@ -57,7 +57,7 @@ describe("Given a Header component", () => {
       );
 
       const heading = screen.getByRole("heading", { name: "Hand" });
-      const icon = screen.getByTestId("arrow-left");
+      const icon = screen.getByTestId("KeyboardArrowLeftIcon");
 
       expect(heading).toBeInTheDocument();
       expect(icon).toBeInTheDocument();
@@ -75,8 +75,8 @@ describe("Given a Header component", () => {
       );
 
       const heading = screen.getByRole("heading", { name: "Hands" });
-      const icon1 = screen.getByTestId("add");
-      const icon2 = screen.getByTestId("user");
+      const icon1 = screen.getByTestId("AddIcon");
+      const icon2 = screen.getByTestId("PersonIcon");
 
       expect(heading).toBeInTheDocument();
       expect(icon1).toBeInTheDocument();
@@ -92,10 +92,10 @@ describe("Given a Header component", () => {
             </MemoryRouter>
           </Provider>
         );
-        const icon = screen.getByTestId("user");
+        const icon = screen.getByTestId("PersonIcon");
         await userEvent.click(icon);
 
-        const logoutButton = screen.getByTestId("logout");
+        const logoutButton = screen.getByTestId("LogoutIcon");
 
         expect(logoutButton).toBeInTheDocument();
       });
@@ -109,10 +109,10 @@ describe("Given a Header component", () => {
               </MemoryRouter>
             </Provider>
           );
-          const icon = screen.getByTestId("user");
+          const icon = screen.getByTestId("PersonIcon");
           await userEvent.click(icon);
 
-          const logoutButton = screen.getByTestId("logout");
+          const logoutButton = screen.getByTestId("LogoutIcon");
           await userEvent.click(logoutButton);
 
           expect(mockLogoutFunction.logout).toHaveBeenCalled();
@@ -131,7 +131,7 @@ describe("Given a Header component", () => {
         );
 
         const heading = screen.getByRole("heading", { name: "Create" });
-        const icon = screen.getByTestId("arrow-left");
+        const icon = screen.getByTestId("CloseIcon");
 
         expect(heading).toBeInTheDocument();
         expect(icon).toBeInTheDocument();

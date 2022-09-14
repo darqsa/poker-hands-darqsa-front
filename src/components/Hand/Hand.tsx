@@ -113,7 +113,6 @@ const Hand = ({ hand }: HandProps): JSX.Element => {
         onClick={() => {
           setMenuStatus(!menuStatus);
         }}
-        data-testid="more-vert"
         className={
           menuStatus
             ? "hand__more-icon hand__more-icon--active"

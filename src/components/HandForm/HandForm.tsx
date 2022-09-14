@@ -367,7 +367,6 @@ const HandForm = ({ formFunction }: HandFormProps): JSX.Element => {
               />
             </div>
             <ArrowForwardIcon
-              data-testid="next-first-page"
               className="form__icon"
               onClick={() => setCurrentPage(2)}
             />
@@ -558,12 +557,10 @@ const HandForm = ({ formFunction }: HandFormProps): JSX.Element => {
           </section>
           <div className="form__footer">
             <ArrowBackIcon
-              data-testid="previous-second-page"
               className="form__icon"
               onClick={() => setCurrentPage(1)}
             />
             <ArrowForwardIcon
-              data-testid="next-second-page"
               className="form__icon"
               onClick={() => setCurrentPage(3)}
             />
@@ -629,7 +626,6 @@ const HandForm = ({ formFunction }: HandFormProps): JSX.Element => {
           </section>
           <div className="form__footer">
             <ArrowBackIcon
-              data-testid="previous-third-page"
               className="form__icon"
               onClick={() => setCurrentPage(2)}
             />

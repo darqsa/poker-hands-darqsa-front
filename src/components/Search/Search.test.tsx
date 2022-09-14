@@ -25,6 +25,7 @@ describe("Given a Search component", () => {
   describe("When invoke and user types a fake handname", () => {
     test("Then it should render a return button", async () => {
       const text = "1234";
+
       render(
         <Provider store={store}>
           <Search />
@@ -44,6 +45,7 @@ describe("Given a Search component", () => {
 
     test("And the user clicks the return button, it should call the loadHands function", async () => {
       const text = "1234";
+
       render(
         <Provider store={store}>
           <Search />
@@ -70,6 +72,7 @@ describe("Given a Search component", () => {
         loadHands: jest.fn(),
       };
       const text = "1234";
+
       render(
         <Provider store={store}>
           <Search />

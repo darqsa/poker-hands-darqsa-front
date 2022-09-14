@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
-import { BrowserRouter, MemoryRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { fakeHand } from "../../test-utils/mocks/mockHand";
 import mockStore from "../../test-utils/mocks/mockStore";
 import DetailsPage from "./DetailsPage";
@@ -11,15 +11,22 @@ jest.mock(
   () => () => mockGetByIdFunction
 );
 
+const mockUseDispatch = jest.fn();
+
+jest.mock("../../app/hooks", () => ({
+  ...jest.requireActual("../../app/hooks"),
+  useAppDispatch: () => mockUseDispatch,
+}));
+
 describe("Gien a DetailsPage component", () => {
   describe("When it's called and gets a fakeHand and a valid handId as params", () => {
     test("Then it should render a HandDetails component with the fakeHand inside", () => {
       render(
-        <BrowserRouter>
-          <Provider store={mockStore}>
+        <Provider store={mockStore}>
+          <BrowserRouter>
             <DetailsPage />
-          </Provider>
-        </BrowserRouter>
+          </BrowserRouter>
+        </Provider>
       );
 
       const expectedHeading = screen.getByRole("heading", {
@@ -33,11 +40,11 @@ describe("Gien a DetailsPage component", () => {
   describe("When it's called and gets a fakeHand and an invalid handId", () => {
     test("Then it should call the loadHandById function with undefined", () => {
       render(
-        <MemoryRouter initialEntries={[""]}>
-          <Provider store={mockStore}>
+        <Provider store={mockStore}>
+          <BrowserRouter>
             <DetailsPage />
-          </Provider>
-        </MemoryRouter>
+          </BrowserRouter>
+        </Provider>
       );
 
       expect(mockGetByIdFunction.loadHandById).toHaveBeenCalledWith(undefined);

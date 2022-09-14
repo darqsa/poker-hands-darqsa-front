@@ -5,6 +5,13 @@ import handsSlice, {
   loadHandsActionCreator,
 } from "./handsSlice";
 
+const mockUseDispatch = jest.fn();
+
+jest.mock("../../../app/hooks", () => ({
+  ...jest.requireActual("../../../app/hooks"),
+  useAppDispatch: () => mockUseDispatch,
+}));
+
 describe("Given a handsSlice function", () => {
   describe("When invoked with an initial state as previous hands and a loadHands with a fakeUser inside", () => {
     test("Then it should return an array with the fakeHand", () => {

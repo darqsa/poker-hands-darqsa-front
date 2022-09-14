@@ -164,40 +164,6 @@ describe("Given an App component", () => {
         expect(heading).toBeInTheDocument();
       });
     });
-
-    describe("And the route is /hand/:handId", () => {
-      test("Then it should redirect to the hand page", () => {
-        localStorage.setItem("token", "12345");
-        render(
-          <Provider store={mockStore}>
-            <MemoryRouter initialEntries={["/hand/1234"]}>
-              <App />
-            </MemoryRouter>
-          </Provider>
-        );
-
-        const heading = screen.getByRole("heading", { name: "Game Info" });
-
-        expect(heading).toBeInTheDocument();
-      });
-    });
-
-    describe("And the route is /hand/edit/handId", () => {
-      test("Then it should redirect to the edit page", () => {
-        localStorage.setItem("token", "12345");
-        render(
-          <Provider store={mockStore}>
-            <MemoryRouter initialEntries={["/hand/edit/"]}>
-              <App />
-            </MemoryRouter>
-          </Provider>
-        );
-
-        const heading = screen.getByRole("heading", { name: "Game Info" });
-
-        expect(heading).toBeInTheDocument();
-      });
-    });
   });
 
   describe("When it receives a uistate from the store with isLoading:true", () => {

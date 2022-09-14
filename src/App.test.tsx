@@ -67,10 +67,8 @@ describe("Given an App component", () => {
     describe("And the route is /hand/edit/handId", () => {
       test("Then it should redirect to the edit page", () => {
         render(
-          <Provider store={store}>
-            <MemoryRouter
-              initialEntries={["/hand/edit/631e0675f6f24c8fc0e6038d"]}
-            >
+          <Provider store={mockStore}>
+            <MemoryRouter initialEntries={["/hand/edit/1234"]}>
               <App />
             </MemoryRouter>
           </Provider>
@@ -171,14 +169,14 @@ describe("Given an App component", () => {
       test("Then it should redirect to the hand page", () => {
         localStorage.setItem("token", "12345");
         render(
-          <Provider store={store}>
-            <MemoryRouter initialEntries={["/hand/631e0675f6f24c8fc0e6038d"]}>
+          <Provider store={mockStore}>
+            <MemoryRouter initialEntries={["/hand/1234"]}>
               <App />
             </MemoryRouter>
           </Provider>
         );
 
-        const heading = screen.getByRole("heading", { name: "Hand" });
+        const heading = screen.getByRole("heading", { name: "Game Info" });
 
         expect(heading).toBeInTheDocument();
       });
@@ -188,16 +186,14 @@ describe("Given an App component", () => {
       test("Then it should redirect to the edit page", () => {
         localStorage.setItem("token", "12345");
         render(
-          <Provider store={store}>
-            <MemoryRouter
-              initialEntries={["/hand/edit/631e0675f6f24c8fc0e6038d"]}
-            >
+          <Provider store={mockStore}>
+            <MemoryRouter initialEntries={["/hand/edit/"]}>
               <App />
             </MemoryRouter>
           </Provider>
         );
 
-        const heading = screen.getByRole("heading", { name: "Edit" });
+        const heading = screen.getByRole("heading", { name: "Game Info" });
 
         expect(heading).toBeInTheDocument();
       });
@@ -233,7 +229,21 @@ describe("Given an App component", () => {
       const uiComponent = screen.getByTestId("CloseIcon");
       await userEvent.click(uiComponent);
 
-      expect(uiComponent).toBeInTheDocument();
+      expect(mockUseDispatch).toHaveBeenCalledWith(closeAlertActionCreator());
+    });
+
+    test("And then it should autoclose in 4 secs calling closeAlertActionCreator", async () => {
+      jest.useFakeTimers();
+
+      render(
+        <Provider store={mockStore}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </Provider>
+      );
+
+      jest.advanceTimersByTime(4000);
       expect(mockUseDispatch).toHaveBeenCalledWith(closeAlertActionCreator());
     });
   });

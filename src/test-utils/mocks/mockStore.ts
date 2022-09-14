@@ -43,6 +43,7 @@ export const emptyMockStore = configureStore({
   reducer: {
     hands: emptyMockHandsReducer,
     user: mockUserReducer,
+    ui: mockUiReducer,
   },
 });
 

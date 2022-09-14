@@ -1,9 +1,18 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
 import { BrowserRouter, MemoryRouter } from "react-router-dom";
 import App from "./App";
 import { store } from "./app/store";
+import { closeAlertActionCreator } from "./features/ui/slices/uiSlice";
 import mockStore from "./test-utils/mocks/mockStore";
+
+const mockUseDispatch = jest.fn();
+
+jest.mock("./app/hooks", () => ({
+  ...jest.requireActual("./app/hooks"),
+  useAppDispatch: () => mockUseDispatch,
+}));
 
 describe("Given an App component", () => {
   describe("When there is no token", () => {
@@ -212,7 +221,7 @@ describe("Given an App component", () => {
   });
 
   describe("When it receives a uistate from the store with isAlertShown:true", () => {
-    test("Then it should render an alert with a closeIcon inside", () => {
+    test("Then it should render an alert with a closeIcon inside and onclick call the mockDispatch with closeAlertActionCreator", async () => {
       render(
         <Provider store={mockStore}>
           <BrowserRouter>
@@ -222,8 +231,10 @@ describe("Given an App component", () => {
       );
 
       const uiComponent = screen.getByTestId("CloseIcon");
+      await userEvent.click(uiComponent);
 
       expect(uiComponent).toBeInTheDocument();
+      expect(mockUseDispatch).toHaveBeenCalledWith(closeAlertActionCreator());
     });
   });
 });

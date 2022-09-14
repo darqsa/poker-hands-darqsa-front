@@ -1,9 +1,18 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
 import { BrowserRouter, MemoryRouter } from "react-router-dom";
 import App from "./App";
 import { store } from "./app/store";
+import { closeAlertActionCreator } from "./features/ui/slices/uiSlice";
 import mockStore from "./test-utils/mocks/mockStore";
+
+const mockUseDispatch = jest.fn();
+
+jest.mock("./app/hooks", () => ({
+  ...jest.requireActual("./app/hooks"),
+  useAppDispatch: () => mockUseDispatch,
+}));
 
 describe("Given an App component", () => {
   describe("When there is no token", () => {
@@ -58,10 +67,8 @@ describe("Given an App component", () => {
     describe("And the route is /hand/edit/handId", () => {
       test("Then it should redirect to the edit page", () => {
         render(
-          <Provider store={store}>
-            <MemoryRouter
-              initialEntries={["/hand/edit/631e0675f6f24c8fc0e6038d"]}
-            >
+          <Provider store={mockStore}>
+            <MemoryRouter initialEntries={["/hand/edit/1234"]}>
               <App />
             </MemoryRouter>
           </Provider>
@@ -157,42 +164,6 @@ describe("Given an App component", () => {
         expect(heading).toBeInTheDocument();
       });
     });
-
-    describe("And the route is /hand/:handId", () => {
-      test("Then it should redirect to the hand page", () => {
-        localStorage.setItem("token", "12345");
-        render(
-          <Provider store={store}>
-            <MemoryRouter initialEntries={["/hand/631e0675f6f24c8fc0e6038d"]}>
-              <App />
-            </MemoryRouter>
-          </Provider>
-        );
-
-        const heading = screen.getByRole("heading", { name: "Hand" });
-
-        expect(heading).toBeInTheDocument();
-      });
-    });
-
-    describe("And the route is /hand/edit/handId", () => {
-      test("Then it should redirect to the edit page", () => {
-        localStorage.setItem("token", "12345");
-        render(
-          <Provider store={store}>
-            <MemoryRouter
-              initialEntries={["/hand/edit/631e0675f6f24c8fc0e6038d"]}
-            >
-              <App />
-            </MemoryRouter>
-          </Provider>
-        );
-
-        const heading = screen.getByRole("heading", { name: "Edit" });
-
-        expect(heading).toBeInTheDocument();
-      });
-    });
   });
 
   describe("When it receives a uistate from the store with isLoading:true", () => {
@@ -212,7 +183,7 @@ describe("Given an App component", () => {
   });
 
   describe("When it receives a uistate from the store with isAlertShown:true", () => {
-    test("Then it should render an alert with a closeIcon inside", () => {
+    test("Then it should render an alert with a closeIcon inside and onclick call the mockDispatch with closeAlertActionCreator", async () => {
       render(
         <Provider store={mockStore}>
           <BrowserRouter>
@@ -222,8 +193,24 @@ describe("Given an App component", () => {
       );
 
       const uiComponent = screen.getByTestId("CloseIcon");
+      await userEvent.click(uiComponent);
 
-      expect(uiComponent).toBeInTheDocument();
+      expect(mockUseDispatch).toHaveBeenCalledWith(closeAlertActionCreator());
+    });
+
+    test("And then it should autoclose in 4 secs calling closeAlertActionCreator", async () => {
+      jest.useFakeTimers();
+
+      render(
+        <Provider store={mockStore}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </Provider>
+      );
+
+      jest.advanceTimersByTime(4000);
+      expect(mockUseDispatch).toHaveBeenCalledWith(closeAlertActionCreator());
     });
   });
 });

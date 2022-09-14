@@ -122,11 +122,7 @@ const Hand = ({ hand }: HandProps): JSX.Element => {
       />
       <Fade in={menuStatus}>
         <div className="hand__menu">
-          <DeleteIcon
-            data-testid="delete"
-            className="hand__icon"
-            onClick={deleteUserHand}
-          />
+          <DeleteIcon className="hand__icon" onClick={deleteUserHand} />
           <EditIcon
             className="hand__icon"
             onClick={() => navigate(`/hand/edit/${hand.id!}`)}

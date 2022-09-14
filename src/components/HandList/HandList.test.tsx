@@ -8,11 +8,11 @@ describe("Given a Hand List component", () => {
   describe("When invoked and gets a fakeHand as array content", () => {
     test("Then it should render as much list items as it receives", () => {
       render(
-        <BrowserRouter>
-          <Provider store={mockStore}>
+        <Provider store={mockStore}>
+          <BrowserRouter>
             <HandList />
-          </Provider>
-        </BrowserRouter>
+          </BrowserRouter>
+        </Provider>
       );
 
       const hands = screen.getAllByTestId("more-vert");

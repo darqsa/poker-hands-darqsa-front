@@ -54,7 +54,7 @@ const HandDetails = ({ hand }: HandDetailsProps): JSX.Element => {
             {`${hand.game.preFlop.pot}bb`}
           </span>
         </section>
-        {hand.game.flop && (
+        {hand.game.flop?.pot && (
           <section className="details__game-section">
             <h3 className="details__section-heading">Flop</h3>
             <div className="details__board-img-group">
@@ -89,7 +89,7 @@ const HandDetails = ({ hand }: HandDetailsProps): JSX.Element => {
             </span>
           </section>
         )}
-        {hand.game.turn && (
+        {hand.game.turn?.pot && (
           <section className="details__game-section">
             <h3 className="details__section-heading">Turn</h3>
             <div className="details__board-img-group">
@@ -110,7 +110,7 @@ const HandDetails = ({ hand }: HandDetailsProps): JSX.Element => {
             </span>
           </section>
         )}
-        {hand.game.river && (
+        {hand.game.river?.pot && (
           <section className="details__game-section">
             <h3 className="details__section-heading">River</h3>
             <div className="details__board-img-group">

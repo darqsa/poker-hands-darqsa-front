@@ -1,4 +1,4 @@
-import { Alert, IconButton, Snackbar } from "@mui/material";
+import { Alert, Snackbar } from "@mui/material";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "./app/hooks";
 import Header from "./components/Header/Header";
@@ -65,11 +65,7 @@ function App() {
               dispatch(closeAlertActionCreator());
             }}
             className="alert"
-            action={
-              <IconButton aria-label="close" color="inherit" size="small">
-                <CloseIcon fontSize="inherit" />
-              </IconButton>
-            }
+            action={<CloseIcon fontSize="inherit" />}
           >
             {ui.alertMessage}
           </Alert>

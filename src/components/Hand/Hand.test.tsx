@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { store } from "../../app/store";
+import { openAlertActionCreator } from "../../features/ui/slices/uiSlice";
 import { completeFakeHand, fakeHand } from "../../test-utils/mocks/mockHand";
 import Hand from "./Hand";
 
@@ -18,6 +19,12 @@ jest.mock(
   "../../features/hands/hooks/useHandsApi",
   () => () => mockDeleteFunction
 );
+
+Object.assign(navigator, {
+  clipboard: {
+    writeText: () => {},
+  },
+});
 
 describe("Given a hand component", () => {
   describe("When it receives a finishedFakeHand as pros", () => {
@@ -89,10 +96,30 @@ describe("Given a hand component", () => {
       const moreVert = screen.getByTestId("more-vert");
       await userEvent.click(moreVert);
 
-      const deleteButton = screen.getByTestId("delete");
+      const deleteButton = screen.getByTestId("DeleteIcon");
       await userEvent.click(deleteButton);
 
       expect(mockDeleteFunction.deleteHand).toHaveBeenCalled();
+    });
+    test("Then it should render a 'more' button that renders a edit icon on click that calls shareHand function", async () => {
+      render(
+        <BrowserRouter>
+          <Provider store={store}>
+            <Hand hand={completeFakeHand} />
+          </Provider>
+        </BrowserRouter>
+      );
+      const moreVert = screen.getByTestId("more-vert");
+      await userEvent.click(moreVert);
+
+      const shareButton = screen.getByTestId("ShareIcon");
+      await userEvent.click(shareButton);
+
+      const expectedText = "Hand copied to clipboard 📎";
+
+      expect(mockUseDispatch).toHaveBeenCalledWith(
+        openAlertActionCreator(expectedText)
+      );
     });
 
     test("Then it should render a 'more' button that renders a edit icon on click that calls deleteHand function", async () => {

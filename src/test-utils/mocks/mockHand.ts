@@ -3,8 +3,8 @@ import { HandData } from "../../features/hands/models/Hand";
 export const fakeHand: HandData = {
   handName: "Best hand name ever",
   preGame: {
-    hero: { hand: ["Ac", "Ad"], initialStack: 100, position: 0 },
-    villains: [{ hand: ["Ah", "As"], initialStack: 100, position: 1 }],
+    hero: { hand: ["Ac", "Ad"], initialStack: 100, position: 1 },
+    villains: [{ hand: ["Ah", "As"], initialStack: 100, position: 2 }],
   },
   game: { preFlop: { actions: ["Everyone is allin"], pot: 200 } },
   postGame: { finalPot: 200, gameWinner: "Hero" },

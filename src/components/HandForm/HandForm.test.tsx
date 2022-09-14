@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { store } from "../../app/store";
 import { openAlertActionCreator } from "../../features/ui/slices/uiSlice";
+import { completeFakeHand, fakeHand } from "../../test-utils/mocks/mockHand";
 import HandForm from "./HandForm";
 
 let mockUseHandsFunctions = {
@@ -472,6 +473,10 @@ describe("Given a HandForm  component", () => {
   describe("When user types in every field and the form is 'edit'", () => {
     describe("And user clicks on the submit button", () => {
       test("Then it should call the edit hand function with the object completed", async () => {
+        mockUseHandsFunctions.loadHandById = jest
+          .fn()
+          .mockReturnValue(completeFakeHand);
+
         render(
           <BrowserRouter>
             <Provider store={store}>
@@ -479,147 +484,24 @@ describe("Given a HandForm  component", () => {
             </Provider>
           </BrowserRouter>
         );
-        const hand = {
-          heroPosition: 2,
-          villainPosition: 2,
-          heroStack: 2,
-          villainStack: 2,
-          hand1: "Ah",
-          hand2: "Ah",
-          hand3: "Ah",
-          hand4: "Ah",
-          handName: "Fake Hand Name",
-          preFlopActions: "Fake action",
-          preFlopPot: 2,
-          flopActions: "Fake action",
-          flopPot: 2,
-          flopBoard1: "Ah",
-          flopBoard2: "Ah",
-          flopBoard3: "Ah",
-          turnActions: "Fake action",
-          turnPot: 2,
-          turnBoard: "Ah",
-          riverActions: "Fake action",
-          riverPot: 2,
-          riverBoard: "Ah",
-          gameDescription: "Description example",
-          gameWinner: "hero",
-        };
+        const text = "new fake hand name";
 
-        const firstPageForm = {
-          heroPosition: screen.getAllByLabelText(
-            "* Position"
-          )[0] as HTMLInputElement,
-          villainPosition: screen.getAllByLabelText(
-            "* Position"
-          )[1] as HTMLInputElement,
-          heroStack: screen.getAllByLabelText("* Stack")[0] as HTMLInputElement,
-          villainStack: screen.getAllByLabelText(
-            "* Stack"
-          )[1] as HTMLInputElement,
-          heroHand1: screen.getAllByLabelText("* Hand")[0] as HTMLInputElement,
-          heroHand2: screen.getByTestId("hero-hand-2") as HTMLInputElement,
-          villainHand1: screen.getAllByLabelText(
-            "* Hand"
-          )[1] as HTMLInputElement,
-          villainHand2: screen.getByTestId(
-            "villain-hand-2"
-          ) as HTMLInputElement,
-          handName: screen.getByLabelText("* Hand name") as HTMLInputElement,
-        };
+        const handName = screen.getByLabelText(
+          "* Hand name"
+        ) as HTMLInputElement;
 
-        fireEvent.change(firstPageForm.heroPosition, {
-          target: { value: hand.heroPosition },
-        });
-        fireEvent.change(firstPageForm.villainPosition, {
-          target: { value: hand.villainPosition },
-        });
-        await userEvent.click(firstPageForm.heroStack);
-        await userEvent.keyboard(`${hand.heroStack}`);
-        await userEvent.click(firstPageForm.villainStack);
-        await userEvent.keyboard(`${hand.villainStack}`);
-        await userEvent.type(firstPageForm.heroHand1, `${hand.hand1}`);
-        await userEvent.type(firstPageForm.heroHand2, `${hand.hand2}`);
-        await userEvent.type(firstPageForm.villainHand1, `${hand.hand3}`);
-        await userEvent.type(firstPageForm.villainHand2, `${hand.hand4}`);
-        await userEvent.type(firstPageForm.handName, `${hand.handName}`);
+        await userEvent.type(handName, `${text}`);
 
         const nextIcon1 = screen.getByTestId("next-first-page");
         await userEvent.click(nextIcon1);
 
-        const secondPageForm = {
-          preFlopActions: screen.getByLabelText(
-            "* Actions"
-          ) as HTMLInputElement,
-          preFlopPot: screen.getByLabelText("* Pot") as HTMLInputElement,
-          flopActions: screen.getAllByLabelText(
-            "Actions"
-          )[0] as HTMLInputElement,
-          flopPot: screen.getAllByLabelText("Pot")[0] as HTMLInputElement,
-          flopHand1: screen.getAllByLabelText("Board")[0] as HTMLInputElement,
-          flopHand2: screen.getByTestId("board-hand2") as HTMLInputElement,
-          flopHand3: screen.getByTestId("board-hand3") as HTMLInputElement,
-          turnActions: screen.getAllByLabelText(
-            "Actions"
-          )[1] as HTMLInputElement,
-          turnPot: screen.getAllByLabelText("Pot")[1] as HTMLInputElement,
-          turnHand: screen.getAllByLabelText("Board")[1] as HTMLInputElement,
-          riverActions: screen.getAllByLabelText(
-            "Actions"
-          )[2] as HTMLInputElement,
-          riverPot: screen.getAllByLabelText("Pot")[2] as HTMLInputElement,
-          riverHand: screen.getAllByLabelText("Board")[2] as HTMLInputElement,
-        };
-
-        await userEvent.type(
-          secondPageForm.preFlopActions,
-          `${hand.preFlopActions}`
-        );
-        await userEvent.type(secondPageForm.flopActions, `${hand.flopActions}`);
-        await userEvent.type(secondPageForm.turnActions, `${hand.turnActions}`);
-        await userEvent.type(
-          secondPageForm.riverActions,
-          `${hand.riverActions}`
-        );
-        await userEvent.type(secondPageForm.flopHand1, `${hand.flopBoard1}`);
-        await userEvent.type(secondPageForm.flopHand2, `${hand.flopBoard2}`);
-        await userEvent.type(secondPageForm.flopHand3, `${hand.flopBoard3}`);
-        await userEvent.type(secondPageForm.turnHand, `${hand.turnBoard}`);
-        await userEvent.type(secondPageForm.riverHand, `${hand.riverBoard}`);
-        await userEvent.click(secondPageForm.preFlopPot);
-        await userEvent.keyboard(`${hand.preFlopPot}`);
-        await userEvent.click(secondPageForm.flopPot);
-        await userEvent.keyboard(`${hand.flopPot}`);
-        await userEvent.click(secondPageForm.turnPot);
-        await userEvent.keyboard(`${hand.turnPot}`);
-        await userEvent.click(secondPageForm.riverPot);
-        await userEvent.keyboard(`${hand.riverPot}`);
-
         const nextIcon2 = screen.getByTestId("next-second-page");
         await userEvent.click(nextIcon2);
-
-        const thirdPageForm = {
-          gameWinner: screen.getByLabelText("* Winner") as HTMLInputElement,
-          description: screen.getByLabelText("Description") as HTMLInputElement,
-        };
-
-        fireEvent.change(thirdPageForm.gameWinner, {
-          target: { value: hand.gameWinner },
-        });
-        await userEvent.type(
-          thirdPageForm.description,
-          `${hand.gameDescription}`
-        );
 
         const submitButton = screen.getByRole("button");
         await userEvent.click(submitButton);
 
-        const expectedActionCreatorText = `Your hand: ${hand.handName}, has been edited successfully 👍`;
-
         expect(mockUseHandsFunctions.editHand).toHaveBeenCalled();
-        expect(mockUseDispatch).toHaveBeenCalledWith(
-          openAlertActionCreator(expectedActionCreatorText)
-        );
       });
     });
   });

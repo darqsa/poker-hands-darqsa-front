@@ -91,7 +91,11 @@ const HandForm = ({ formFunction }: HandFormProps): JSX.Element => {
     })();
   }, [loadHandById, handId, navigate, formFunction]);
 
-  const onChangeInfo = (event: React.ChangeEvent<any>) => {
+  const onChangeInfo = (
+    event: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
     setFormInfo({
       ...formInfo,
       [event.target.id]: event.target.value,

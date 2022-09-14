@@ -47,7 +47,10 @@ function App() {
             element={token ? <CreatePage /> : <Navigate to="/login" />}
           />
           <Route path="/hand/:handId" element={<DetailsPage />} />
-          <Route path="/hand/edit/:handId" element={<EditPage />} />
+          <Route
+            path="/hand/edit/:handId"
+            element={token ? <EditPage /> : <Navigate to="/login" />}
+          />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <Snackbar

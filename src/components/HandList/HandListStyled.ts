@@ -5,11 +5,8 @@ const HandListContainerStyled = styled.div`
   display: flex;
   color: ${styles.colors.main};
   justify-content: center;
-  @media (min-width: 1200px) {
+  @media (min-width: 1000px) {
     width: 85%;
-  }
-  @media (min-width: 900px) {
-    width: 80%;
   }
   margin: auto;
   .hands-list-container {
@@ -26,14 +23,25 @@ const HandListContainerStyled = styled.div`
     }
     &__list {
       list-style: none;
-      display: flex;
       flex-wrap: wrap;
       gap: 20px;
       padding: 0;
       min-width: 320px;
+      display: flex;
       justify-content: center;
+
+      @media (min-width: 830px) {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+      @media (min-width: 1300px) {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+      }
+
       margin-top: 100px;
     }
+
     &__list-item {
       width: 380px;
       min-width: 320px;

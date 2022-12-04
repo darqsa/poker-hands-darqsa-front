@@ -4,6 +4,8 @@ Poker Hands is a PWA where you can save cards with poker hands. You can delete o
 
 ## Links
 
+###[-Back-end](https://github.com/darqsa/poker-hands-darqsa-front) 
+
 🌐♠️ PokerHands
 
 [💻Front deploy](https://david-arques-final-project-202207-bcn.netlify.app/home)
